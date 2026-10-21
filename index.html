@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Instalaciones Mateo — Electricidad, aire y refrigeración en Villa María</title>
+<meta name="description" content="Electricista domiciliario en Villa María. Instalaciones eléctricas, iluminación LED, cámaras, alarmas y cerraduras inteligentes, aire acondicionado, refrigeración y venta de equipos.">
+<meta name="theme-color" content="#061428">
+<meta name="color-scheme" content="light">
+
+<!-- para cuando comparten el link por WhatsApp o Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="Instalaciones Mateo — Luz, frío y calor resueltos en el día">
+<meta property="og:description" content="Instalaciones eléctricas, iluminación LED, seguridad, aire acondicionado y refrigeración en Villa María. Mandá una foto y te pasamos el presupuesto.">
+<meta property="og:url" content="https://mateopedrazainstalaciones.com.ar/">
+<meta property="og:image" content="https://mateopedrazainstalaciones.com.ar/img/hero-fondo.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://mateopedrazainstalaciones.com.ar/">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+
+<!-- si el JS no llega a cargar, nada queda escondido -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<a class="salto" href="#contenido">Saltar al contenido</a>
+
+<!-- ================= BARRA ================= -->
+<header class="barra" id="barra">
+  <div class="barra__fila">
+    <div class="barra__izq">
+      <button class="hamburguesa" id="abrir-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="carrito-boton" id="abrir-buscador" type="button" aria-haspopup="dialog" aria-controls="buscador" aria-label="Buscar en la web" hidden>
+        <span class="ico-buscar ico-buscar--barra" aria-hidden="true"></span>
+      </button>
+      <button class="carrito-boton" id="abrir-carrito" type="button" aria-haspopup="dialog" aria-controls="carrito" aria-label="Ver carrito de compra, vacío">
+        <span class="ico-carrito" aria-hidden="true"></span>
+        <span class="carrito-boton__num" id="carrito-num" hidden>0</span>
+      </button>
+      <!-- aparece solo cuando la persona entró con Google -->
+      <button class="cuenta-boton" id="cuenta-boton" type="button" aria-controls="menu" hidden>
+        <img id="cuenta-boton-foto" src="" alt="" width="32" height="32" referrerpolicy="no-referrer">
+      </button>
+    </div>
+
+    <a class="marca" href="#" aria-label="Mateo Pedraza Instalaciones, ir al inicio">
+      <img class="marca__mp" src="img/logo.png" alt="" width="248" height="160">
+    </a>
+  </div>
+</header>
+
+<!-- ================= MENÚ LATERAL =================
+     La navegación, la cuenta y los datos de contacto,
+     todo en la misma barra que se desliza desde el costado. -->
+<div class="velo" id="velo"></div>
+
+<aside class="menu" id="menu" aria-label="Menú">
+  <div class="menu__tope">
+    <a class="marca marca--menu" href="#" aria-label="Mateo Pedraza Instalaciones, ir al inicio">
+      <img class="marca__mp" src="img/logo.png" alt="" width="248" height="160">
+    </a>
+    <button class="cerrar-menu" id="cerrar-menu" type="button" aria-label="Cerrar menú">&times;</button>
+  </div>
+
+  <a class="btn btn--wp menu__cta" href="#" data-wp data-wp-texto="Hola Mateo, necesito un presupuesto.">
+    <span class="ico-wp" aria-hidden="true"></span>
+    Pedir presupuesto
+  </a>
+
+  <nav class="menu__nav" aria-label="Secciones">
+    <a href="#servicios">Servicios</a>
+    <a href="#trabajos">Trabajos</a>
+    <a href="#consulta">Mandar foto</a>
+    <a href="#carrito" data-abre-carrito>Equipos</a>
+    <a href="#kit" data-abre-kit>Armá tu kit</a>
+    <a href="#preguntas">Preguntas</a>
+  </nav>
+
+  <!-- Entrar con Google: no se muestra hasta completar GOOGLE_CLIENT_ID
+       y APPS_SCRIPT_URL en script.js (ver CONFIGURAR-LOGIN.md) -->
+  <div class="cuenta" id="cuenta-google" hidden>
+    <div class="cuenta__fuera" id="cuenta-fuera">
+      <div id="google-boton"></div>
+      <p class="cuenta__nota">Recibí promos por mail. Te das de baja cuando quieras.</p>
+    </div>
+
+    <div class="cuenta__dentro" id="cuenta-dentro" hidden>
+      <img class="cuenta__foto" id="cuenta-foto" src="" alt="" width="36" height="36" referrerpolicy="no-referrer">
+      <div class="cuenta__datos">
+        <strong id="cuenta-nombre"></strong>
+        <span id="cuenta-email"></span>
+      </div>
+      <button class="cuenta__salir" id="cuenta-salir" type="button">Salir</button>
+    </div>
+  </div>
+
+  <div class="menu__pie">
+    <a class="menu__ig" href="https://www.instagram.com/instalacionesmateo" target="_blank" rel="noopener">
+      <span class="ico-instagram" aria-hidden="true"></span> @instalacionesmateo
+    </a>
+    <p>Villa María, Villa Nueva y alrededores</p>
+  </div>
+</aside>
+
+<!-- ================= BUSCADOR =================
+     La lupita de la barra busca en toda la página: servicios,
+     equipos, trabajos y preguntas. Los resultados se arman solos
+     con lo que ya está escrito en la web: si cambiás un texto,
+     el buscador lo encuentra igual. -->
+<div class="buscador" id="buscador" role="dialog" aria-modal="true" aria-label="Buscar en la web">
+  <div class="buscador__caja">
+    <div class="buscador__fila">
+      <div class="catalogo__buscador buscador__campo">
+        <span class="ico-buscar" aria-hidden="true"></span>
+        <input type="search" id="buscador-texto" placeholder="¿Qué necesitás? Ej: split, tira LED, cámaras" aria-label="Buscar" autocomplete="off" enterkeyhint="search">
+      </div>
+      <button class="cerrar-menu" id="cerrar-buscador" type="button" aria-label="Cerrar buscador">&times;</button>
+    </div>
+
+    <div class="buscador__sugerencias" id="buscador-sugerencias">
+      <button type="button">Split</button>
+      <button type="button">Tira LED</button>
+      <button type="button">Cámaras</button>
+      <button type="button">Cerradura</button>
+      <button type="button">Aislante</button>
+      <button type="button">Mano de obra</button>
+    </div>
+
+    <p class="lectura-oculta" id="buscador-aviso" aria-live="polite"></p>
+    <ul class="buscador__resultados" id="buscador-resultados"></ul>
+  </div>
+</div>
+
+<!-- ================= CARRITO =================
+     Todo el catálogo vive acá adentro: se busca, se elige y se
+     arma el pedido en el mismo lugar. Queda guardado aunque
+     cierres la página. -->
+<div class="velo" id="velo-carrito"></div>
+
+<aside class="carrito" id="carrito" aria-label="Carrito de compra">
+  <div class="carrito__tope">
+    <div class="catalogo__buscador">
+      <span class="ico-buscar" aria-hidden="true"></span>
+      <input type="search" id="buscador-equipos" placeholder="Buscar: split, tira LED, cable, caño 3/8…" aria-label="Buscar equipos e insumos por palabra clave">
+    </div>
+
+    <button class="carrito__filtros-btn" id="abrir-filtros" type="button" aria-controls="carrito-lateral" aria-expanded="false">
+      <span class="ico-filtros" aria-hidden="true"></span> Filtros <span class="carrito__filtros-num" id="filtros-activos" hidden></span>
+    </button>
+
+    <button class="cerrar-menu" id="cerrar-carrito" type="button" aria-label="Cerrar carrito">&times;</button>
+  </div>
+
+  <div class="carrito__cuerpo">
+
+  <!-- ---- barra lateral: todos los filtros juntos. En la PC queda fija
+       a la izquierda; en el celular se abre con el botón "Filtros". ---- -->
+  <nav class="lateral" id="carrito-lateral" aria-label="Filtros del catálogo">
+    <div class="lateral__tope">
+      <strong>Filtrar productos</strong>
+      <button class="lateral__listo" id="cerrar-filtros" type="button">Ver productos</button>
+    </div>
+
+    <div class="lateral__grupo">
+      <p class="lateral__titulo">Tipo de producto</p>
+      <div class="lateral__lista" id="filtros-categoria">
+        <button type="button" class="chip-filtro" data-categoria="todos" aria-pressed="true">Todos los productos</button>
+        <button type="button" class="chip-filtro" data-categoria="aire" aria-pressed="false">Aire acondicionado</button>
+        <button type="button" class="chip-filtro" data-categoria="frio" aria-pressed="false">Refrigeración</button>
+        <button type="button" class="chip-filtro" data-categoria="gas" aria-pressed="false">Gases refrigerantes</button>
+        <button type="button" class="chip-filtro" data-categoria="quimicos" aria-pressed="false">Selladores Albans</button>
+        <button type="button" class="chip-filtro" data-categoria="cobre" aria-pressed="false">Caño de cobre y aislantes</button>
+        <button type="button" class="chip-filtro" data-categoria="electrico" aria-pressed="false">Electricidad, cables y cerraduras</button>
+        <button type="button" class="chip-filtro" data-categoria="led" aria-pressed="false">Iluminación LED</button>
+        <button type="button" class="chip-filtro" data-categoria="seguridad" aria-pressed="false">Seguridad</button>
+      </div>
+    </div>
+
+    <div class="lateral__grupo">
+      <p class="lateral__titulo">Estado</p>
+      <div class="lateral__lista" id="filtros-equipos">
+        <button type="button" class="chip-filtro" data-filtro="todos" aria-pressed="true">Nuevos y usados</button>
+        <button type="button" class="chip-filtro" data-filtro="nuevo" aria-pressed="false">Solo nuevos</button>
+        <button type="button" class="chip-filtro" data-filtro="usado" aria-pressed="false">Solo usados</button>
+      </div>
+    </div>
+
+    <div class="lateral__grupo">
+      <label class="lateral__titulo" for="orden-precio">Ordenar</label>
+      <select id="orden-precio" class="lateral__select">
+        <option value="recomendado" selected>Recomendado: equipos primero</option>
+        <option value="asc">Menor precio primero</option>
+        <option value="desc">Mayor precio primero</option>
+      </select>
+    </div>
+
+    <!-- el slider arranca abajo, en el precio más bajo, y se mueve en
+         pasos chicos donde están la mayoría de los productos -->
+    <div class="lateral__grupo catalogo__precio">
+      <label class="lateral__titulo" for="precio-max">Precio máximo</label>
+      <input type="range" id="precio-max" min="0" max="1000" step="1" value="1000">
+      <div class="catalogo__precio__fila">
+        <span id="precio-min-valor">$0</span>
+        <strong id="precio-max-valor">Sin límite</strong>
+      </div>
+    </div>
+
+    <button class="lateral__limpiar" id="limpiar-filtros" type="button" hidden>Borrar filtros</button>
+  </nav>
+
+  <div class="carrito__principal">
+
+  <!-- ---- sección 1 del carrito: el catálogo ----
+       Cada producto es un <li class="producto">: nombre, precio, foto y
+       "palabras" (para el buscador). El id tiene que ser único y el
+       data-categoria es el que usa "Tipo de producto" en la barra lateral. -->
+  <section class="carrito__seccion">
+    <div class="catalogo__cabeza">
+      <h2>Equipos e insumos</h2>
+      <p class="catalogo__cuenta" id="catalogo-cuenta"></p>
+    </div>
+    <ol class="catalogo__pasos">
+      <li>Agregá lo que necesitás</li>
+      <li>Completá tus datos abajo</li>
+      <li>Finalizá por WhatsApp y te confirmamos el total</li>
+    </ol>
+    <!-- >>> CAMBIÁ ESTO: la fecha de la última lista de precios cargada -->
+    <p class="catalogo__nota">* Precios de lista al 13/10/2026. Cambian seguido: antes de cobrar te confirmamos el precio final y el stock por WhatsApp.</p>
+
+    <button type="button" class="kit-banner" data-abre-kit>
+      <strong>Armá tu kit <span aria-hidden="true">→</span></strong>
+      <span>Tira LED, instalación de aire o seguridad: elegí las partes y te pasamos el precio.</span>
+    </button>
+
+    <p class="lectura-oculta" id="aviso-buscador" aria-live="polite"></p>
+
+    <ul class="catalogo__grilla" id="grilla-equipos">
+      <li class="producto" data-id="split-2200" data-nombre="Split 2200 frigorías frío/calor" data-precio="" data-estado="nuevo" data-categoria="aire"
+          data-palabras="split aire acondicionado frio calor 2200 frigorias nuevo dormitorio">
+        <figure data-marca="Split nuevo">
+          <img src="img/prod-split-2200.jpg" alt="Split frío/calor 2200 frigorías, equipo nuevo" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Nuevo</span>
+          <h3>Split 2200 frigorías frío/calor</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="split-3000" data-nombre="Split 3000 frigorías frío/calor" data-precio="" data-estado="nuevo" data-categoria="aire"
+          data-palabras="split aire acondicionado frio calor 3000 frigorias nuevo living comedor">
+        <figure data-marca="Split nuevo">
+          <img src="img/prod-split-3000.jpg" alt="Split frío/calor 3000 frigorías, equipo nuevo" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Nuevo</span>
+          <h3>Split 3000 frigorías frío/calor</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="split-4500" data-nombre="Split 4500 frigorías frío/calor" data-precio="" data-estado="nuevo" data-categoria="aire"
+          data-palabras="split aire acondicionado frio calor 4500 frigorias nuevo local comercio grande">
+        <figure data-marca="Split nuevo">
+          <img src="img/prod-split-4500.jpg" alt="Split frío/calor 4500 frigorías, equipo nuevo" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Nuevo</span>
+          <h3>Split 4500 frigorías frío/calor</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="split-usado" data-nombre="Split 3000 solo frío (usado)" data-precio="" data-estado="usado" data-categoria="aire"
+          data-palabras="split aire acondicionado solo frio 3000 usado revisado garantia">
+        <figure data-marca="Split usado">
+          <img src="img/prod-split-usado.jpg" alt="Split solo frío usado, revisado y con garantía" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa chapa--usado">Usado</span>
+          <h3>Split 3000 solo frío</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="heladera-usada" data-nombre="Heladera exhibidora (usada)" data-precio="" data-estado="usado" data-categoria="frio"
+          data-palabras="heladera exhibidora comercial usada kiosco fiambreria bebidas">
+        <figure data-marca="Exhibidora usada">
+          <img src="img/prod-heladera-usada.jpg" alt="Heladera exhibidora usada, probada y con gas cargado" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa chapa--usado">Usado</span>
+          <h3>Heladera exhibidora</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="freezer-nuevo" data-nombre="Freezer horizontal (nuevo)" data-precio="" data-estado="nuevo" data-categoria="frio"
+          data-palabras="freezer horizontal nuevo comercio carniceria congelador">
+        <figure data-marca="Freezer nuevo">
+          <img src="img/prod-freezer-nuevo.jpg" alt="Freezer horizontal nuevo para comercio" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Nuevo</span>
+          <h3>Freezer horizontal</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="portatil-usado" data-nombre="Aire portátil (usado)" data-precio="" data-estado="usado" data-categoria="aire"
+          data-palabras="aire portatil usado ambiente chico sin instalacion">
+        <figure data-marca="Portátil usado">
+          <img src="img/prod-portatil-usado.jpg" alt="Aire acondicionado portátil usado" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa chapa--usado">Usado</span>
+          <h3>Aire portátil</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <!-- ---- Aires acondicionados BGH (lista FrioRep 13/10/2026) ---- -->
+
+      <li class="producto" data-id="bgh-1006005930" data-nombre="Split BGH Inverter 3100 fg frío/calor (3650 W, BSI37WCNX)" data-precio="838598" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh inverter frio calor 3100 frigorias 3650w bsi37wcnx dormitorio">
+        <figure data-marca="Split inverter">
+          <img src="img/prod-bgh-1006005930.jpg" alt="Split BGH Inverter 3100 fg frío/calor (3650 W, BSI37WCNX)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Inverter 3100 fg frío/calor (3650 W, BSI37WCNX)</h3>
+          <p class="producto__precio">$838.598</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1006005357" data-nombre="Split BGH Silent Air 3000 fg on-off (3500 W)" data-precio="728565" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh on off 3000 frigorias 3500w cdw silent air dormitorio">
+        <figure data-marca="Split on-off">
+          <img src="img/prod-bgh-1006005357.jpg" alt="Split BGH Silent Air 3000 fg on-off (3500 W)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Silent Air 3000 fg on-off (3500 W)</h3>
+          <p class="producto__precio">$728.565</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1006005948" data-nombre="Split BGH Silent Air 4600 fg on-off (5400 W)" data-precio="997861" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh on off 4600 frigorias 5400w cdw silent air living">
+        <figure data-marca="Split on-off">
+          <img src="img/prod-bgh-1006005948.jpg" alt="Split BGH Silent Air 4600 fg on-off (5400 W)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Silent Air 4600 fg on-off (5400 W)</h3>
+          <p class="producto__precio">$997.861</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1006004974" data-nombre="Split BGH Inverter 4700 fg frío/calor (5500 W, BSI55WCNX)" data-precio="1254821" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh inverter frio calor 4700 frigorias 5500w bsi55wcnx living">
+        <figure data-marca="Split inverter">
+          <img src="img/prod-bgh-1006004974.jpg" alt="Split BGH Inverter 4700 fg frío/calor (5500 W, BSI55WCNX)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Inverter 4700 fg frío/calor (5500 W, BSI55WCNX)</h3>
+          <p class="producto__precio">$1.254.821</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1006005937" data-nombre="Split BGH Silent Air 5500 fg on-off (6500 W)" data-precio="1278333" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh on off 5500 frigorias 6500w cew silent air living">
+        <figure data-marca="Split on-off">
+          <img src="img/prod-bgh-1006005937.jpg" alt="Split BGH Silent Air 5500 fg on-off (6500 W)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Silent Air 5500 fg on-off (6500 W)</h3>
+          <p class="producto__precio">$1.278.333</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1006005934" data-nombre="Split BGH Inverter WiFi 9100 fg (10600 W, BSI106WCAW)" data-precio="2210301" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh inverter wifi 9100 frigorias 10600w bsi106wcaw salon local">
+        <figure data-marca="Split inverter">
+          <img src="img/prod-bgh-1006005934.jpg" alt="Split BGH Inverter WiFi 9100 fg (10600 W, BSI106WCAW)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Inverter WiFi 9100 fg (10600 W, BSI106WCAW)</h3>
+          <p class="producto__precio">$2.210.301</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1009000010" data-nombre="Piso techo BGH Inverter 5 TR frío/calor (BSPTHI60CPT)" data-precio="3429956" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh piso techo inverter frio calor 5 tr 15000 frigorias bspthi60cpt comercial local">
+        <figure data-marca="Piso techo">
+          <img src="img/prod-bgh-1009000010.jpg" alt="Piso techo BGH Inverter 5 TR frío/calor (BSPTHI60CPT)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Piso techo BGH Inverter 5 TR frío/calor (BSPTHI60CPT)</h3>
+          <p class="producto__precio">$3.429.956</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1009000005" data-nombre="Piso techo BGH 6 TR on-off (BSPTH72CTP)" data-precio="3063266" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh piso techo on off 6 tr 18000 frigorias bspth72ctp comercial local">
+        <figure data-marca="Piso techo">
+          <img src="img/prod-bgh-1009000005.jpg" alt="Piso techo BGH 6 TR on-off (BSPTH72CTP)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Piso techo BGH 6 TR on-off (BSPTH72CTP)</h3>
+          <p class="producto__precio">$3.063.266</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1009000008" data-nombre="Piso techo BGH Inverter 6 TR frío/calor R32 (BSPTHI72CTQ)" data-precio="3704415" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh piso techo inverter frio calor r32 6 tr 18000 frigorias bspthi72ctq comercial local">
+        <figure data-marca="Piso techo">
+          <img src="img/prod-bgh-1009000008.jpg" alt="Piso techo BGH Inverter 6 TR frío/calor R32 (BSPTHI72CTQ)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Piso techo BGH Inverter 6 TR frío/calor R32 (BSPTHI72CTQ)</h3>
+          <p class="producto__precio">$3.704.415</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-220030100019" data-nombre="Cassette BGH 6 TR on-off (18000 fg)" data-precio="3158251" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh cassette casette techo on off 6 tr 18000 frigorias comercial local oficina">
+        <figure data-marca="Cassette">
+          <img src="img/prod-bgh-220030100019.jpg" alt="Cassette BGH 6 TR on-off (18000 fg)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Cassette BGH 6 TR on-off (18000 fg)</h3>
+          <p class="producto__precio">$3.158.251</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-220030100025" data-nombre="Baja silueta / ducto BGH 6 TR on-off" data-precio="3158251" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh ducto baja silueta conductos on off 6 tr 18000 frigorias comercial">
+        <figure data-marca="Baja silueta">
+          <img src="img/prod-bgh-220030100025.jpg" alt="Baja silueta / ducto BGH 6 TR on-off" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Baja silueta / ducto BGH 6 TR on-off</h3>
+          <p class="producto__precio">$3.158.251</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <!-- ---- Gases refrigerantes (lista FrioRep 07/10/2026) ---- -->
+
+      <li class="producto" data-id="gas-128001000001" data-nombre="Gas Lata R32 x 650 g Anton" data-precio="24506" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r32 lata r32 x 650 g anton carga">
+        <figure data-marca="Lata R32">
+          <img src="img/prod-gas-128001000001.jpg" alt="Gas Lata R32 x 650 g Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Lata R32 x 650 g Anton</h3>
+          <p class="producto__precio">$24.506</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-686114000541" data-nombre="Gas Garrafa R32 x 3 kg Anton" data-precio="89856" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r32 garrafa r32 x 3 kg anton carga">
+        <figure data-marca="Garrafa R32">
+          <img src="img/prod-gas-686114000541.jpg" alt="Gas Garrafa R32 x 3 kg Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Garrafa R32 x 3 kg Anton</h3>
+          <p class="producto__precio">$89.856</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430030200006" data-nombre="Gas Lata R290 x 400 g Anton" data-precio="11611" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r290 propano lata r290 x 400 g anton carga">
+        <figure data-marca="Lata R290">
+          <img src="img/prod-gas-430030200006.jpg" alt="Gas Lata R290 x 400 g Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Lata R290 x 400 g Anton</h3>
+          <p class="producto__precio">$11.611</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430030200007" data-nombre="Gas Lata R134a x 900 g Anton" data-precio="26857" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r134 r134a heladera lata r134a x 900 g anton carga">
+        <figure data-marca="Lata R134a">
+          <img src="img/prod-gas-430030200007.jpg" alt="Gas Lata R134a x 900 g Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Lata R134a x 900 g Anton</h3>
+          <p class="producto__precio">$26.857</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430030200010" data-nombre="Gas Lata R290 x 225 g Anton" data-precio="10163" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r290 propano lata r290 x 225 g anton carga">
+        <figure data-marca="Lata R290">
+          <img src="img/prod-gas-430030200010.jpg" alt="Gas Lata R290 x 225 g Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Lata R290 x 225 g Anton</h3>
+          <p class="producto__precio">$10.163</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-7791073877141" data-nombre="Gas Lata R600a x 420 g Necton" data-precio="7338" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r600 r600a isobutano heladera lata r600a x 420 g necton carga">
+        <figure data-marca="Lata R600a">
+          <img src="img/prod-gas-7791073877141.jpg" alt="Gas Lata R600a x 420 g Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Lata R600a x 420 g Necton</h3>
+          <p class="producto__precio">$7.338</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430040001112" data-nombre="Gas Lata R290 x 400 g Necton" data-precio="8495" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r290 propano lata r290 x 400 g necton carga">
+        <figure data-marca="Lata R290">
+          <img src="img/prod-gas-430040001112.jpg" alt="Gas Lata R290 x 400 g Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Lata R290 x 400 g Necton</h3>
+          <p class="producto__precio">$8.495</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430040001113" data-nombre="Gas Lata R600a x 225 g Anton" data-precio="9090" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r600 r600a isobutano heladera lata r600a x 225 g anton carga">
+        <figure data-marca="Lata R600a">
+          <img src="img/prod-gas-430040001113.jpg" alt="Gas Lata R600a x 225 g Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Lata R600a x 225 g Anton</h3>
+          <p class="producto__precio">$9.090</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50008002553" data-nombre="Gas Garrafa R134a x 13,6 kg Necton" data-precio="372745" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r134 r134a garrafa r134a x 13,6 kg necton carga">
+        <figure data-marca="Garrafa R134a">
+          <img src="img/prod-gas-50008002553.jpg" alt="Gas Garrafa R134a x 13,6 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R134a x 13,6 kg Necton</h3>
+          <p class="producto__precio">$372.745</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50008003881" data-nombre="Gas Garrafa R134a x 6,8 kg Necton" data-precio="196666" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r134 r134a garrafa r134a x 6,8 kg necton carga">
+        <figure data-marca="Garrafa R134a">
+          <img src="img/prod-gas-50008003881.jpg" alt="Gas Garrafa R134a x 6,8 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R134a x 6,8 kg Necton</h3>
+          <p class="producto__precio">$196.666</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50008005070" data-nombre="Gas Lata R134a x 900 g Necton" data-precio="24957" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r134 r134a heladera lata r134a x 900 g necton carga">
+        <figure data-marca="Lata R134a">
+          <img src="img/prod-gas-50008005070.jpg" alt="Gas Lata R134a x 900 g Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Lata R134a x 900 g Necton</h3>
+          <p class="producto__precio">$24.957</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-686114000251" data-nombre="Gas Garrafa R134a x 3,4 kg Necton" data-precio="105505" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r134 r134a garrafa r134a x 3,4 kg necton carga">
+        <figure data-marca="Garrafa R134a">
+          <img src="img/prod-gas-686114000251.jpg" alt="Gas Garrafa R134a x 3,4 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R134a x 3,4 kg Necton</h3>
+          <p class="producto__precio">$105.505</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50002000554" data-nombre="Gas Garrafa R22 x 13,6 kg Necton" data-precio="387539" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r22 aire acondicionado garrafa r22 x 13,6 kg necton carga">
+        <figure data-marca="Garrafa R22">
+          <img src="img/prod-gas-50002000554.jpg" alt="Gas Garrafa R22 x 13,6 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R22 x 13,6 kg Necton</h3>
+          <p class="producto__precio">$387.539</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50002001920" data-nombre="Gas Garrafa R22 x 6,8 kg Necton" data-precio="222027" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r22 aire acondicionado garrafa r22 x 6,8 kg necton carga">
+        <figure data-marca="Garrafa R22">
+          <img src="img/prod-gas-50002001920.jpg" alt="Gas Garrafa R22 x 6,8 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R22 x 6,8 kg Necton</h3>
+          <p class="producto__precio">$222.027</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50002002325" data-nombre="Gas Lata R22 x 1 kg Necton" data-precio="33458" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r22 aire acondicionado lata r22 x 1 kg necton carga">
+        <figure data-marca="Lata R22">
+          <img src="img/prod-gas-50002002325.jpg" alt="Gas Lata R22 x 1 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Lata R22 x 1 kg Necton</h3>
+          <p class="producto__precio">$33.458</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-686114000701" data-nombre="Gas Garrafa R22 x 3,4 kg Necton" data-precio="111014" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r22 aire acondicionado garrafa r22 x 3,4 kg necton carga">
+        <figure data-marca="Garrafa R22">
+          <img src="img/prod-gas-686114000701.jpg" alt="Gas Garrafa R22 x 3,4 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R22 x 3,4 kg Necton</h3>
+          <p class="producto__precio">$111.014</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430060104755" data-nombre="Gas Garrafa AN22 Plus x 11,3 kg Anton" data-precio="282105" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante an22 r22 reemplazo garrafa an22 plus x 11,3 kg anton carga">
+        <figure data-marca="Garrafa AN22 Plus">
+          <img src="img/prod-gas-430060104755.jpg" alt="Gas Garrafa AN22 Plus x 11,3 kg Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Garrafa AN22 Plus x 11,3 kg Anton</h3>
+          <p class="producto__precio">$282.105</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430060104757" data-nombre="Gas Garrafa AN22 x 2,7 kg Anton" data-precio="91494" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante an22 r22 reemplazo garrafa an22 x 2,7 kg anton carga">
+        <figure data-marca="Garrafa AN22">
+          <img src="img/prod-gas-430060104757.jpg" alt="Gas Garrafa AN22 x 2,7 kg Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Garrafa AN22 x 2,7 kg Anton</h3>
+          <p class="producto__precio">$91.494</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-115001000002" data-nombre="Gas Lata R404A x 650 g Anton" data-precio="20476" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r404 r404a freezer camara lata r404a x 650 g anton carga">
+        <figure data-marca="Lata R404A">
+          <img src="img/prod-gas-115001000002.jpg" alt="Gas Lata R404A x 650 g Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Lata R404A x 650 g Anton</h3>
+          <p class="producto__precio">$20.476</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430080103236" data-nombre="Gas Lata AN22 Plus x 780 g Anton" data-precio="24136" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante an22 r22 reemplazo lata an22 plus x 780 g anton carga">
+        <figure data-marca="Lata AN22 Plus">
+          <img src="img/prod-gas-430080103236.jpg" alt="Gas Lata AN22 Plus x 780 g Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Lata AN22 Plus x 780 g Anton</h3>
+          <p class="producto__precio">$24.136</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50005000559" data-nombre="Gas Garrafa R404A x 5,4 kg Necton" data-precio="107855" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r404 r404a freezer camara garrafa r404a x 5,4 kg necton carga">
+        <figure data-marca="Garrafa R404A">
+          <img src="img/prod-gas-50005000559.jpg" alt="Gas Garrafa R404A x 5,4 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R404A x 5,4 kg Necton</h3>
+          <p class="producto__precio">$107.855</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50005001978" data-nombre="Gas Garrafa R404A x 2,7 kg Necton" data-precio="60482" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r404 r404a freezer camara garrafa r404a x 2,7 kg necton carga">
+        <figure data-marca="Garrafa R404A">
+          <img src="img/prod-gas-50005001978.jpg" alt="Gas Garrafa R404A x 2,7 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R404A x 2,7 kg Necton</h3>
+          <p class="producto__precio">$60.482</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-50006002457" data-nombre="Gas Garrafa R404A x 10,9 kg Necton" data-precio="218869" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r404 r404a freezer camara garrafa r404a x 10,9 kg necton carga">
+        <figure data-marca="Garrafa R404A">
+          <img src="img/prod-gas-50006002457.jpg" alt="Gas Garrafa R404A x 10,9 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R404A x 10,9 kg Necton</h3>
+          <p class="producto__precio">$218.869</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430090103288" data-nombre="Gas Lata R404A x 650 g Necton" data-precio="20469" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r404 r404a freezer camara lata r404a x 650 g necton carga">
+        <figure data-marca="Lata R404A">
+          <img src="img/prod-gas-430090103288.jpg" alt="Gas Lata R404A x 650 g Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Lata R404A x 650 g Necton</h3>
+          <p class="producto__precio">$20.469</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-108001000001" data-nombre="Gas Garrafa R410A x 11,3 kg Necton" data-precio="349474" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 11,3 kg necton carga">
+        <figure data-marca="Garrafa R410A">
+          <img src="img/prod-gas-108001000001.jpg" alt="Gas Garrafa R410A x 11,3 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R410A x 11,3 kg Necton</h3>
+          <p class="producto__precio">$349.474</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430110100003" data-nombre="Gas Lata R410A x 650 g Necton" data-precio="26539" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r410 r410a aire acondicionado split lata r410a x 650 g necton carga">
+        <figure data-marca="Lata R410A">
+          <img src="img/prod-gas-430110100003.jpg" alt="Gas Lata R410A x 650 g Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Lata R410A x 650 g Necton</h3>
+          <p class="producto__precio">$26.539</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430110100004" data-nombre="Gas Garrafa R410A x 5,6 kg Necton" data-precio="218086" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 5,6 kg necton carga">
+        <figure data-marca="Garrafa R410A">
+          <img src="img/prod-gas-430110100004.jpg" alt="Gas Garrafa R410A x 5,6 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R410A x 5,6 kg Necton</h3>
+          <p class="producto__precio">$218.086</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430110100006" data-nombre="Gas Garrafa R410A x 2,8 kg Necton" data-precio="96362" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 2,8 kg necton carga">
+        <figure data-marca="Garrafa R410A">
+          <img src="img/prod-gas-430110100006.jpg" alt="Gas Garrafa R410A x 2,8 kg Necton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Necton</span>
+          <h3>Gas Garrafa R410A x 2,8 kg Necton</h3>
+          <p class="producto__precio">$96.362</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430110100007" data-nombre="Gas Garrafa R410A x 2,8 kg Anton" data-precio="89474" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 2,8 kg anton carga">
+        <figure data-marca="Garrafa R410A">
+          <img src="img/prod-gas-430110100007.jpg" alt="Gas Garrafa R410A x 2,8 kg Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Garrafa R410A x 2,8 kg Anton</h3>
+          <p class="producto__precio">$89.474</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="gas-430110100009" data-nombre="Gas Garrafa R410A x 11,3 kg Anton" data-precio="291319" data-estado="nuevo" data-categoria="gas"
+          data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 11,3 kg anton carga">
+        <figure data-marca="Garrafa R410A">
+          <img src="img/prod-gas-430110100009.jpg" alt="Gas Garrafa R410A x 11,3 kg Anton" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Anton</span>
+          <h3>Gas Garrafa R410A x 11,3 kg Anton</h3>
+          <p class="producto__precio">$291.319</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <!-- ---- Selladores y químicos Albans (lista FrioRep 07/10/2026) ---- -->
+
+      <li class="producto" data-id="albans-74001005865" data-nombre="Sella rosca rojo para refrigeración 50 ml (SK-005 St-Lock Red) Albans" data-precio="12048" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador traba roscas sella rosca rojo para refrigeración 50 ml (sk-005 st-lock red) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005865.jpg" alt="Sella rosca rojo para refrigeración 50 ml (SK-005 St-Lock Red) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Sella rosca rojo para refrigeración 50 ml (SK-005 St-Lock Red) Albans</h3>
+          <p class="producto__precio">$12.048</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005866" data-nombre="Masilla reparadora para fisuras 20 g (SK010 Copper Repair) Albans" data-precio="18491" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador cobre reparacion masilla reparadora para fisuras 20 g (sk010 copper repair) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005866.jpg" alt="Masilla reparadora para fisuras 20 g (SK010 Copper Repair) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Masilla reparadora para fisuras 20 g (SK010 Copper Repair) Albans</h3>
+          <p class="producto__precio">$18.491</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005867" data-nombre="Sella rosca azul uso general 50 ml (SK-004 St-Lock Blue) Albans" data-precio="12048" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador traba roscas sella rosca azul uso general 50 ml (sk-004 st-lock blue) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005867.jpg" alt="Sella rosca azul uso general 50 ml (SK-004 St-Lock Blue) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Sella rosca azul uso general 50 ml (SK-004 St-Lock Blue) Albans</h3>
+          <p class="producto__precio">$12.048</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005868" data-nombre="Sellador en frío para todos los metales FixQuick (ST-SK009) Albans" data-precio="11968" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador soldadura en frio sellador en frío para todos los metales fixquick (st-sk009) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005868.jpg" alt="Sellador en frío para todos los metales FixQuick (ST-SK009) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Sellador en frío para todos los metales FixQuick (ST-SK009) Albans</h3>
+          <p class="producto__precio">$11.968</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005869" data-nombre="Masilla reutilizable disipadora de calor Stop Heat (ST-SK006) Albans" data-precio="43138" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador soldadura proteccion calor masilla reutilizable disipadora de calor stop heat (st-sk006) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005869.jpg" alt="Masilla reutilizable disipadora de calor Stop Heat (ST-SK006) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Masilla reutilizable disipadora de calor Stop Heat (ST-SK006) Albans</h3>
+          <p class="producto__precio">$43.138</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005879" data-nombre="Pasta sella rajaduras caño de cobre 10 g (SK011) Albans" data-precio="20545" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador cobre fisura pasta sella rajaduras caño de cobre 10 g (sk011) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005879.jpg" alt="Pasta sella rajaduras caño de cobre 10 g (SK011) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Pasta sella rajaduras caño de cobre 10 g (SK011) Albans</h3>
+          <p class="producto__precio">$20.545</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005880" data-nombre="Tapa fuga sellador jeringa 10 ml (ST-524) Albans" data-precio="13849" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador fugas tapa fuga sellador jeringa 10 ml (st-524) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005880.jpg" alt="Tapa fuga sellador jeringa 10 ml (ST-524) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Tapa fuga sellador jeringa 10 ml (ST-524) Albans</h3>
+          <p class="producto__precio">$13.849</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005881" data-nombre="Sella fuga rosa jeringa 15 ml (S508-04) Albans" data-precio="13849" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador fugas sella fuga rosa jeringa 15 ml (s508-04) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005881.jpg" alt="Sella fuga rosa jeringa 15 ml (S508-04) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Sella fuga rosa jeringa 15 ml (S508-04) Albans</h3>
+          <p class="producto__precio">$13.849</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005882" data-nombre="Detector UV y sella fuga jeringa azul 15 ml (S508UV-04) Albans" data-precio="18494" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador fugas ultravioleta detector uv y sella fuga jeringa azul 15 ml (s508uv-04) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005882.jpg" alt="Detector UV y sella fuga jeringa azul 15 ml (S508UV-04) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Detector UV y sella fuga jeringa azul 15 ml (S508UV-04) Albans</h3>
+          <p class="producto__precio">$18.494</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005883" data-nombre="Repuesto sella fuga rosa 15 ml (S508-2) Albans" data-precio="12823" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador fugas repuesto sella fuga rosa 15 ml (s508-2) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005883.jpg" alt="Repuesto sella fuga rosa 15 ml (S508-2) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Repuesto sella fuga rosa 15 ml (S508-2) Albans</h3>
+          <p class="producto__precio">$12.823</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005884" data-nombre="Sella fuga rosa 30 ml (ST-508) Albans" data-precio="24649" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador fugas sella fuga rosa 30 ml (st-508) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005884.jpg" alt="Sella fuga rosa 30 ml (ST-508) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Sella fuga rosa 30 ml (ST-508) Albans</h3>
+          <p class="producto__precio">$24.649</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005885" data-nombre="Sella fuga Easy Fast inyección directa 6 ml (ST-201) Albans" data-precio="26489" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador fugas sella fuga easy fast inyección directa 6 ml (st-201) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005885.jpg" alt="Sella fuga Easy Fast inyección directa 6 ml (ST-201) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Sella fuga Easy Fast inyección directa 6 ml (ST-201) Albans</h3>
+          <p class="producto__precio">$26.489</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005886" data-nombre="Kit sellador y detector de fugas con linterna y aplicador 30 ml (K508UV-04) Albans" data-precio="75718" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador fugas ultravioleta uv kit sellador y detector de fugas con linterna y aplicador 30 ml (k508uv-04) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005886.jpg" alt="Kit sellador y detector de fugas con linterna y aplicador 30 ml (K508UV-04) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Kit sellador y detector de fugas con linterna y aplicador 30 ml (K508UV-04) Albans</h3>
+          <p class="producto__precio">$75.718</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="albans-74001005887" data-nombre="Pistola aplicadora (P001) Albans" data-precio="7979" data-estado="nuevo" data-categoria="quimicos"
+          data-palabras="albans quimico sellador aplicador jeringa pistola aplicadora (p001) refrigeracion">
+        <figure data-marca="Albans">
+          <img src="img/prod-albans-74001005887.jpg" alt="Pistola aplicadora (P001) Albans" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Albans</span>
+          <h3>Pistola aplicadora (P001) Albans</h3>
+          <p class="producto__precio">$7.979</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <!-- ---- Caños de cobre (lista FrioRep 07/10/2026) ---- -->
+
+      <li class="producto" data-id="cobre-24002000275" data-unidad="kg" data-nombre="Caño de cobre 5/8&quot; (0,8 mm) por kg Paranapanema" data-precio="198393" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="caño cano cobre tubo instalacion split caño de cobre 5/8&quot; (0,8 mm) por kg paranapanema">
+        <figure data-marca="Caño de cobre">
+          <img src="img/prod-cobre-24002000275.jpg" alt="Caño de cobre 5/8&quot; (0,8 mm) por kg Paranapanema" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Paranapanema</span>
+          <h3>Caño de cobre 5/8&quot; (0,8 mm) por kg Paranapanema</h3>
+          <p class="producto__precio">$198.393</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="cobre-24002002733" data-unidad="kg" data-nombre="Caño de cobre 1/4&quot; por kg Termomecanica" data-precio="74643" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="caño cano cobre tubo instalacion split caño de cobre 1/4&quot; por kg termomecanica">
+        <figure data-marca="Caño de cobre">
+          <img src="img/prod-cobre-24002002733.jpg" alt="Caño de cobre 1/4&quot; por kg Termomecanica" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Termomecanica</span>
+          <h3>Caño de cobre 1/4&quot; por kg Termomecanica</h3>
+          <p class="producto__precio">$74.643</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="cobre-24002002734" data-unidad="kg" data-nombre="Caño de cobre 3/8&quot; por kg Termomecanica" data-precio="117857" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="caño cano cobre tubo instalacion split caño de cobre 3/8&quot; por kg termomecanica">
+        <figure data-marca="Caño de cobre">
+          <img src="img/prod-cobre-24002002734.jpg" alt="Caño de cobre 3/8&quot; por kg Termomecanica" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Termomecanica</span>
+          <h3>Caño de cobre 3/8&quot; por kg Termomecanica</h3>
+          <p class="producto__precio">$117.857</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="cobre-24002002735" data-unidad="kg" data-nombre="Caño de cobre 1/2&quot; por kg Termomecanica" data-precio="157143" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="caño cano cobre tubo instalacion split caño de cobre 1/2&quot; por kg termomecanica">
+        <figure data-marca="Caño de cobre">
+          <img src="img/prod-cobre-24002002735.jpg" alt="Caño de cobre 1/2&quot; por kg Termomecanica" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Termomecanica</span>
+          <h3>Caño de cobre 1/2&quot; por kg Termomecanica</h3>
+          <p class="producto__precio">$157.143</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="value-bomba-condensado" data-nombre="Bomba de condensado Value" data-precio="" data-estado="nuevo" data-categoria="aire"
+          data-palabras="bomba de condensado agua desagote drenaje split aire acondicionado value">
+        <figure data-marca="Bomba de condensado">
+          <img src="img/prod-value-bomba-condensado.jpg" alt="Bomba de condensado Value blanca para desagote de aire acondicionado" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Value</span>
+          <h3>Bomba de condensado Value</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-domo-18-1g" data-nombre="Módulo inteligente Wi-Fi Demasled DOMO-18-1G" data-precio="" data-estado="nuevo" data-categoria="electrico"
+          data-palabras="modulo inteligente wifi domotica smart house demasled domo interruptor app alexa google smart life">
+        <figure data-marca="Demasled">
+          <img src="img/prod-demasled-domo-18-1g.jpg" alt="Módulo inteligente Wi-Fi Demasled DOMO-18-1G de 1 canal" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Módulo inteligente Wi-Fi Demasled (1 canal)</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-domo-66-b3" data-nombre="Cerradura biométrica para exterior Smart Wi-Fi Demasled" data-precio="" data-estado="nuevo" data-categoria="electrico"
+          data-palabras="cerradura inteligente biometrica huella clave exterior puerta wifi bluetooth smart life app demasled domo-66">
+        <figure data-marca="Cerradura Demasled">
+          <img src="img/prod-demasled-domo-66-b3.jpg" alt="Cerradura biométrica negra Demasled instalada en una puerta exterior" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Cerradura biométrica para exterior Smart Wi-Fi</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-domo-67" data-nombre="Mini cerradura biométrica para blindex Smart Wi-Fi Demasled" data-precio="" data-estado="nuevo" data-categoria="electrico"
+          data-palabras="cerradura inteligente biometrica huella clave tarjeta blindex vidrio templado wifi smart life app demasled domo-67">
+        <figure data-marca="Cerradura Demasled">
+          <img src="img/prod-demasled-domo-67.jpg" alt="Mini cerradura biométrica Demasled para puerta de blindex, con teclado y lector de huella" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Mini cerradura biométrica para blindex Smart Wi-Fi</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="unv-ipc2122lb" data-nombre="Cámara IP bullet Uniview 2 MP (IPC2122LB)" data-precio="" data-estado="nuevo" data-categoria="seguridad"
+          data-palabras="camara seguridad ip bullet exterior 2mp full hd uniview unv ipc2122lb vigilancia">
+        <figure data-marca="Cámara Uniview">
+          <img src="img/prod-unv-ipc2122lb.jpg" alt="Cámara de seguridad bullet Uniview blanca con soporte de pared" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Uniview</span>
+          <h3>Cámara IP bullet 2 MP (IPC2122LB)</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="unv-ipc322lb" data-nombre="Cámara IP domo Uniview 2 MP (IPC322LB)" data-precio="" data-estado="nuevo" data-categoria="seguridad"
+          data-palabras="camara seguridad ip domo interior 2mp full hd uniview unv ipc322lb vigilancia">
+        <figure data-marca="Cámara Uniview">
+          <img src="img/prod-unv-ipc322lb.jpg" alt="Cámara de seguridad domo Uniview blanca" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Uniview</span>
+          <h3>Cámara IP domo 2 MP (IPC322LB)</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="x28-kit-8-zonas-4g" data-nombre="Kit de alarma X-28 8 zonas con comunicador 4G" data-precio="1033800" data-estado="nuevo" data-categoria="seguridad"
+          data-palabras="alarma x28 x-28 kit 8 zonas central n8-mpxh teclado t8m-mpxh detector infrarrojo md 96rl-mpxh sirena s 16l-mpxh bateria 12v 7a comunicador com30-mpxh 4g app mi alarma casa comercio">
+        <figure data-marca="Alarma X-28">
+          <img src="img/prod-x28-kit-8-zonas.jpg" alt="Kit de alarma X-28: central, teclado, detectores, sirena y batería" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">X-28</span>
+          <h3>Kit de alarma 8 zonas con comunicador 4G</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">$1.033.800</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-tsmd-54-b2" data-nombre="Tira LED 12V 12W/m 120 LED/m Demasled (rollo 5 m)" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="tira led rollo 5m 12v smd2835 120 led interior blanco calido neutro frio demasled tsmd-54">
+        <figure data-marca="Tira LED">
+          <img src="img/prod-demasled-tsmd-54-b2.jpg" alt="Rollo de tira LED Demasled y ambiente iluminado con luz cálida" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Tira LED 12V 12W/m · rollo 5 m (cálida, neutra o fría)</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-tcob-01-12v" data-nombre="Tira LED COB 12V 11W/m Demasled (rollo 5 m)" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="tira led cob rollo 5m 12v luz continua sin puntos interior demasled tcob-01">
+        <figure data-marca="Tira LED COB">
+          <img src="img/prod-demasled-tcob-01-12v.jpg" alt="Tira LED COB Demasled iluminando un estante" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Tira LED COB 12V 11W/m · rollo 5 m</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-tsmd-53-b2" data-nombre="Tira LED 24V 33W/m 240 LED/m Demasled (rollo 5 m)" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="tira led rollo 5m 24v alta potencia smd2835 240 led blanco calido neutro frio demasled tsmd-53">
+        <figure data-marca="Tira LED">
+          <img src="img/prod-demasled-tsmd-53-b2.jpg" alt="Tira LED Demasled colocada debajo de una alacena" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Tira LED 24V 33W/m alta potencia · rollo 5 m</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-per-59-2m" data-nombre="Perfil de aluminio flat 16,8x6,6 mm Demasled (2 m)" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="perfil aluminio tira led flat plano 2m cover difusor demasled per-59">
+        <figure data-marca="Perfil de aluminio">
+          <img src="img/prod-demasled-per-59-2m.jpg" alt="Perfil de aluminio plano para tira LED con difusor" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Perfil de aluminio flat 16,8x6,6 mm · 2 m</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-per-03-2m" data-nombre="Perfil de aluminio esquinero 16x16 mm Demasled (2 m)" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="perfil aluminio tira led esquinero rincon 2m cover difusor demasled per-03">
+        <figure data-marca="Perfil de aluminio">
+          <img src="img/prod-demasled-per-03-2m.jpg" alt="Perfil de aluminio esquinero con tira LED adentro" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Perfil de aluminio esquinero 16x16 mm · 2 m</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-per-12-2m" data-nombre="Perfil de aluminio U blanco 17x14,5 mm Demasled (2 m)" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="perfil aluminio tira led u blanco 2m cover opal difusor demasled per-12">
+        <figure data-marca="Perfil de aluminio">
+          <img src="img/prod-demasled-per-12-2m.jpg" alt="Perfil de aluminio en U blanco con difusor opal" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Perfil de aluminio U blanco 17x14,5 mm · 2 m</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-fap-60-12v" data-nombre="Transformador 12V 60W 5A para tira LED Demasled" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="transformador fuente switching 12v 60w 5a tira led interior demasled fap-60">
+        <figure data-marca="Transformador">
+          <img src="img/prod-demasled-fap-60-12v.jpg" alt="Fuente switching Demasled de 12 V para tira LED" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Transformador 12V 60W para tira LED</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-fap-200-12v" data-nombre="Transformador 12V 200W 16,5A para tira LED Demasled" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="transformador fuente switching 12v 200w 16a tira led interior demasled fap-200">
+        <figure data-marca="Transformador">
+          <img src="img/prod-demasled-fap-200-12v.jpg" alt="Fuente switching Demasled de 12 V 200 W para tira LED" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Transformador 12V 200W para tira LED</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-fap-60-24v" data-nombre="Transformador 24V 60W 2,5A para tira LED Demasled" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="transformador fuente switching 24v 60w tira led interior demasled fap-60-24v">
+        <figure data-marca="Transformador">
+          <img src="img/prod-demasled-fap-60-24v.jpg" alt="Fuente switching Demasled de 24 V para tira LED" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Transformador 24V 60W para tira LED</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="demasled-fap-200-24v" data-nombre="Transformador 24V 204W 8,5A para tira LED Demasled" data-precio="" data-estado="nuevo" data-categoria="led"
+          data-palabras="transformador fuente switching 24v 200w tira led interior demasled fap-200-24v">
+        <figure data-marca="Transformador">
+          <img src="img/prod-demasled-fap-200-24v.jpg" alt="Fuente switching Demasled de 24 V 200 W para tira LED" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Demasled</span>
+          <h3>Transformador 24V 204W para tira LED</h3>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="cable-tpr-5x1-5" data-unidad="m" data-nombre="Cable TPR tipo taller 5x1,5 mm (por metro)" data-precio="" data-estado="nuevo" data-categoria="electrico"
+          data-palabras="cable tpr tipo taller 5x1,5 5x1.5 pentapolar flexible por metro motor trifasico">
+        <figure data-marca="Cable TPR">
+          <img src="img/prod-cable-tpr-5.jpg" alt="Cable tipo taller TPR de cinco conductores" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Tipo taller</span>
+          <h3>Cable TPR 5x1,5 mm · por metro</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="cable-tpr-5x2-5" data-unidad="m" data-nombre="Cable TPR tipo taller 5x2,5 mm (por metro)" data-precio="" data-estado="nuevo" data-categoria="electrico"
+          data-palabras="cable tpr tipo taller 5x2,5 5x2.5 pentapolar flexible por metro motor trifasico">
+        <figure data-marca="Cable TPR">
+          <img src="img/prod-cable-tpr-5.jpg" alt="Cable tipo taller TPR de cinco conductores" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Tipo taller</span>
+          <h3>Cable TPR 5x2,5 mm · por metro</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="aislante-1-4" data-unidad="m" data-nombre="Aislante para caño de cobre 1/4&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tubo espuma coquilla caño cano cobre 1/4 aire acondicionado split instalacion">
+        <figure data-marca="Aislante">
+          <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Aislante</span>
+          <h3>Aislante para caño de cobre 1/4&quot; · por metro</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="aislante-3-8" data-unidad="m" data-nombre="Aislante para caño de cobre 3/8&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tubo espuma coquilla caño cano cobre 3/8 aire acondicionado split instalacion">
+        <figure data-marca="Aislante">
+          <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Aislante</span>
+          <h3>Aislante para caño de cobre 3/8&quot; · por metro</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="aislante-1-2" data-unidad="m" data-nombre="Aislante para caño de cobre 1/2&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tubo espuma coquilla caño cano cobre 1/2 aire acondicionado split instalacion">
+        <figure data-marca="Aislante">
+          <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Aislante</span>
+          <h3>Aislante para caño de cobre 1/2&quot; · por metro</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="aislante-5-8" data-unidad="m" data-nombre="Aislante para caño de cobre 5/8&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tubo espuma coquilla caño cano cobre 5/8 aire acondicionado split instalacion">
+        <figure data-marca="Aislante">
+          <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">Aislante</span>
+          <h3>Aislante para caño de cobre 5/8&quot; · por metro</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+    </ul>
+
+    <p class="catalogo__vacio" id="catalogo-vacio" hidden>
+      No encontré productos con esa búsqueda. Probá con otra palabra o
+      <a href="#" data-wp data-wp-texto="Hola Mateo, busco un equipo y no lo encontré en la web.">preguntanos por WhatsApp</a>.
+    </p>
+  </section>
+
+  <!-- ---- sección 2 del carrito: el pedido ---- -->
+  <section class="carrito__seccion carrito__seccion--pedido">
+    <div class="carrito__encabezado">
+      <h2 id="tu-pedido">Tu pedido</h2>
+      <button class="carrito__vaciar" id="carrito-vaciar" type="button" hidden>Vaciar</button>
+    </div>
+
+    <p class="carrito__vacio" id="carrito-vacio">
+      Todavía no agregaste ningún producto. Elegí algo del catálogo de arriba
+      y tocá "Agregar".
+    </p>
+
+    <ul class="carrito__lista" id="carrito-lista"></ul>
+
+    <div class="carrito__opciones" id="carrito-opciones" hidden>
+      <div class="campo">
+        <label for="carrito-nombre">Tu nombre</label>
+        <input type="text" id="carrito-nombre" placeholder="Nombre y apellido" autocomplete="name" required>
+      </div>
+
+      <div class="campo">
+        <label for="carrito-telefono">Tu WhatsApp</label>
+        <input type="tel" id="carrito-telefono" placeholder="Ej: 353 412 3456" autocomplete="tel" inputmode="tel" required>
+      </div>
+
+      <div class="campo">
+        <label for="carrito-pago">Cómo pagás</label>
+        <select id="carrito-pago" required>
+          <option value="" selected disabled hidden>Elegí una opción</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Tarjeta de débito o crédito">Tarjeta de débito o crédito</option>
+          <option value="Mercado Pago">Mercado Pago</option>
+        </select>
+      </div>
+
+      <!-- no hay local: todo se entrega e instala a domicilio -->
+      <div class="campo">
+        <label for="carrito-direccion">Dirección de entrega</label>
+        <input type="text" id="carrito-direccion" placeholder="Calle, número y barrio" autocomplete="street-address" required>
+      </div>
+    </div>
+
+    <!-- links de pago: aparecen según la forma de pago elegida.
+         Los datos (link de Mercado Pago, alias, CBU) se cargan en
+         PAGOS, arriba de todo en script.js -->
+    <div class="pago" id="pago-mp" hidden>
+      <p class="pago__texto">
+        Pagá cuando te confirmemos el total por WhatsApp. Se abre la app de
+        Mercado Pago (o la web si no la tenés) y podés pagar con saldo, débito
+        o crédito.
+      </p>
+      <a class="btn btn--mp btn--ancho" id="pago-mp-link" href="#" target="_blank" rel="noopener">
+        <span>Pagar <span id="pago-mp-monto"></span> con Mercado Pago</span>
+      </a>
+    </div>
+
+    <div class="pago" id="pago-transferencia" hidden>
+      <p class="pago__texto">Cuando te confirmemos el total por WhatsApp, transferí desde la app de tu banco o billetera:</p>
+      <dl class="pago__datos">
+        <div id="pago-alias-fila">
+          <dt>Alias</dt>
+          <dd><span id="pago-alias"></span> <button type="button" class="pago__copiar" data-copiar="pago-alias">Copiar</button></dd>
+        </div>
+        <div id="pago-cbu-fila">
+          <dt>CBU / CVU</dt>
+          <dd><span id="pago-cbu"></span> <button type="button" class="pago__copiar" data-copiar="pago-cbu">Copiar</button></dd>
+        </div>
+        <div id="pago-titular-fila">
+          <dt>Titular</dt>
+          <dd id="pago-titular"></dd>
+        </div>
+        <div id="pago-cuil-fila">
+          <dt>CUIL</dt>
+          <dd id="pago-cuil"></dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="carrito__total" id="carrito-total-caja" hidden>
+      <span>Total estimado*</span>
+      <strong id="carrito-total">$0</strong>
+    </div>
+
+    <a class="btn btn--wp btn--ancho" id="carrito-finalizar" href="#" data-wp-carrito hidden>
+      <span class="ico-wp" aria-hidden="true"></span>
+      <span class="btn__texto">Finalizar por WhatsApp</span>
+    </a>
+    <p class="carrito__privacidad" id="carrito-privacidad" hidden>* No se cobra nada todavía: te confirmamos precio y stock por WhatsApp y recién ahí pagás. Tus datos los usamos solo para coordinar la entrega.</p>
+  </section>
+
+  </div><!-- /carrito__principal -->
+  </div><!-- /carrito__cuerpo -->
+
+  <!-- barra fija abajo: con el pedido fuera de vista, muestra cuánto
+       lleva y lleva directo a "Tu pedido" -->
+  <button class="carrito__resumen" id="carrito-resumen" type="button" hidden>
+    <span>Ver mi pedido <span class="carrito__resumen-num" id="carrito-resumen-num">0</span></span>
+    <strong id="carrito-resumen-total">$0</strong>
+  </button>
+</aside>
+
+<main id="contenido">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <!-- video de fondo (más liviano en el celular). El velo oscuro mantiene
+         el texto legible; si el sistema pide menos movimiento, no se reproduce. -->
+    <!-- cartel de YPF GNC: los chicos en la canasta del hidroelevador (drone). En pantallas paradas va
+         una versión vertical (la foto completa) en vez de recortar la ancha -->
+    <video class="hero__video" id="hero-video" muted loop playsinline autoplay preload="auto" aria-hidden="true" poster="img/hero-fondo.jpg">
+      <source src="img/hero-fondo-celular.mp4" type="video/mp4" media="(orientation: portrait) and (max-width: 1100px)">
+      <source src="img/hero-fondo.mp4" type="video/mp4">
+    </video>
+    <div class="hero__velo" aria-hidden="true"></div>
+
+    <p class="rotulo" data-entra>Villa María y alrededores · Córdoba</p>
+    <h1 data-entra>
+      Luz, frío y calor
+      <span>resueltos en el día.</span>
+    </h1>
+    <p class="hero__bajada" data-entra>
+      ¿En qué te podemos ayudar?
+    </p>
+
+    <div class="hero__acciones" data-entra>
+      <a class="btn btn--wp" href="#" data-wp data-wp-texto="Hola Mateo, necesito un servicio.">
+        <span class="ico-wp" aria-hidden="true"></span>
+        Necesito un servicio
+      </a>
+      <button class="btn btn--linea" type="button" data-abre-carrito>
+        Busco un equipo
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ================= EQUIPO DE TRABAJO =================
+       La foto es la pieza "Nuestro equipo" (img/equipo.jpg). -->
+  <section class="equipo" id="equipo" aria-labelledby="equipo-titulo">
+    <div class="equipo__caja">
+      <figure class="equipo__foto" data-revelar>
+        <img src="img/equipo.jpg" alt="Nuestro equipo: los cuatro integrantes de Mateo Pedraza Instalaciones, de brazos cruzados"
+             width="1024" height="1280" loading="lazy" decoding="async">
+      </figure>
+      <div class="equipo__texto">
+        <p class="rotulo" data-revelar>Equipo de trabajo</p>
+        <h2 id="equipo-titulo" data-revelar>Las caras detrás de cada trabajo.</h2>
+        <p class="equipo__bajada" data-revelar>
+          Somos un equipo de Villa María que trabaja a domicilio: electricidad,
+          iluminación LED, seguridad, aire acondicionado y refrigeración, en
+          casas, comercios e industrias.
+        </p>
+        <!-- >>> CAMBIÁ ESTO: el número de certificación, si cambia -->
+        <p class="certificado" data-revelar>
+          <span class="certificado__sello" aria-hidden="true"></span>
+          <span>
+            <strong>Instaladores certificados CACAAV</strong>
+            Cámara Argentina de Calefacción, Aire Acondicionado y Ventilación ·
+            <span class="certificado__num">N.º 00.19629-000-2016</span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICIOS ================= -->
+  <section class="bloque" id="servicios">
+    <div class="bloque__encabezado">
+      <p class="rotulo rotulo--oscuro" data-revelar>Servicios</p>
+      <h2 data-revelar>Todo lo que se enchufa, se enfría o se ilumina.</h2>
+    </div>
+
+    <!-- Cada tarjeta abre su ficha (más abajo, en "FICHAS DE SERVICIOS")
+         con Instalación, Mantenimiento y el botón de mano de obra.
+         data-ficha une la tarjeta con su ficha. -->
+    <ul class="carril" aria-label="Servicios">
+      <li class="tarjeta tarjeta--medio servicio" data-ficha="iluminacion" data-revelar>
+        <figure data-marca="Iluminación">
+          <img src="img/servicio-iluminacion.jpg" alt="Galpón con iluminación LED lineal instalada en el techo"
+               width="480" height="600" loading="lazy" decoding="async">
+          <figcaption>
+            <span class="chip-destacado" id="ver-led-destacado" role="link" tabindex="0">Lo que más instalamos</span>
+            <h3>Iluminación</h3>
+            <p>Comercios, galpones, oficinas, jardines y frentes. Proyectamos la iluminación LED que cada rubro necesita.</p>
+            <button type="button" class="servicio__abrir" aria-haspopup="dialog">Instalación y mantenimiento <span aria-hidden="true">→</span></button>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tarjeta tarjeta--medio servicio" data-ficha="electricidad" data-revelar>
+        <figure data-marca="Electricidad">
+          <img src="img/servicio-electrico.jpg" alt="Tablero eléctrico nuevo con disyuntor y térmicas, instalado en la pared con caños a la vista"
+               width="720" height="900" loading="lazy" decoding="async">
+          <figcaption>
+            <h3>Electricidad</h3>
+            <p>Tableros, cableado, tomas y puesta a tierra en casas y locales. También cerraduras inteligentes Demasled.</p>
+            <button type="button" class="servicio__abrir" aria-haspopup="dialog">Instalación y mantenimiento <span aria-hidden="true">→</span></button>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tarjeta tarjeta--medio servicio" data-ficha="seguridad" data-revelar>
+        <figure class="foto-clara" data-marca="Seguridad">
+          <img src="img/servicio-seguridad.jpg" alt="Cámara de seguridad domo Uniview"
+               width="720" height="900" loading="lazy" decoding="async">
+          <figcaption>
+            <h3>Seguridad</h3>
+            <p>Cámaras Uniview y alarmas X-28 para casas y comercios, con todo el cableado.</p>
+            <button type="button" class="servicio__abrir" aria-haspopup="dialog">Instalación y mantenimiento <span aria-hidden="true">→</span></button>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tarjeta tarjeta--medio servicio" data-ficha="refrigeracion" data-revelar>
+        <figure class="foto-clara" data-marca="Refrigeración">
+          <img src="img/servicio-aire.jpg" alt="Equipo de aire acondicionado instalado en una pared"
+               width="480" height="600" loading="lazy" decoding="async">
+          <figcaption>
+            <h3>Refrigeración</h3>
+            <p>Aire acondicionado, heladeras, freezers y motocompresores. Instalación, carga de gas y reparación.</p>
+            <button type="button" class="servicio__abrir" aria-haspopup="dialog">Instalación y mantenimiento <span aria-hidden="true">→</span></button>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tarjeta tarjeta--medio servicio" data-ficha="equipos" data-revelar>
+        <figure class="foto-clara" data-marca="Equipos">
+          <img src="img/servicio-equipos.jpg" alt="Equipos de aire y frío nuevos, listos para instalar"
+               width="480" height="600" loading="lazy" decoding="async">
+          <figcaption>
+            <h3>Venta de equipos</h3>
+            <p>Aires y equipos de frío nuevos y usados revisados, con instalación incluida y garantía.</p>
+            <button type="button" class="servicio__abrir" aria-haspopup="dialog">Instalación y mantenimiento <span aria-hidden="true">→</span></button>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+    <p class="pista"><span class="pista__dedo" aria-hidden="true"></span> Deslizá para ver todos</p>
+  </section>
+
+  <!-- ================= EQUIPOS DESTACADOS =================
+       Las tarjetas se copian solas del catálogo del carrito (misma foto y
+       mismo precio en vivo). >>> CAMBIÁ ESTO: para elegir cuáles se ven,
+       poné sus data-id en data-ids, separados por coma. -->
+  <section class="bloque bloque--destacados" id="equipos">
+    <div class="bloque__encabezado">
+      <p class="rotulo rotulo--oscuro" data-revelar>Equipos y precios</p>
+      <h2 data-revelar>Aires BGH para tu casa o comercio.</h2>
+      <p class="trabajos__bajada" data-revelar>
+        Precios de lista*. Te confirmamos el total y coordinamos la instalación por WhatsApp.
+      </p>
+    </div>
+
+    <ul class="catalogo__grilla destacados__grilla" id="destacados"
+        data-ids="bgh-1006005357,bgh-1006005930,bgh-1006005948,bgh-1006004974,bgh-1006005937,bgh-1006005934"></ul>
+
+    <div class="destacados__mas">
+      <button class="btn btn--linea" type="button" data-abre-carrito>
+        Ver todos los equipos e insumos <span id="destacados-total"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= TRABAJOS HECHOS =================
+       Una sola galería con filtros por rubro. -->
+  <section class="bloque" id="trabajos">
+    <div class="bloque__encabezado">
+      <p class="rotulo" data-revelar>Trabajos hechos</p>
+      <h2 data-revelar>Antes eran cables sueltos.</h2>
+      <p class="trabajos__bajada" data-revelar>
+        Instalaciones eléctricas, iluminación LED, aire acondicionado y
+        refrigeración — así quedaron.
+      </p>
+    </div>
+
+    <div class="trabajos__filtros" id="filtros-trabajos">
+      <button type="button" class="chip-filtro" data-filtro="todos" aria-pressed="true">Todos</button>
+      <button type="button" class="chip-filtro" data-filtro="led" aria-pressed="false">Iluminación LED</button>
+      <button type="button" class="chip-filtro" data-filtro="aire" aria-pressed="false">Aire acondicionado</button>
+      <button type="button" class="chip-filtro" data-filtro="electrico" aria-pressed="false">Electricidad, carteles y cámaras</button>
+    </div>
+
+    <p class="lectura-oculta" id="aviso-filtro-trabajos" aria-live="polite"></p>
+
+    <ul class="trabajos__grilla" id="grilla-trabajos">
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="La Rural">
+          <video src="img/trabajo-salon-led-rgb.mp4" poster="img/trabajo-salon-led-rgb.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: los rombos LED del techo del salón La Rural cambian de color"></video>
+          <figcaption><h3>Salón La Rural: rombos LED que cambian de color</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="electrico">
+        <figure data-marca="Cartel YPF">
+          <video src="img/trabajo-ypf-cartel.mp4" poster="img/trabajo-ypf-cartel.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video con drone: dos técnicos en la canasta del hidroelevador trabajando en el cartel de YPF"></video>
+          <figcaption><h3>Cartel de YPF: trabajo en altura</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="aire">
+        <figure data-marca="Soma Estudio">
+          <video src="img/trabajo-soma-split.mp4" poster="img/trabajo-soma-split.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: se prende con el control un aire split recién instalado en Soma Estudio"></video>
+          <figcaption><h3>Aires instalados en Soma Estudio</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="Galpón LED">
+          <video src="img/trabajo-galpon-led.mp4" poster="img/trabajo-galpon-led.jpg" muted loop playsinline preload="metadata"
+                 width="1280" height="720" aria-label="Video con drone: se prenden las líneas LED en el techo de un galpón"></video>
+          <figcaption><h3>Galpón con líneas LED (video con drone)</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="electrico">
+        <figure data-marca="Local YV">
+          <video src="img/trabajo-yv-camaras.mp4" poster="img/trabajo-yv-camaras.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: cámaras de seguridad con cañería a la vista en el techo del local de ropa YV"></video>
+          <figcaption><h3>13 cámaras de seguridad en el local YV</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="aire">
+        <figure data-marca="7 aires">
+          <video src="img/trabajo-siete-aires.mp4" poster="img/trabajo-siete-aires.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: ménsulas y cañerías listas en la pared de un galpón para siete equipos de aire"></video>
+          <figcaption><h3>Instalación de 7 aires: ménsulas y cañerías</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="AF Automotores">
+          <video src="img/trabajo-af-hexagonos.mp4" poster="img/trabajo-af-hexagonos.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: luminaria LED de hexágonos en el techo de la agencia AF Automotores"></video>
+          <figcaption><h3>Hexágonos LED en AF Automotores</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="electrico">
+        <figure data-marca="Tablero">
+          <video src="img/trabajo-tablero-gabinete.mp4" poster="img/trabajo-tablero-gabinete.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: tablero eléctrico en gabinete con pilotos en la puerta, térmicas y cablecanal por dentro"></video>
+          <figcaption><h3>Tablero eléctrico en gabinete</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="aire">
+        <figure data-marca="YPF Autopista">
+          <video src="img/trabajo-ypf-service.mp4" poster="img/trabajo-ypf-service.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: Mateo en la escalera terminando el service de un aire split en YPF Autopista"></video>
+          <figcaption><h3>Service de aires en YPF Autopista</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="Declon Gym">
+          <video src="img/trabajo-declon-led.mp4" poster="img/trabajo-declon-led.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: líneas de luz LED en el techo del gimnasio Declon"></video>
+          <figcaption><h3>Iluminación del gimnasio Declon</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="electrico">
+        <figure data-marca="Cartel YPF">
+          <img src="img/trabajo-ypf-cartel-torre.jpg" alt="Vista con drone del cartel de YPF con el hidroelevador al pie y la estación de fondo"
+               width="810" height="1080" loading="lazy" decoding="async">
+          <figcaption><h3>El cartel de YPF desde el drone</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="aire">
+        <figure data-marca="Split">
+          <video src="img/trabajo-split-conexion.mp4" poster="img/trabajo-split-conexion.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: conexión de los cables en la bornera de la unidad interior de un split"></video>
+          <figcaption><h3>Conexionado de la unidad interior</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="Núcleo">
+          <video src="img/trabajo-nucleo-led.mp4" poster="img/trabajo-nucleo-led.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: estructura flotante con perfiles LED en el techo del gimnasio Núcleo"></video>
+          <figcaption><h3>Estructura flotante LED en gimnasio Núcleo</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="electrico">
+        <figure data-marca="Tablero">
+          <img src="img/trabajo-tablero-borneras.jpg" alt="Detalle de un tablero: térmicas y cables azules ordenados en una bornera de distribución"
+               width="810" height="1080" loading="lazy" decoding="async">
+          <figcaption><h3>Tablero con cableado prolijo</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="aire">
+        <figure data-marca="Unidad exterior">
+          <video src="img/trabajo-exterior-conexion.mp4" poster="img/trabajo-exterior-conexion.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: técnico conectando los cables de la unidad exterior de un aire Midea"></video>
+          <figcaption><h3>Conexionado de la unidad exterior</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="Local YV">
+          <video src="img/trabajo-yv-iluminacion.mp4" poster="img/trabajo-yv-iluminacion.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: paneles LED en el techo, perfiles de luz en los probadores y el salón del local YV iluminado"></video>
+          <figcaption><h3>Iluminación nueva del local YV</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="electrico">
+        <figure data-marca="Tablero">
+          <img src="img/trabajo-tablero-protector.jpg" alt="Tablero con térmica, protector de tensión que marca 237 V y borneras de distribución"
+               width="810" height="1080" loading="lazy" decoding="async">
+          <figcaption><h3>Tablero con protector de tensión</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="aire">
+        <figure data-marca="En camino">
+          <img src="img/trabajo-equipos-camioneta.jpg" alt="Técnico cargando cajas de equipos en la caja de la camioneta, en una estación YPF"
+               width="810" height="1080" loading="lazy" decoding="async">
+          <figcaption><h3>Con los equipos, rumbo a la obra</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="La Rural">
+          <img src="img/trabajo-salon-led-rombo.jpg" alt="Mateo debajo del techo del salón La Rural con rombos LED celestes y marco de luz blanca"
+               width="810" height="1080" loading="lazy" decoding="async">
+          <figcaption><h3>Rombos LED y marco de luz en La Rural</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="electrico">
+        <figure data-marca="Cartel YPF">
+          <img src="img/trabajo-ypf-cartel-canasta.jpg" alt="Técnico con arnés en la canasta del hidroelevador trabajando en el cartel de YPF"
+               width="810" height="1080" loading="lazy" decoding="async">
+          <figcaption><h3>Montaje en el cartel con hidroelevador</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="Patio y pileta">
+          <video src="img/trabajo-pileta-led.mp4" poster="img/trabajo-pileta-led.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video de noche: tira LED al pie del muro y luces entre las plantas alrededor de la pileta"></video>
+          <figcaption><h3>Iluminación de patio y pileta</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="En obra">
+          <video src="img/trabajo-rural-armado.mp4" poster="img/trabajo-rural-armado.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: dos electricistas en escaleras arman la estructura de rombos sobre bandejas portacables"></video>
+          <figcaption><h3>Armando la estructura en La Rural</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="Cocina">
+          <video src="img/trabajo-cocina-led.mp4" poster="img/trabajo-cocina-led.jpg" muted loop playsinline preload="metadata"
+                 width="720" height="960" aria-label="Video: tira LED cálida debajo de las alacenas iluminando la mesada de una cocina"></video>
+          <figcaption><h3>LED bajo alacena en una cocina</h3></figcaption>
+        </figure>
+      </li>
+      <li class="trabajo" data-categoria="led">
+        <figure data-marca="La Rural">
+          <img src="img/trabajo-salon-led-blanco.jpg" alt="Estructura de rombos y marco con perfiles LED encendidos en luz blanca en el techo del salón La Rural"
+               width="810" height="1080" loading="lazy" decoding="async">
+          <figcaption><h3>La estructura LED en luz blanca</h3></figcaption>
+        </figure>
+      </li>
+    </ul>
+
+    <p class="trabajos__vacio" id="trabajos-vacio" hidden>No hay fotos para ese filtro todavía.</p>
+  </section>
+
+  <!-- ================= CAJA DE CONSULTA CON FOTO ================= -->
+  <section class="bloque" id="consulta">
+    <div class="consulta">
+      <div class="bloque__encabezado">
+        <p class="rotulo rotulo--oscuro" data-revelar>Contanos qué querés hacer</p>
+        <h2 data-revelar>Sacale una foto y lo vemos juntos.</h2>
+        <p class="consulta__ayuda" data-revelar>
+          Con una foto del tablero, la pared o el equipo alcanza para darte un precio
+          aproximado. Armá el mensaje acá y se abre WhatsApp con todo escrito.
+        </p>
+      </div>
+
+      <form class="forma" id="forma" novalidate data-revelar>
+
+        <!-- zona de fotos -->
+        <div class="fotos">
+          <label class="fotos__zona" for="fotos" id="zona">
+            <span class="fotos__ico" aria-hidden="true">＋</span>
+            <span class="fotos__texto">
+              <strong>Agregar fotos</strong>
+              <span id="fotos-ayuda">Sacá una con la cámara o elegí del carrete. Hasta 3.</span>
+            </span>
+            <input type="file" id="fotos" name="fotos" accept="image/*" multiple>
+          </label>
+          <ul class="miniaturas" id="miniaturas" aria-live="polite"></ul>
+        </div>
+
+        <div class="campo">
+          <label for="nombre">Tu nombre</label>
+          <input type="text" id="nombre" autocomplete="name" placeholder="Ej: Carla Gómez" required>
+        </div>
+
+        <div class="campo">
+          <label for="rubro">¿Qué necesitás?</label>
+          <select id="rubro">
+            <option>Instalación eléctrica</option>
+            <option>Cerradura inteligente</option>
+            <option>Cámaras o alarma</option>
+            <option>Iluminación de comercio o galpón</option>
+            <option>Aire acondicionado</option>
+            <option>Heladera, freezer o motocompresor</option>
+            <option>Comprar un equipo</option>
+            <option>Otra cosa</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="zona-texto">Zona o barrio</label>
+          <input type="text" id="zona-texto" placeholder="Ej: Barrio Rivadavia, Villa María">
+        </div>
+
+        <div class="campo">
+          <label for="detalle">Contanos el trabajo</label>
+
+          <!-- atajos: un toque y se escribe solo -->
+          <div class="atajos" id="atajos">
+            <button type="button" data-texto="Se me salta la térmica cuando prendo el aire.">Salta la térmica</button>
+            <button type="button" data-texto="Necesito instalar un split que ya compré.">Instalar un split</button>
+            <button type="button" data-texto="Quiero poner luces LED en mi local.">Luces para el local</button>
+            <button type="button" data-texto="Se me apagó la heladera exhibidora y no enfría.">No enfría la heladera</button>
+            <button type="button" data-texto="Quiero cambiar el tablero viejo por uno con disyuntor.">Cambiar el tablero</button>
+            <button type="button" data-texto="Quiero poner cámaras de seguridad.">Poner cámaras</button>
+            <button type="button" data-texto="Quiero instalar una cerradura inteligente.">Cerradura inteligente</button>
+          </div>
+
+          <textarea id="detalle" rows="4" maxlength="600"
+                    placeholder="Ej: se me salta la térmica cuando prendo el aire del comedor." required></textarea>
+          <p class="campo__cuenta"><span id="cuenta">0</span>/600</p>
+        </div>
+
+        <p class="forma__error" id="error" role="alert" hidden></p>
+
+        <button class="btn btn--wp btn--ancho" id="enviar" type="submit">
+          <span class="ico-wp" aria-hidden="true"></span>
+          <span class="btn__texto">Enviar por WhatsApp</span>
+        </button>
+
+        <p class="forma__nota" id="nota">
+          Se abre WhatsApp con el mensaje listo. Las fotos las adjuntás ahí con el clip,
+          en un toque.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= PREGUNTAS =================
+       >>> CAMBIÁ ESTO si alguna respuesta no coincide con cómo trabajás. -->
+  <section class="bloque" id="preguntas">
+    <div class="bloque__encabezado">
+      <p class="rotulo rotulo--oscuro" data-revelar>Preguntas</p>
+      <h2 data-revelar>Lo que más nos consultan.</h2>
+    </div>
+
+    <div class="faq" id="faq">
+      <details class="faq__item" data-revelar>
+        <summary>¿Cuánto sale el presupuesto?</summary>
+        <div class="faq__caja"><p>Nada. Nos mandás una foto por WhatsApp, te hacemos un par de preguntas y te pasamos un precio cerrado. Recién ahí decidís.</p></div>
+      </details>
+      <details class="faq__item" data-revelar>
+        <summary>¿En qué zonas trabajan?</summary>
+        <div class="faq__caja"><p>Villa María, Villa Nueva y alrededores. Si estás un poco más lejos, escribinos igual y vemos si nos queda de paso.</p></div>
+      </details>
+      <details class="faq__item" data-revelar>
+        <summary>¿Hacen urgencias?</summary>
+        <div class="faq__caja"><p>Sí. Cortes, térmicas que saltan o un equipo de frío parado los atendemos en el día, según cómo venga la agenda. Avisanos que es urgente cuando escribas.</p></div>
+      </details>
+      <details class="faq__item" data-revelar>
+        <summary>¿El trabajo tiene garantía?</summary>
+        <div class="faq__caja"><p>Sí, siempre por escrito. Los equipos usados que vendemos van con 3 meses de garantía y los nuevos con la garantía oficial de fábrica.</p></div>
+      </details>
+      <details class="faq__item" data-revelar>
+        <summary>¿Instalan un equipo que compré en otro lado?</summary>
+        <div class="faq__caja"><p>Sin problema. Antes de instalarlo lo revisamos y te decimos si la instalación eléctrica del ambiente lo aguanta.</p></div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= PIE ================= -->
+<footer class="pie">
+  <p class="marca marca--pie">
+    <img class="marca__mp" src="img/logo.png" alt="Mateo Pedraza Instalaciones" width="248" height="160">
+  </p>
+  <p class="pie__dato">Villa María y alrededores</p>
+  <p class="pie__dato pie__cert">Certificación CACAAV N.º 00.19629-000-2016</p>
+  <a class="pie__dato pie__tel" href="#" data-wp data-wp-texto="Hola Mateo, te escribo desde la web.">WhatsApp directo</a>
+  <a class="pie__dato pie__ig" href="https://www.instagram.com/instalacionesmateo" target="_blank" rel="noopener">
+    <span class="ico-instagram" aria-hidden="true"></span> @instalacionesmateo
+  </a>
+  <p class="pie__legal">© <span id="anio">2026</span> Instalaciones Mateo · Hecho por Hélice Drone Marketing</p>
+</footer>
+
+<!-- ================= WP FLOTANTE ================= -->
+<a class="flotante" id="flotante" href="#" data-wp data-wp-texto="Hola Mateo, quiero hacer una consulta." aria-label="Escribir por WhatsApp">
+  <span class="ico-wp ico-wp--grande" aria-hidden="true"></span>
+</a>
+
+<!-- avisos cortos que aparecen abajo -->
+<div class="avisos" id="avisos" aria-live="polite" aria-atomic="false"></div>
+
+<!-- ================= VISOR DE FOTOS =================
+     Cualquier foto de las galerías (Trabajos hechos, Iluminación
+     LED) se agranda al tocarla. Se abre acá, arriba de todo. -->
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button class="visor__cerrar" id="visor-cerrar" type="button" aria-label="Cerrar">&times;</button>
+  <button class="visor__flecha visor__flecha--prev" id="visor-anterior" type="button" aria-label="Foto anterior">‹</button>
+
+  <div class="visor__contenido">
+    <figure class="visor__figura">
+      <img id="visor-img" src="" alt="">
+      <figcaption id="visor-pie"></figcaption>
+    </figure>
+
+    <div class="visor__miniaturas" id="visor-miniaturas" aria-label="Más fotos"></div>
+  </div>
+
+  <button class="visor__flecha visor__flecha--next" id="visor-siguiente" type="button" aria-label="Foto siguiente">›</button>
+</div>
+
+<!-- ================= FICHAS DE SERVICIOS =================
+     Se abren al tocar una tarjeta de Servicios. Cada <article> es una
+     ficha: data-ficha tiene que ser igual al de su tarjeta.
+     >>> CAMBIÁ ESTO: los rubros, lo que incluye cada parte y el
+     mensaje de WhatsApp (data-wp-texto) de cada servicio. -->
+<div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-label="Servicio">
+  <div class="ficha__caja">
+    <button class="ficha__cerrar" id="ficha-cerrar" type="button" aria-label="Cerrar">&times;</button>
+
+    <article class="ficha__servicio" data-ficha="iluminacion" hidden>
+      <p class="ficha__rotulo">Servicio</p>
+      <h3 class="ficha__titulo">Iluminación</h3>
+      <ul class="ficha__rubros">
+        <li>Comercios y oficinas</li>
+        <li>Galpones</li>
+        <li>Gimnasios y salones</li>
+        <li>Casas, patios y frentes</li>
+      </ul>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">1</span> Instalación</h4>
+        <ul>
+          <li>Proyecto de iluminación pensado para cada espacio.</li>
+          <li>Perfiles y tiras LED, paneles, reflectores y luminarias.</li>
+          <li>Estructuras flotantes y diseños a medida.</li>
+          <li>Iluminación de jardines, frentes y piletas.</li>
+        </ul>
+      </div>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">2</span> Mantenimiento</h4>
+        <ul>
+          <li>Cambio de tiras, equipos y fuentes que fallan.</li>
+          <li>Recambio de luminarias viejas por LED.</li>
+          <li>Revisión de conexiones y encendidos.</li>
+        </ul>
+      </div>
+      <a class="btn btn--wp btn--ancho ficha__wp" href="#" data-wp data-wp-texto="Hola Mateo, quiero consultar la mano de obra de iluminación.">
+        <span class="ico-wp" aria-hidden="true"></span>
+        Consultar mano de obra
+      </a>
+    </article>
+
+    <article class="ficha__servicio" data-ficha="electricidad" hidden>
+      <p class="ficha__rotulo">Servicio</p>
+      <h3 class="ficha__titulo">Electricidad</h3>
+      <ul class="ficha__rubros">
+        <li>Instalaciones eléctricas</li>
+        <li>Tableros</li>
+        <li>Cerraduras Demasled</li>
+      </ul>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">1</span> Instalación</h4>
+        <ul>
+          <li>Instalaciones nuevas y ampliaciones en casas y locales.</li>
+          <li>Tableros con disyuntor, térmicas y protector de tensión.</li>
+          <li>Cableado, tomas, bocas y puesta a tierra.</li>
+          <li>Cerraduras inteligentes Demasled: con huella, clave, tarjeta o desde el celular.</li>
+        </ul>
+      </div>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">2</span> Mantenimiento</h4>
+        <ul>
+          <li>Búsqueda y reparación de fallas.</li>
+          <li>Recambio de cableado y tableros viejos.</li>
+          <li>Ajuste y configuración de cerraduras inteligentes.</li>
+        </ul>
+      </div>
+      <a class="btn btn--wp btn--ancho ficha__wp" href="#" data-wp data-wp-texto="Hola Mateo, quiero consultar la mano de obra de electricidad.">
+        <span class="ico-wp" aria-hidden="true"></span>
+        Consultar mano de obra
+      </a>
+      <button type="button" class="btn btn--linea btn--ancho ficha__equipos" data-abre-carrito data-categoria-carrito="electrico">Ver cerraduras y productos</button>
+    </article>
+
+    <article class="ficha__servicio" data-ficha="seguridad" hidden>
+      <p class="ficha__rotulo">Servicio</p>
+      <h3 class="ficha__titulo">Seguridad</h3>
+      <ul class="ficha__rubros">
+        <li>Cámaras Uniview</li>
+        <li>Alarmas X-28</li>
+      </ul>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">1</span> Instalación</h4>
+        <ul>
+          <li>Cámaras con grabador, cañerías y cableado UTP.</li>
+          <li>Configuración para ver las cámaras desde el celular.</li>
+          <li>Alarmas X-28 con sensores, sirena, teclado y control remoto.</li>
+        </ul>
+      </div>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">2</span> Mantenimiento</h4>
+        <ul>
+          <li>Revisión de cámaras, grabador y disco.</li>
+          <li>Cambio de baterías y sensores de la alarma.</li>
+          <li>Ampliación con más cámaras o más zonas.</li>
+        </ul>
+      </div>
+      <a class="btn btn--wp btn--ancho ficha__wp" href="#" data-wp data-wp-texto="Hola Mateo, quiero consultar la mano de obra de cámaras o alarmas.">
+        <span class="ico-wp" aria-hidden="true"></span>
+        Consultar mano de obra
+      </a>
+      <button type="button" class="btn btn--linea btn--ancho ficha__equipos" data-abre-carrito data-categoria-carrito="seguridad">Ver cámaras y alarmas</button>
+    </article>
+
+    <article class="ficha__servicio" data-ficha="refrigeracion" hidden>
+      <p class="ficha__rotulo">Servicio</p>
+      <h3 class="ficha__titulo">Refrigeración</h3>
+      <ul class="ficha__rubros">
+        <li>Aire acondicionado</li>
+        <li>Heladeras</li>
+        <li>Freezers</li>
+        <li>Motocompresores</li>
+      </ul>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">1</span> Instalación</h4>
+        <ul>
+          <li>Instalación de split, piso techo, cassette y otros equipos de aire.</li>
+          <li>Puesta en marcha de heladeras exhibidoras y freezers.</li>
+          <li>Cambio de motocompresores.</li>
+          <li>Traslado de equipos si te mudás.</li>
+        </ul>
+      </div>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">2</span> Mantenimiento</h4>
+        <ul>
+          <li>Limpieza y service de aires.</li>
+          <li>Carga de gas y búsqueda de fugas.</li>
+          <li>Reparación de heladeras y freezers.</li>
+          <li>Revisión y reemplazo de motocompresores.</li>
+        </ul>
+      </div>
+      <a class="btn btn--wp btn--ancho ficha__wp" href="#" data-wp data-wp-texto="Hola Mateo, quiero consultar la mano de obra de refrigeración (aire, heladera, freezer o motocompresor).">
+        <span class="ico-wp" aria-hidden="true"></span>
+        Consultar mano de obra
+      </a>
+    </article>
+
+    <article class="ficha__servicio" data-ficha="equipos" hidden>
+      <p class="ficha__rotulo">Servicio</p>
+      <h3 class="ficha__titulo">Venta de equipos</h3>
+      <ul class="ficha__rubros">
+        <li>Aires nuevos</li>
+        <li>Usados revisados</li>
+        <li>Insumos</li>
+      </ul>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">1</span> Instalación</h4>
+        <ul>
+          <li>El equipo que comprás te lo instalamos nosotros.</li>
+          <li>Te asesoramos con la potencia que necesita el ambiente.</li>
+        </ul>
+      </div>
+      <div class="ficha__bloque">
+        <h4><span class="ficha__num">2</span> Mantenimiento</h4>
+        <ul>
+          <li>Service y limpieza del equipo cuando lo necesite.</li>
+          <li>Garantía en los equipos nuevos y en los usados revisados.</li>
+        </ul>
+      </div>
+      <a class="btn btn--wp btn--ancho ficha__wp" href="#" data-wp data-wp-texto="Hola Mateo, quiero consultar la mano de obra de instalación de un equipo.">
+        <span class="ico-wp" aria-hidden="true"></span>
+        Consultar mano de obra
+      </a>
+      <button type="button" class="btn btn--linea btn--ancho ficha__equipos" data-abre-carrito>Ver equipos y precios</button>
+    </article>
+  </div>
+</div>
+
+<!-- ================= ARMÁ TU KIT =================
+     Se abre desde el menú y desde el carrito. Cada opción apunta a un
+     producto del catálogo por su data-id (value): el nombre y el precio
+     salen de ahí. Si todo el kit tiene precio, también se puede agregar
+     al carrito; si no, se pide por WhatsApp.
+     >>> CAMBIÁ ESTO: las opciones de cada kit. data-w = watts por metro
+     y data-v = voltios de la tira (sirven para elegir el transformador). -->
+<div class="ficha kit" id="kit" role="dialog" aria-modal="true" aria-label="Armá tu kit">
+  <div class="ficha__caja">
+    <button class="ficha__cerrar" id="kit-cerrar" type="button" aria-label="Cerrar">&times;</button>
+    <p class="ficha__rotulo">Armá tu kit</p>
+    <h3 class="ficha__titulo">¿Qué querés armar?</h3>
+
+    <div class="kit__tipos" id="kit-tipos">
+      <button type="button" class="chip-filtro" data-kit="led" aria-pressed="true">Tira LED</button>
+      <button type="button" class="chip-filtro" data-kit="aire" aria-pressed="false">Instalación de aire</button>
+      <button type="button" class="chip-filtro" data-kit="seguridad" aria-pressed="false">Seguridad</button>
+    </div>
+
+    <form class="kit__form" id="kit-form" novalidate>
+      <div class="kit__panel" data-kit="led">
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">1</span> Tira</legend>
+          <label class="kit__opcion"><input type="radio" name="tira" value="demasled-tsmd-54-b2" data-w="12" data-v="12" checked> 12V 12W/m <small>la más usada: alacenas, estantes, cielorraso</small></label>
+          <label class="kit__opcion"><input type="radio" name="tira" value="demasled-tcob-01-12v" data-w="11" data-v="12"> COB 12V 11W/m <small>luz continua, sin puntitos</small></label>
+          <label class="kit__opcion"><input type="radio" name="tira" value="demasled-tsmd-53-b2" data-w="33" data-v="24"> 24V 33W/m <small>alta potencia, para iluminar ambientes</small></label>
+        </fieldset>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">2</span> Color de luz</legend>
+          <div class="kit__fila">
+            <label class="kit__opcion kit__opcion--chica"><input type="radio" name="color" value="cálida" checked> Cálida</label>
+            <label class="kit__opcion kit__opcion--chica"><input type="radio" name="color" value="neutra"> Neutra</label>
+            <label class="kit__opcion kit__opcion--chica"><input type="radio" name="color" value="fría"> Fría</label>
+          </div>
+        </fieldset>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">3</span> ¿Cuántos metros?</legend>
+          <label class="kit__metros"><input type="number" name="metros" min="1" max="200" step="1" value="5" inputmode="numeric"> metros <small>las tiras vienen en rollos de 5 m</small></label>
+        </fieldset>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">4</span> Perfil de aluminio</legend>
+          <label class="kit__opcion"><input type="radio" name="perfil" value="" checked> Sin perfil</label>
+          <label class="kit__opcion"><input type="radio" name="perfil" value="demasled-per-59-2m"> Flat (plano) <small>tramos de 2 m</small></label>
+          <label class="kit__opcion"><input type="radio" name="perfil" value="demasled-per-03-2m"> Esquinero <small>tramos de 2 m</small></label>
+          <label class="kit__opcion"><input type="radio" name="perfil" value="demasled-per-12-2m"> U blanco <small>tramos de 2 m</small></label>
+        </fieldset>
+        <p class="kit__nota" id="kit-trafo"></p>
+      </div>
+
+      <div class="kit__panel" data-kit="aire" hidden>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">1</span> Medidas de caño</legend>
+          <label class="kit__opcion"><input type="radio" name="medidas" value="cobre-24002002733,cobre-24002002734" data-medidas="1/4,3/8" checked> 1/4" y 3/8"</label>
+          <label class="kit__opcion"><input type="radio" name="medidas" value="cobre-24002002733,cobre-24002002735" data-medidas="1/4,1/2"> 1/4" y 1/2"</label>
+          <label class="kit__opcion"><input type="radio" name="medidas" value="cobre-24002002733,cobre-24002000275" data-medidas="1/4,5/8"> 1/4" y 5/8"</label>
+          <label class="kit__opcion"><input type="radio" name="medidas" value="cobre-24002002734,cobre-24002000275" data-medidas="3/8,5/8"> 3/8" y 5/8"</label>
+          <p class="kit__ayuda">¿No sabés cuál? Decinos el equipo y te lo confirmamos.</p>
+        </fieldset>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">2</span> Distancia entre unidades</legend>
+          <label class="kit__metros"><input type="number" name="metros-aire" min="1" max="50" step="1" value="3" inputmode="numeric"> metros</label>
+        </fieldset>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">3</span> Qué más</legend>
+          <label class="kit__opcion"><input type="checkbox" name="aislante" checked> Aislante para los dos caños</label>
+          <label class="kit__opcion"><input type="checkbox" name="equipo-aire"> También necesito el equipo</label>
+        </fieldset>
+      </div>
+
+      <div class="kit__panel" data-kit="seguridad" hidden>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">1</span> Cámaras Uniview</legend>
+          <label class="kit__metros"><input type="number" name="bullet" min="0" max="32" step="1" value="2" inputmode="numeric"> bullet <small>exterior</small></label>
+          <label class="kit__metros"><input type="number" name="domo" min="0" max="32" step="1" value="2" inputmode="numeric"> domo <small>interior</small></label>
+          <p class="kit__ayuda">El grabador y el disco te los cotizamos según la cantidad de cámaras.</p>
+        </fieldset>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">2</span> Alarma</legend>
+          <label class="kit__opcion"><input type="checkbox" name="alarma" value="x28-kit-8-zonas-4g"> Kit de alarma X-28 8 zonas con comunicador 4G</label>
+        </fieldset>
+        <fieldset class="kit__paso">
+          <legend><span class="ficha__num">3</span> Cerradura inteligente</legend>
+          <label class="kit__opcion"><input type="radio" name="cerradura" value="" checked> Sin cerradura</label>
+          <label class="kit__opcion"><input type="radio" name="cerradura" value="demasled-domo-66-b3"> Para puerta exterior</label>
+          <label class="kit__opcion"><input type="radio" name="cerradura" value="demasled-domo-67"> Para puerta de blindex</label>
+        </fieldset>
+      </div>
+    </form>
+
+    <div class="kit__resumen">
+      <h4>Tu kit</h4>
+      <ul class="kit__lista" id="kit-lista"></ul>
+      <p class="kit__total" id="kit-total"></p>
+    </div>
+
+    <label class="kit__opcion kit__instalacion"><input type="checkbox" id="kit-instalacion" checked> Lo quiero con instalación</label>
+
+    <a class="btn btn--wp btn--ancho ficha__wp" id="kit-wp" href="#" target="_blank" rel="noopener">
+      <span class="ico-wp" aria-hidden="true"></span>
+      Pedir el kit por WhatsApp
+    </a>
+    <button type="button" class="btn btn--linea btn--ancho ficha__equipos" id="kit-carrito" hidden>Agregar al carrito</button>
+  </div>
+</div>
+
+<!-- para que Google entienda de qué se trata el negocio -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "Instalaciones Mateo",
+  "url": "https://mateopedrazainstalaciones.com.ar/",
+  "telephone": "+5493534290559",
+  "description": "Instalaciones eléctricas, cerraduras inteligentes, cámaras y alarmas, iluminación, aire acondicionado y refrigeración en Villa María, Córdoba.",
+  "areaServed": ["Villa María", "Villa Nueva", "Córdoba"],
+  "address": { "@type": "PostalAddress", "addressLocality": "Villa María", "addressRegion": "Córdoba", "addressCountry": "AR" },
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "name": "Certificación CACAAV",
+    "credentialCategory": "certification",
+    "identifier": "00.19629-000-2016",
+    "recognizedBy": { "@type": "Organization", "name": "Cámara Argentina de Calefacción, Aire Acondicionado y Ventilación (CACAAV)" }
+  },
+  "priceRange": "$$"
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
