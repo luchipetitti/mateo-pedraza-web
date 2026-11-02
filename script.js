@@ -835,11 +835,24 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    // "02/11/2026" -> 20261102, para comparar fechas
+    const fechaNumero = function (texto) {
+      const m = /(\d{2})\/(\d{2})\/(\d{4})/.exec(texto || '');
+      return m ? Number(m[3] + m[2] + m[1]) : 0;
+    };
     const aplicarPreciosWeb = function (r) {
       if (!r || !r.ok || !r.precios) return;
+      // si la planilla es más vieja que los precios escritos en la página
+      // (se cargó una lista nueva a mano y todavía no se publicó desde el
+      // presupuestador), mandan los de la página
+      const nota = document.querySelector('.catalogo__nota');
+      if (nota && fechaNumero(r.fecha) && fechaNumero(r.fecha) < fechaNumero(nota.textContent)) return;
       let cambios = 0;
       productos.forEach(function (li) {
-        const ref = li.dataset.id.slice(li.dataset.id.indexOf('-') + 1);
+        // el código va sin el prefijo de marca; los que no tienen marca
+        // (split-usado, portatil-usado…) van con el data-id completo
+        let ref = li.dataset.id;
+        if (!(ref in r.precios)) ref = ref.slice(ref.indexOf('-') + 1);
         if (!(ref in r.precios)) return;
         const nuevo = Math.round(Number(r.precios[ref]) || 0);
         if (nuevo === precioDe(li)) return;
@@ -847,7 +860,6 @@ document.addEventListener('DOMContentLoaded', function () {
         marcarPrecio(li);
         cambios++;
       });
-      const nota = document.querySelector('.catalogo__nota');
       if (nota && r.fecha) nota.textContent = nota.textContent.replace(/al \d{2}\/\d{2}\/\d{4}/, 'al ' + r.fecha);
       if (!cambios) return;
       calcularRango();
@@ -927,6 +939,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }, { threshold: 0 }).observe(heroVideo);
     }
+  }
+
+  /* El banner frío / calor / luz: anda solo mientras se ve. Como el
+     hero, se reproduce aunque Windows tenga apagadas las animaciones. */
+  const franjaVideo = document.getElementById('franja-video');
+  if (franjaVideo && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entradas) {
+      if (entradas[0].isIntersecting) {
+        franjaVideo.play().catch(function () { /* nada */ });
+      } else {
+        franjaVideo.pause();
+      }
+    }, { threshold: .3 }).observe(franjaVideo);
   }
 
   /* ---------------------------------------------------------
@@ -1040,7 +1065,7 @@ document.addEventListener('DOMContentLoaded', function () {
       medio.muted = true;
       medio.loop = true;
       medio.playsInline = true;
-      medio.controls = quietito;
+      medio.controls = false;
     }
 
     // sin IntersectionObserver no hay forma de saber si se ve: se da por visible
@@ -1049,7 +1074,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const lista = function () {
       medio.classList.add('cargada');
       figura.classList.add('lista');
-      if (esVideo && !quietito && aLaVista) medio.play().catch(function () { /* el navegador lo frenó, no pasa nada */ });
+      if (esVideo && aLaVista) medio.play().catch(function () { /* el navegador lo frenó, no pasa nada */ });
     };
     const fallo = function () {
       figura.classList.add('sin-foto', 'lista');
@@ -1062,8 +1087,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     };
 
-    // un video que no se ve, no se reproduce: así la página scrollea liviana
-    if (esVideo && !quietito && 'IntersectionObserver' in window) {
+    // un video que no se ve, no se reproduce: así la página scrollea liviana.
+    // Como el hero, andan aunque Windows tenga apagadas las animaciones
+    // (son tomas mudas y en loop; con controles se veían desprolijos)
+    if (esVideo && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (entradas) {
         aLaVista = entradas[0].isIntersecting;
         if (aLaVista) {
@@ -1289,9 +1316,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const kitCarritoBtn = document.getElementById('kit-carrito');
   const kitInstalacion = document.getElementById('kit-instalacion');
   const kitCerrarBtn = document.getElementById('kit-cerrar');
+  const kitBuscar = document.getElementById('kit-buscar');
+  const kitSugerencias = document.getElementById('kit-sugerencias');
   let kitTipo = 'led';
   let kitOrigen = null;
   let kitItems = [];
+  // lo que se suma con el mini buscador: vale para cualquier tipo de kit
+  let kitExtras = [];
 
   const productoDe = function (id) {
     return id ? document.querySelector('#grilla-equipos .producto[data-id="' + CSS.escape(id) + '"]') : null;
@@ -1341,21 +1372,30 @@ document.addEventListener('DOMContentLoaded', function () {
     return partes;
   };
 
+  // combo aire + kit + instalación: el equipo y el kit tienen precio;
+  // la instalación (y el caño de más si la distancia pasa los 3 m del
+  // kit) se confirma por WhatsApp
+  const METROS_KIT = 3;
   const armarKitAire = function () {
-    const medidas = elegido('medidas');
-    const metros = numero('metros-aire', 1);
     const partes = [];
-    if (!medidas) return partes;
-    const ids = medidas.value.split(',');
-    const pulgadas = medidas.dataset.medidas.split(',');
-    // el caño se vende por kg: va en metros y el precio se confirma
-    ids.forEach(function (id) { partes.push(parte(id, metros, 'm')); });
-    const aislante = kitForm.querySelector('[name="aislante"]');
-    if (aislante && aislante.checked) {
-      pulgadas.forEach(function (p) { partes.push(parte('aislante-' + p.replace('/', '-'), metros, 'm')); });
+    const equipo = elegido('equipo');
+    if (equipo && equipo.value) partes.push(parte(equipo.value, 1, 'u'));
+    const kitAire = elegido('kit-aire');
+    if (kitAire && kitAire.value) {
+      const metros = numero('metros-aire', 1);
+      partes.push(parte(kitAire.value, 1, 'u', metros > METROS_KIT ? metros + ' m entre unidades: hay que sumar caño' : ''));
     }
     return partes;
   };
+  // al elegir el equipo se marca el kit con las medidas de caño que le van
+  if (kitForm) {
+    kitForm.addEventListener('change', function (e) {
+      if (e.target.name !== 'equipo') return;
+      const id = e.target.dataset.kitInstalacion;
+      const kitAire = id && kitForm.querySelector('[name="kit-aire"][value="' + id + '"]');
+      if (kitAire) kitAire.checked = true;
+    });
+  }
 
   const armarKitSeguridad = function () {
     const partes = [];
@@ -1368,6 +1408,85 @@ document.addEventListener('DOMContentLoaded', function () {
     return partes;
   };
 
+  // los productos del mini buscador, sumados a los del kit: si ya están
+  // (en la misma unidad) se suma la cantidad en vez de repetir la fila
+  const sumarExtras = function (partes) {
+    kitExtras.forEach(function (x) {
+      const li = productoDe(x.id);
+      if (!li) return;
+      const unidad = li.dataset.unidad || 'u';
+      const ya = partes.find(function (p) { return p.id === x.id && p.unidad === unidad; });
+      if (ya) { ya.cantidad += x.cantidad; ya.extra = (ya.extra || 0) + x.cantidad; return; }
+      const nueva = parte(x.id, x.cantidad, unidad);
+      if (nueva) { nueva.extra = x.cantidad; partes.push(nueva); }
+    });
+    return partes;
+  };
+
+  const cambiarExtra = function (id, delta) {
+    const x = kitExtras.find(function (e) { return e.id === id; });
+    if (x) x.cantidad += delta;
+    else if (delta > 0) kitExtras.push({ id: id, cantidad: delta });
+    kitExtras = kitExtras.filter(function (e) { return e.cantidad > 0; });
+    pintarKit();
+    pintarSugerencias();
+  };
+
+  // mini buscador: todas las palabras tienen que estar, sin tildes ni
+  // mayúsculas (sinTildes es la del buscador de toda la web, más abajo)
+  const pintarSugerencias = function () {
+    if (!kitSugerencias || !kitBuscar) return;
+    kitSugerencias.innerHTML = '';
+    const palabras = sinTildes(kitBuscar.value).split(/\s+/).filter(Boolean);
+    if (!palabras.length) return;
+    const hallados = Array.prototype.slice.call(document.querySelectorAll('#grilla-equipos .producto')).filter(function (li) {
+      const texto = sinTildes(li.dataset.nombre + ' ' + (li.dataset.palabras || ''));
+      return palabras.every(function (p) { return texto.indexOf(p) !== -1; });
+    });
+    if (!hallados.length) {
+      const nada = document.createElement('li');
+      nada.className = 'kit__sin-resultados';
+      nada.textContent = 'No encontramos eso. Igual podés pedirlo por WhatsApp.';
+      kitSugerencias.appendChild(nada);
+      return;
+    }
+    hallados.slice(0, 6).forEach(function (li) {
+      const fila = document.createElement('li');
+      const texto = document.createElement('span');
+      texto.className = 'kit__sugerencia-nombre';
+      texto.textContent = li.dataset.nombre;
+      const precio = document.createElement('small');
+      const valor = parseFloat(li.dataset.precio) || 0;
+      precio.textContent = valor ? formatoPrecio(valor) + (li.dataset.unidad ? ' por ' + (li.dataset.unidad === 'm' ? 'metro' : li.dataset.unidad) : '') : 'Consultar precio';
+      texto.appendChild(precio);
+      const boton = document.createElement('button');
+      boton.type = 'button';
+      boton.className = 'kit__sumar';
+      const ya = kitExtras.find(function (e) { return e.id === li.dataset.id; });
+      boton.textContent = ya ? 'Sumar otro (' + ya.cantidad + ')' : 'Sumar';
+      boton.addEventListener('click', function () { cambiarExtra(li.dataset.id, 1); });
+      fila.appendChild(texto);
+      fila.appendChild(boton);
+      kitSugerencias.appendChild(fila);
+    });
+    if (hallados.length > 6) {
+      const mas = document.createElement('li');
+      mas.className = 'kit__sin-resultados';
+      mas.textContent = 'Hay ' + (hallados.length - 6) + ' más: escribí algo más preciso.';
+      kitSugerencias.appendChild(mas);
+    }
+  };
+  if (kitBuscar) {
+    kitBuscar.addEventListener('input', pintarSugerencias);
+    // Enter suma el primero de la lista
+    kitBuscar.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      const primero = kitSugerencias && kitSugerencias.querySelector('.kit__sumar');
+      if (primero) primero.click();
+    });
+  }
+
   const kitConPrecio = function () {
     return kitItems.length > 0 && kitItems.every(function (p) { return p.precio > 0; });
   };
@@ -1375,15 +1494,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const pintarKit = function () {
     if (!kitForm) return;
     if (kitTrafo) kitTrafo.textContent = '';
-    const armar = { led: armarKitLed, aire: armarKitAire, seguridad: armarKitSeguridad }[kitTipo];
-    kitItems = armar().filter(Boolean);
+    const armar = { led: armarKitLed, aire: armarKitAire, seguridad: armarKitSeguridad, libre: function () { return []; } }[kitTipo];
+    kitItems = sumarExtras(armar().filter(Boolean));
 
     if (kitLista) {
       kitLista.innerHTML = '';
       if (!kitItems.length) {
         const li = document.createElement('li');
         li.className = 'kit__vacio';
-        li.textContent = 'Elegí al menos una parte.';
+        li.textContent = kitTipo === 'libre' ? 'Buscá productos arriba y sumalos.' : 'Elegí al menos una parte.';
         kitLista.appendChild(li);
       }
       kitItems.forEach(function (p) {
@@ -1394,28 +1513,44 @@ document.addEventListener('DOMContentLoaded', function () {
         nombre.textContent = p.nombre + (p.nota ? ' (' + p.nota + ')' : '');
         li.appendChild(cant);
         li.appendChild(nombre);
+        // lo sumado con el buscador se puede subir, bajar o sacar
+        if (p.extra) {
+          const botones = document.createElement('span');
+          botones.className = 'kit__cantidad';
+          [['−', -1, 'Sacar uno de '], ['+', 1, 'Sumar uno más de ']].forEach(function (b) {
+            const boton = document.createElement('button');
+            boton.type = 'button';
+            boton.textContent = b[0];
+            boton.setAttribute('aria-label', b[2] + p.nombre);
+            boton.addEventListener('click', function () { cambiarExtra(p.id, b[1]); });
+            botones.appendChild(boton);
+          });
+          li.appendChild(botones);
+        }
         kitLista.appendChild(li);
       });
     }
 
-    const equipoAire = kitTipo === 'aire' && kitForm.querySelector('[name="equipo-aire"]:checked');
-    const conPrecio = kitConPrecio() && !equipoAire;
+    const conPrecio = kitConPrecio();
+    const conInstalacion = kitInstalacion && kitInstalacion.checked;
     if (kitTotal) {
       kitTotal.textContent = !kitItems.length ? ''
         : conPrecio
-          ? 'Total: ' + formatoPrecio(kitItems.reduce(function (a, p) { return a + p.precio * p.cantidad; }, 0)) + '*'
+          ? 'Total: ' + formatoPrecio(kitItems.reduce(function (a, p) { return a + p.precio * p.cantidad; }, 0)) + '*' +
+            (conInstalacion ? ' + instalación (te la confirmamos por WhatsApp)' : '')
           : 'Algunas partes todavía no tienen precio en la web: te pasamos el total por WhatsApp.';
     }
     if (kitCarritoBtn) kitCarritoBtn.hidden = !conPrecio;
 
     if (kitWp) {
-      const titulos = { led: 'tira LED', aire: 'instalación de aire', seguridad: 'seguridad' };
-      let texto = 'Hola Mateo, armé un kit de ' + titulos[kitTipo] + ' en la web:\n';
+      const titulos = { led: 'kit de tira LED', aire: 'combo de aire + kit + instalación', seguridad: 'kit de seguridad', libre: 'kit a medida' };
+      let texto = 'Hola Mateo, armé un ' + titulos[kitTipo] + ' en la web:\n';
       kitItems.forEach(function (p) {
         texto += '• ' + (p.unidad === 'm' ? p.cantidad + ' m de ' : p.cantidad + ' × ') + p.nombre + (p.nota ? ' (' + p.nota + ')' : '') + '\n';
       });
-      if (equipoAire) texto += '• También necesito el equipo de aire\n';
-      if (kitInstalacion && kitInstalacion.checked) texto += 'Lo quiero con instalación: ¿cuánto sale la mano de obra?\n';
+      const equipo = elegido('equipo');
+      if (kitTipo === 'aire' && !(equipo && equipo.value)) texto += '• El equipo ya lo tengo\n';
+      if (conInstalacion) texto += 'Lo quiero con instalación: ¿cuánto sale la mano de obra?\n';
       texto += '¿Me pasás el precio?';
       kitWp.href = armarLink(texto);
       kitWp.classList.toggle('desactivado', !kitItems.length);

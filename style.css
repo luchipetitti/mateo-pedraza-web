@@ -2858,6 +2858,56 @@ html:not(.js) .carrito {
 .kit__lista li + li { border-top: 1px solid var(--borde-claro); }
 .kit__lista strong { flex: 0 0 auto; min-width: 42px; color: var(--hielo); }
 .kit__total { margin: 10px 0 0; font-weight: 700; font-size: .95rem; color: var(--blanco); }
+.kit__lista li > span:not(.kit__cantidad) { flex: 1 1 auto; min-width: 0; }
+.kit__cantidad { display: flex; gap: 4px; flex: 0 0 auto; align-self: center; }
+.kit__cantidad button,
+.kit__sumar {
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--marino);
+  background: var(--hielo-claro);
+  cursor: pointer;
+}
+.kit__cantidad button { width: 28px; height: 28px; font-size: 1rem; line-height: 1; }
+
+/* mini buscador: suma cualquier producto de la web al kit */
+.kit__extra { margin: 4px 0 12px; }
+.kit__extra-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--blanco);
+}
+.kit__buscar {
+  width: 100%;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-size: .92rem;
+  color: var(--marino);
+  background: var(--blanco);
+}
+.kit__sugerencias { margin: 6px 0 0; padding: 0; list-style: none; }
+.kit__sugerencias li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 2px;
+  font-size: .88rem;
+  color: rgba(220, 241, 247, .9);
+}
+.kit__sugerencias li + li { border-top: 1px solid var(--borde-claro); }
+.kit__sugerencia-nombre { flex: 1 1 auto; min-width: 0; }
+.kit__sugerencia-nombre small { display: block; margin-top: 2px; font-size: .78rem; color: var(--hielo); }
+.kit__sumar { flex: 0 0 auto; padding: 7px 12px; font-size: .8rem; }
+.kit__sin-resultados { font-size: .82rem; color: rgba(220, 241, 247, .65); }
+.kit__ayuda--libre { margin: 0 0 4px; }
 .kit__instalacion { margin-bottom: 4px; }
 .desactivado { opacity: .5; pointer-events: none; }
 
@@ -2894,6 +2944,22 @@ html:not(.js) .carrito {
   .js .trabajo video,
   .js .producto img { transform: none; }
 }
+
+/* ---------- banner frío / calor / luz ----------
+   Va entre Trabajos y la consulta, de borde a borde de la pantalla:
+   en PC y en celular ocupa todo el ancho y se achica en proporción. */
+.franja {
+  display: block;
+  width: 100%;
+  background: #eef3f8;
+}
+.franja__video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1456 / 180;
+}
+.franja:focus-visible { outline: 3px solid var(--hielo-claro); outline-offset: -3px; }
 
 /* ---------- menos movimiento ---------- */
 
