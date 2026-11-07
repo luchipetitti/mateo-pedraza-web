@@ -39,8 +39,9 @@
       <button class="hamburguesa" id="abrir-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
-      <button class="carrito-boton" id="abrir-buscador" type="button" aria-haspopup="dialog" aria-controls="buscador" aria-label="Buscar en la web" hidden>
+      <button class="buscar-barra" id="abrir-buscador" type="button" aria-haspopup="dialog" aria-controls="buscador" aria-label="Buscar o preguntar en la web" hidden>
         <span class="ico-buscar ico-buscar--barra" aria-hidden="true"></span>
+        <span class="buscar-barra__texto">Buscar<span class="buscar-barra__mas"> o preguntar…</span></span>
       </button>
       <button class="carrito-boton" id="abrir-carrito" type="button" aria-haspopup="dialog" aria-controls="carrito" aria-label="Ver carrito de compra, vacío">
         <span class="ico-carrito" aria-hidden="true"></span>
@@ -121,7 +122,7 @@
     <div class="buscador__fila">
       <div class="catalogo__buscador buscador__campo">
         <span class="ico-buscar" aria-hidden="true"></span>
-        <input type="search" id="buscador-texto" placeholder="¿Qué necesitás? Ej: split, tira LED, cámaras" aria-label="Buscar" autocomplete="off" enterkeyhint="search">
+        <input type="search" id="buscador-texto" placeholder="Buscá o preguntá: ¿hacen urgencias?" aria-label="Buscar" autocomplete="off" enterkeyhint="search">
       </div>
       <button class="cerrar-menu" id="cerrar-buscador" type="button" aria-label="Cerrar buscador">&times;</button>
     </div>
@@ -133,6 +134,9 @@
       <button type="button">Cerradura</button>
       <button type="button">Aislante</button>
       <button type="button">Mano de obra</button>
+      <button type="button">¿Tiene garantía?</button>
+      <button type="button">¿Hacen urgencias?</button>
+      <button type="button">¿Qué horario tienen?</button>
     </div>
 
     <p class="lectura-oculta" id="buscador-aviso" aria-live="polite"></p>
@@ -2088,23 +2092,33 @@
     </div>
 
     <div class="faq" id="faq">
-      <details class="faq__item" data-revelar>
+      <!-- data-palabras: otras formas de preguntar lo mismo, para que
+           el buscador de arriba encuentre la respuesta -->
+      <details class="faq__item" data-revelar data-palabras="trabajos servicios rubros especialidad especializan dedican hacen electricidad iluminacion">
+        <summary>¿Qué trabajos hacen?</summary>
+        <div class="faq__caja"><p>Nos especializamos en instalaciones eléctricas y de refrigeración: diseño de iluminación para locales y hogares, instalaciones eléctricas en obras domiciliarias e industriales, aires acondicionados (instalación y reparación) y cámaras y alarmas.</p></div>
+      </details>
+      <details class="faq__item" data-revelar data-palabras="horario horarios hora horas atienden atencion abren abierto abiertos cierran cerrado hoy dias lunes martes miercoles jueves viernes sabado sabados domingo domingos feriado trabajan">
+        <summary>¿En qué horario atienden?</summary>
+        <div class="faq__caja"><p>De lunes a viernes de 8 a 17 y los sábados de 8 a 13. Los domingos está cerrado. Por WhatsApp nos podés escribir cuando quieras y te respondemos apenas abrimos.</p></div>
+      </details>
+      <details class="faq__item" data-revelar data-palabras="presupuesto gratis gratuito cobran visita cotizacion cotizar">
         <summary>¿Cuánto sale el presupuesto?</summary>
         <div class="faq__caja"><p>Nada. Nos mandás una foto por WhatsApp, te hacemos un par de preguntas y te pasamos un precio cerrado. Recién ahí decidís.</p></div>
       </details>
-      <details class="faq__item" data-revelar>
+      <details class="faq__item" data-revelar data-palabras="zona zonas donde ciudad barrio lejos viajan llegan vienen villa maria villa nueva alrededores">
         <summary>¿En qué zonas trabajan?</summary>
         <div class="faq__caja"><p>Villa María, Villa Nueva y alrededores. Si estás un poco más lejos, escribinos igual y vemos si nos queda de paso.</p></div>
       </details>
-      <details class="faq__item" data-revelar>
+      <details class="faq__item" data-revelar data-palabras="urgente urgencia emergencia hoy rapido mismo dia corte luz termica salta">
         <summary>¿Hacen urgencias?</summary>
         <div class="faq__caja"><p>Sí. Cortes, térmicas que saltan o un equipo de frío parado los atendemos en el día, según cómo venga la agenda. Avisanos que es urgente cuando escribas.</p></div>
       </details>
-      <details class="faq__item" data-revelar>
+      <details class="faq__item" data-revelar data-palabras="garantia cubre falla rompe usado usados nuevo nuevos">
         <summary>¿El trabajo tiene garantía?</summary>
         <div class="faq__caja"><p>Sí, siempre por escrito. Los equipos usados que vendemos van con 3 meses de garantía y los nuevos con la garantía oficial de fábrica.</p></div>
       </details>
-      <details class="faq__item" data-revelar>
+      <details class="faq__item" data-revelar data-palabras="compre otro lado propio mio traigo tengo equipo instalan instalar">
         <summary>¿Instalan un equipo que compré en otro lado?</summary>
         <div class="faq__caja"><p>Sin problema. Antes de instalarlo lo revisamos y te decimos si la instalación eléctrica del ambiente lo aguanta.</p></div>
       </details>

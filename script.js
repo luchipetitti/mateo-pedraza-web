@@ -2125,7 +2125,8 @@ document.addEventListener('DOMContentLoaded', function () {
   deslizarParaCerrar(carrito, 1, function () { cerrarCarrito(); });
 
   /* ---------------------------------------------------------
-     12. Buscador de toda la web (la lupita de la barra).
+     12. Buscador de toda la web (la barra de arriba). También
+        acepta preguntas y responde con lo que dice la web.
         El índice se arma solo con lo que ya está en la página:
         servicios, equipos, trabajos y preguntas. Si no encuentra
         nada, ofrece mandar la búsqueda por WhatsApp.
@@ -2204,9 +2205,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // las preguntas frecuentes también se encuentran por las palabras
+  // de data-palabras (otras formas de preguntar lo mismo)
   document.querySelectorAll('.faq__item').forEach(function (det) {
     indice.push({
       tipo: 'Pregunta', titulo: textoDe(det, 'summary'), detalle: textoDe(det, '.faq__caja'),
+      extra: det.dataset.palabras || '',
       ir: function () { det.open = true; resaltar(det); }
     });
   });
@@ -2214,23 +2218,104 @@ document.addEventListener('DOMContentLoaded', function () {
   indice.forEach(function (r) {
     r.buscable = sinTildes([r.tipo, r.titulo, r.detalle, r.extra].join(' '));
     r.tituloBuscable = sinTildes(r.titulo);
+    // para responder una pregunta frecuente cuenta su pregunta y sus
+    // data-palabras, no el texto de la respuesta
+    r.claves = r.tipo === 'Pregunta' ? sinTildes(r.titulo + ' ' + r.extra) : r.buscable;
   });
 
-  const buscar = function (consulta) {
-    const palabras = sinTildes(consulta).split(/\s+/).filter(Boolean);
+  /* Preguntas escritas como se habla ("¿cuánto sale un split?"):
+     se sacan los signos y las palabras de relleno, y cada palabra
+     se recorta un poco para que "instalar" encuentre "instalación". */
+  const RELLENO = ('que cual cuales como donde cuando quien quienes el la lo los las un una unos unas ' +
+    'de del al a en y o u para por con sin se me mi mis te tu tus su sus es son esta estan ser hay ' +
+    'tienen tiene tenes hacen hace haces puedo pueden puede podes quiero queria necesito busco ' +
+    'si no mas muy ya hola mateo ustedes vos yo nos les algo alguno alguna eso esto ese esa').split(' ');
+  const PALABRAS_PRECIO = ['cuanto', 'cuantos', 'cuanta', 'sale', 'salen', 'cuesta', 'cuestan',
+    'precio', 'precios', 'vale', 'valen', 'costo', 'cobran', 'cobras'];
+
+  const leerConsulta = function (consulta) {
+    const crudas = sinTildes(consulta).replace(/[¿?¡!.,;:()"']+/g, ' ').split(/\s+/).filter(Boolean);
+    const precio = crudas.some(function (p) { return PALABRAS_PRECIO.indexOf(p) !== -1; });
+    const pregunta = /[¿?]/.test(consulta) || precio ||
+      ['que', 'cual', 'como', 'donde', 'cuando', 'quien', 'hacen', 'tienen', 'puedo', 'instalan', 'trabajan']
+        .indexOf(crudas[0]) !== -1;
+    const palabras = crudas
+      .filter(function (p) { return RELLENO.indexOf(p) === -1 && PALABRAS_PRECIO.indexOf(p) === -1; })
+      .map(function (p) { return p.length >= 6 ? p.slice(0, p.length - 2) : p.length === 5 ? p.slice(0, 4) : p; });
+    return { palabras: palabras, precio: precio, pregunta: pregunta };
+  };
+
+  const buscar = function (lectura) {
+    const palabras = lectura.palabras;
     if (!palabras.length) return [];
-    return indice
-      .filter(function (r) {
-        return palabras.every(function (p) { return r.buscable.indexOf(p) !== -1; });
-      })
-      .map(function (r) {
-        // primero lo que coincide en el título
-        const puntos = palabras.filter(function (p) { return r.tituloBuscable.indexOf(p) !== -1; }).length;
-        return { r: r, puntos: puntos };
-      })
+    const puntuados = indice.map(function (r) {
+      const coinciden = palabras.filter(function (p) { return r.buscable.indexOf(p) !== -1; }).length;
+      const enTitulo = palabras.filter(function (p) { return r.tituloBuscable.indexOf(p) !== -1; }).length;
+      return { r: r, coinciden: coinciden, puntos: coinciden * 2 + enTitulo };
+    });
+    // primero lo que tiene todas las palabras; si nada las tiene todas
+    // (pasa con las preguntas largas), lo que tiene al menos la mitad
+    let elegidos = puntuados.filter(function (x) { return x.coinciden === palabras.length; });
+    if (!elegidos.length) {
+      const minimo = Math.max(1, Math.ceil(palabras.length / 2));
+      elegidos = puntuados.filter(function (x) { return x.coinciden >= minimo; });
+    }
+    return elegidos
       .sort(function (a, b) { return b.puntos - a.puntos; })
       .slice(0, 12)
       .map(function (x) { return x.r; });
+  };
+
+  // arma la respuesta con lo que ya dice la web: precio del catálogo,
+  // respuesta de las preguntas frecuentes o lo que incluye un servicio
+  const responder = function (lectura, encontrados) {
+    if (!lectura.pregunta || !encontrados.length) return null;
+    // solo responde si tiene todas las palabras de la pregunta: así
+    // "¿trabajan los domingos?" no contesta con las zonas de trabajo
+    const primeroDe = function (tipo) {
+      for (let i = 0; i < encontrados.length; i++) {
+        const r = encontrados[i];
+        if (r.tipo === tipo && lectura.palabras.every(function (p) { return r.claves.indexOf(p) !== -1; })) return r;
+      }
+      return null;
+    };
+    const conPunto = function (s) { return s && !/[.!?]$/.test(s) ? s + '.' : s; };
+    const faq = primeroDe('Pregunta');
+    if (lectura.precio) {
+      const producto = primeroDe('Producto');
+      // "¿cuánto sale el presupuesto?" es una pregunta frecuente, no un producto:
+      // gana el que quedó mejor ubicado en la búsqueda
+      if (producto && (!faq || encontrados.indexOf(producto) < encontrados.indexOf(faq))) {
+        return {
+          desde: producto, titulo: producto.titulo,
+          texto: producto.detalle === 'Consultar precio'
+            ? 'Este no tiene precio publicado: consultalo por WhatsApp y te pasamos el valor.'
+            : 'Está a ' + producto.detalle + '. Tocá para verlo en el catálogo y sumarlo al carrito.'
+        };
+      }
+    }
+    if (faq) return { desde: faq, titulo: faq.titulo, texto: faq.detalle };
+    // "¿tienen split de 3000?": si está en el catálogo, sí, y con su precio
+    const hay = primeroDe('Producto');
+    if (hay) {
+      const otros = encontrados.filter(function (r) { return r.tipo === 'Producto' && r !== hay; }).length;
+      return {
+        desde: hay, titulo: hay.titulo,
+        texto: 'Sí, lo tenemos' + (hay.detalle === 'Consultar precio' ? ' (precio a consultar)' : ', a ' + hay.detalle) + '. ' +
+          (otros ? 'Abajo hay ' + otros + (otros === 1 ? ' opción más' : ' opciones más') + '. ' : '') +
+          'Tocá para verlo en el catálogo.'
+      };
+    }
+    const servicio = primeroDe('Servicio');
+    if (servicio) {
+      return {
+        desde: servicio, titulo: servicio.titulo,
+        texto: (servicio.detalle ? conPunto(servicio.detalle) + ' ' : '') +
+          (lectura.precio ? 'El precio depende del trabajo: mandanos una foto por WhatsApp y te pasamos un precio cerrado. ' : '') +
+          'Tocá para ver todo lo que incluye.'
+      };
+    }
+    return null;
   };
 
   const armarResultado = function (nodo, tipoTexto, tituloTexto, detalleTexto) {
@@ -2254,9 +2339,27 @@ document.addEventListener('DOMContentLoaded', function () {
   const pintarResultados = function () {
     if (!buscadorResultados || !buscadorTexto) return;
     const consulta = buscadorTexto.value.trim();
-    const encontrados = buscar(consulta);
+    const lectura = leerConsulta(consulta);
+    let encontrados = buscar(lectura);
+    const respuesta = responder(lectura, encontrados);
     buscadorResultados.innerHTML = '';
     if (buscadorSugerencias) buscadorSugerencias.hidden = !!consulta;
+
+    // la respuesta va arriba de todo, completa; abajo, el resto
+    if (respuesta) {
+      const li = document.createElement('li');
+      const b = document.createElement('button');
+      b.type = 'button';
+      armarResultado(b, 'Respuesta', respuesta.titulo, respuesta.texto);
+      b.classList.add('resultado--respuesta');
+      b.addEventListener('click', function () {
+        cerrarBuscador(false);
+        respuesta.desde.ir();
+      });
+      li.appendChild(b);
+      buscadorResultados.appendChild(li);
+      encontrados = encontrados.filter(function (r) { return r !== respuesta.desde; });
+    }
 
     encontrados.forEach(function (r) {
       const li = document.createElement('li');
@@ -2278,8 +2381,9 @@ document.addEventListener('DOMContentLoaded', function () {
       a.href = armarLink('Hola Mateo, te consulto por: ' + consulta);
       a.target = '_blank';
       a.rel = 'noopener';
+      const hayAlgo = encontrados.length || respuesta;
       armarResultado(a,
-        encontrados.length ? '¿No es esto?' : 'No encontré nada en la web',
+        hayAlgo ? '¿No es esto?' : (lectura.pregunta ? 'Esa no la tengo en la web' : 'No encontré nada en la web'),
         'Preguntale a Mateo por WhatsApp: "' + consulta + '"');
       a.classList.add('resultado--wp');
       li.appendChild(a);
@@ -2288,7 +2392,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (buscadorAviso) {
       buscadorAviso.textContent = consulta
-        ? encontrados.length + (encontrados.length === 1 ? ' resultado' : ' resultados')
+        ? (respuesta ? 'Respuesta: ' + respuesta.texto + '. ' : '') +
+          encontrados.length + (encontrados.length === 1 ? ' resultado' : ' resultados')
         : '';
     }
   };

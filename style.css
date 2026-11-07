@@ -322,6 +322,41 @@ h2 { font-size: clamp(1.65rem, 6.6vw, 2.5rem); max-width: 20ch; }
   align-items: center;
   gap: 8px;
   min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* el buscador, siempre a la vista: una barra que al tocarla abre la búsqueda */
+.buscar-barra {
+  order: 3;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 340px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--vidrio);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
+  font-family: var(--texto);
+  font-size: .9rem;
+  color: rgba(220, 241, 247, .7);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--t), box-shadow var(--t);
+}
+.buscar-barra[hidden] { display: none; }
+.buscar-barra:hover {
+  background: rgba(143, 212, 230, .16);
+  box-shadow: inset 0 0 0 1px rgba(143, 212, 230, .45);
+}
+.buscar-barra .ico-buscar--barra { flex: 0 0 auto; }
+.buscar-barra__texto { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.buscar-barra__mas { display: none; }
+@media (min-width: 420px) {
+  .buscar-barra__mas { display: inline; }
 }
 
 /* el botón de tres rayitas que abre el menú lateral */
@@ -2436,6 +2471,19 @@ html:not(.js) .carrito {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+/* la respuesta a una pregunta: completa, sin cortar, y un poco destacada */
+.resultado--respuesta {
+  gap: 4px;
+  padding: 13px 15px;
+  background: rgba(143, 212, 230, .1);
+  box-shadow: inset 0 0 0 1px rgba(143, 212, 230, .35);
+}
+.resultado--respuesta .resultado__detalle {
+  display: block;
+  font-size: .88rem;
+  line-height: 1.45;
+  color: rgba(220, 241, 247, .85);
 }
 .resultado--wp { background: rgba(31, 178, 85, .14); }
 .resultado--wp .resultado__tipo { color: #5BD98A; }
