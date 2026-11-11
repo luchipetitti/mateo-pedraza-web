@@ -2154,6 +2154,30 @@ html:not(.js) .carrito {
   color: var(--blanco);
 }
 .visor__figura figcaption:empty { display: none; }
+/* el detalle va chico y suave, abajo del nombre */
+.visor__figura figcaption small {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--texto);
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--hielo);
+  opacity: .9;
+}
+/* productos: pie más sutil, foto sobre blanco (como en el catálogo) y sin
+   tira de miniaturas */
+.visor[data-modo="producto"] .visor__figura figcaption {
+  max-width: 560px;
+  margin: 12px auto 0;
+  font-size: .95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .88);
+}
+.visor[data-modo="producto"] .visor__figura img { background: var(--blanco); }
+.visor[data-modo="producto"] .visor__miniaturas { display: none; }
+/* las fotos del catálogo se pueden agrandar */
+#grilla-equipos .producto figure img.cargada,
+#destacados .producto figure img.cargada { cursor: zoom-in; }
 
 .visor__miniaturas {
   display: flex;

@@ -1240,7 +1240,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!foto || !visorImg) return;
     visorImg.src = foto.src;
     visorImg.alt = foto.alt || '';
-    if (visorPie) visorPie.textContent = foto.titulo || '';
+    if (visorPie) {
+      visorPie.textContent = foto.titulo || '';
+      if (foto.detalle) {
+        const chico = document.createElement('small');
+        chico.textContent = foto.detalle;
+        visorPie.appendChild(chico);
+      }
+    }
 
     const variasFotos = visorFotos.length > 1;
     if (visorAnteriorBtn) visorAnteriorBtn.hidden = !variasFotos;
@@ -1248,8 +1255,9 @@ document.addEventListener('DOMContentLoaded', function () {
     pintarMiniaturasVisor();
   };
 
-  const abrirVisor = function (fotos, indice) {
+  const abrirVisor = function (fotos, indice, modo) {
     if (!visor || !fotos.length) return;
+    visor.dataset.modo = modo || '';
     visorOrigen = document.activeElement;
     visorFotos = fotos;
     visorIndice = indice;
@@ -1291,6 +1299,30 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.target === visor) cerrarVisor();
     });
   }
+
+  document.addEventListener('click', function (e) {
+    const img = e.target.closest('.producto figure img');
+    if (!img || !img.classList.contains('cargada')) return;
+    const grilla = img.closest('#grilla-equipos, #destacados');
+    if (!grilla) return;
+    if (grilla.dataset.arrastro) return; // fue un arrastre, no un toque
+    const visibles = Array.prototype.filter.call(grilla.querySelectorAll('.producto'), function (li) {
+      return !li.hidden && li.offsetParent !== null && li.querySelector('figure img');
+    });
+    const fotos = visibles.map(function (li) {
+      const im = li.querySelector('figure img');
+      const precio = parseFloat(li.dataset.precio) || 0;
+      const unidad = li.dataset.unidad === 'm' ? ' por metro' : '';
+      const ilustrativa = li.querySelector('.producto__ilustrativa') ? ' · Foto ilustrativa' : '';
+      return {
+        src: im.currentSrc || im.src,
+        alt: im.alt,
+        titulo: li.dataset.nombre || '',
+        detalle: (precio ? formatoPrecio(precio) + unidad : 'Consultar precio') + ilustrativa
+      };
+    });
+    abrirVisor(fotos, Math.max(0, visibles.indexOf(img.closest('.producto'))), 'producto');
+  });
 
   document.addEventListener('keydown', function (e) {
     if (!visor || !visor.classList.contains('abierto')) return;
