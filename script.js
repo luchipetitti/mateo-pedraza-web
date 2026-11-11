@@ -999,8 +999,49 @@ document.addEventListener('DOMContentLoaded', function () {
      6. Arrastre con el mouse en todo lo que se desliza
         (en el celular el dedo ya lo hace el navegador)
      --------------------------------------------------------- */
+  // deslizamiento propio, lento y con frenada suave (el "smooth" del
+  // navegador es corto y el imán de las tarjetas da un tirón al final)
+  const deslizarSuave = function (pista, destino, duracion) {
+    const max = pista.scrollWidth - pista.clientWidth;
+    destino = Math.max(0, Math.min(max, destino));
+    const desde = pista.scrollLeft;
+    const distancia = destino - desde;
+    if (pista._deslizando) cancelAnimationFrame(pista._deslizando);
+    if (Math.abs(distancia) < 1 || quietito) { pista.scrollLeft = destino; return; }
+    const t = duracion || Math.min(900, 420 + Math.abs(distancia) * .35);
+    const inicio = performance.now();
+    pista.style.scrollSnapType = 'none';
+    const paso = function (ahora) {
+      const p = Math.min(1, (ahora - inicio) / t);
+      const e = 1 - Math.pow(1 - p, 3); // frena despacio al final
+      pista.scrollLeft = desde + distancia * e;
+      if (p < 1) { pista._deslizando = requestAnimationFrame(paso); return; }
+      pista._deslizando = 0;
+      pista.style.scrollSnapType = '';
+    };
+    pista._deslizando = requestAnimationFrame(paso);
+  };
+  // dónde queda centrada la tarjeta más cercana a una posición
+  const centrarCerca = function (pista, posicion) {
+    const mitad = pista.clientWidth / 2;
+    let mejor = posicion;
+    let menor = Infinity;
+    const borde = pista.getBoundingClientRect().left - pista.scrollLeft;
+    Array.prototype.forEach.call(pista.children, function (hijo) {
+      const caja = hijo.getBoundingClientRect();
+      if (!caja.width) return; // tarjetas ocultas por un filtro
+      const centro = caja.left - borde + caja.width / 2 - mitad;
+      const d = Math.abs(centro - posicion);
+      if (d < menor) { menor = d; mejor = centro; }
+    });
+    return mejor;
+  };
+
   const habilitarArrastre = function (caja) {
     let apretado = false;
+    let ultimoX = 0;
+    let ultimoT = 0;
+    let velocidad = 0;
     let xInicial = 0;
     let scrollInicial = 0;
     let recorrido = 0;
@@ -1010,6 +1051,10 @@ document.addEventListener('DOMContentLoaded', function () {
       apretado = true;
       recorrido = 0;
       xInicial = e.clientX;
+      ultimoX = e.clientX;
+      ultimoT = performance.now();
+      velocidad = 0;
+      if (caja._deslizando) { cancelAnimationFrame(caja._deslizando); caja._deslizando = 0; }
       scrollInicial = caja.scrollLeft;
     });
 
@@ -1018,6 +1063,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const dx = e.clientX - xInicial;
       recorrido = Math.max(recorrido, Math.abs(dx));
       caja.scrollLeft = scrollInicial - dx;
+      const ahora = performance.now();
+      if (ahora > ultimoT) velocidad = (e.clientX - ultimoX) / (ahora - ultimoT);
+      ultimoX = e.clientX;
+      ultimoT = ahora;
       // recién cuando se mueve de verdad es un arrastre: si se marcara al
       // apretar, las fotos dejan de recibir el clic (y no abre el visor)
       if (recorrido > 4) {
@@ -1029,6 +1078,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const soltar = function () {
       if (!apretado) return;
       apretado = false;
+      // al soltar sigue un poco con el envión y se acomoda despacio en la
+      // tarjeta más cercana (en vez del salto del imán)
+      if (recorrido > 4 && !caja.classList.contains('atajos')) {
+        const envion = performance.now() - ultimoT < 80 ? velocidad * 260 : 0;
+        deslizarSuave(caja, centrarCerca(caja, caja.scrollLeft - envion));
+      }
       caja.classList.remove('arrastrando');
 
       // Si arrastró de verdad, que no se dispare el clic del enlace
@@ -2052,10 +2107,10 @@ document.addEventListener('DOMContentLoaded', function () {
       b.textContent = lado === 'anterior' ? '‹' : '›';
       b.setAttribute('aria-label', lado === 'anterior' ? 'Ver anteriores' : 'Ver siguientes');
       b.addEventListener('click', function () {
-        pista.scrollBy({
-          left: (lado === 'anterior' ? -1 : 1) * pista.clientWidth * .8,
-          behavior: quietito ? 'auto' : 'smooth'
-        });
+        const salto = (lado === 'anterior' ? -1 : 1) * pista.clientWidth * .8;
+        const desde = pista._deslizando ? pista._destino : pista.scrollLeft;
+        pista._destino = centrarCerca(pista, desde + salto);
+        deslizarSuave(pista, pista._destino, 750);
       });
       fila.appendChild(b);
       return b;

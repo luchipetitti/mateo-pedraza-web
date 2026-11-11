@@ -1024,7 +1024,7 @@ html:not(.js) .carrito {
   display: flex;
   gap: 12px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
   padding: 4px 18px 10px;
   max-width: var(--ancho);
@@ -1062,7 +1062,7 @@ html:not(.js) .carrito {
     inset 0 1px 0 var(--blanco),
     0 0 0 1px var(--borde),
     0 30px 50px -28px rgba(0, 0, 0, .5);
-  transition: transform var(--t), box-shadow var(--t);
+  transition: box-shadow var(--t);
 }
 /* filo de escarcha arriba */
 .tarjeta::before {
@@ -1074,12 +1074,6 @@ html:not(.js) .carrito {
   opacity: .8;
 }
 .tarjeta > * { position: relative; z-index: 2; }
-/* el levantarse y el zoom al pasar el mouse, solo en PC */
-@media (hover: hover) and (pointer: fine) {
-  .tarjeta:hover { transform: translateY(-2px); }
-  .tarjeta--medio:hover img.cargada,
-  .tarjeta--medio:hover video.cargada { transform: scale(1.06); }
-}
 
 .tarjeta h3 { font-size: 1.18rem; margin-bottom: 8px; }
 .tarjeta p { color: var(--gris); font-size: .95rem; }
@@ -1099,12 +1093,12 @@ html:not(.js) .carrito {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 700ms ease, transform 1200ms cubic-bezier(.16, .84, .28, 1);
+  transition: opacity 600ms ease;
 }
 .js .tarjeta--medio img,
-.js .tarjeta--medio video { opacity: 0; transform: scale(1.05); }
+.js .tarjeta--medio video { opacity: 0; }
 .js .tarjeta--medio img.cargada,
-.js .tarjeta--medio video.cargada { opacity: 1; transform: none; }
+.js .tarjeta--medio video.cargada { opacity: 1; }
 
 /* si todavía no subiste el archivo, un cartelito prolijo con el rubro
    (sirve para Servicios, el catálogo y Trabajos hechos) */
@@ -1791,10 +1785,10 @@ html:not(.js) .carrito {
 .producto img {
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: opacity 700ms ease, transform 1200ms cubic-bezier(.16, .84, .28, 1);
+  transition: opacity 600ms ease;
 }
-.js .producto img { opacity: 0; transform: scale(1.05); }
-.js .producto img.cargada { opacity: 1; transform: none; }
+.js .producto img { opacity: 0; }
+.js .producto img.cargada { opacity: 1; }
 
 .producto__info {
   flex: 1 1 auto;
@@ -2138,14 +2132,14 @@ html:not(.js) .carrito {
   box-shadow: 0 40px 70px -20px rgba(0, 0, 0, .8);
 }
 
-.visor__figura img.entra-derecha { animation: visor-derecha 380ms cubic-bezier(.16, .84, .28, 1); }
-.visor__figura img.entra-izquierda { animation: visor-izquierda 380ms cubic-bezier(.16, .84, .28, 1); }
+.visor__figura img.entra-derecha { animation: visor-derecha 520ms cubic-bezier(.25, .8, .35, 1); }
+.visor__figura img.entra-izquierda { animation: visor-izquierda 520ms cubic-bezier(.25, .8, .35, 1); }
 @keyframes visor-derecha {
-  from { opacity: 0; transform: translateX(48px) scale(.98); }
+  from { opacity: 0; transform: translateX(14px); }
   to   { opacity: 1; transform: none; }
 }
 @keyframes visor-izquierda {
-  from { opacity: 0; transform: translateX(-48px) scale(.98); }
+  from { opacity: 0; transform: translateX(-14px); }
   to   { opacity: 1; transform: none; }
 }
 /* en el celular se pasa de foto deslizando: el navegador no tiene
@@ -2256,8 +2250,7 @@ html:not(.js) .carrito {
   padding: 0;
   list-style: none;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -2292,12 +2285,12 @@ html:not(.js) .carrito {
   min-height: 300px;
   object-fit: cover;
   aspect-ratio: 4 / 3;
-  transition: opacity 700ms ease, transform 1200ms cubic-bezier(.16, .84, .28, 1);
+  transition: opacity 600ms ease;
 }
 .js .trabajo img,
-.js .trabajo video { opacity: 0; transform: scale(1.05); }
-.js .trabajo img.cargada { opacity: 1; transform: none; cursor: zoom-in; }
-.js .trabajo video.cargada { opacity: 1; transform: none; }
+.js .trabajo video { opacity: 0; }
+.js .trabajo img.cargada { opacity: 1; cursor: zoom-in; }
+.js .trabajo video.cargada { opacity: 1; }
 
 /* la foto se ve sola, sin texto encima: el título queda para el
    lector de pantalla, el buscador y el pie del visor */
@@ -2958,18 +2951,11 @@ html:not(.js) .carrito {
 .kit-banner strong { font-size: 1rem; color: var(--blanco); }
 .kit-banner span { font-size: .82rem; }
 
-/* ---------- en el celular las tarjetas quedan quietas ----------
-   Solo se deslizan con el dedo: no suben al aparecer ni hacen zoom
-   en las fotos (entran con un fundido nomás). En PC sigue todo igual. */
-@media (hover: none), (pointer: coarse) {
-  .js .tarjeta[data-revelar] { transform: none; }
-  .tarjeta, .trabajo { transition: none; }
-  .js .tarjeta--medio img,
-  .js .tarjeta--medio video,
-  .js .trabajo img,
-  .js .trabajo video,
-  .js .producto img { transform: none; }
-}
+/* ---------- tarjetas quietas (celular y PC) ----------
+   Solo se deslizan: no suben al aparecer, no se levantan ni hacen
+   zoom; las fotos entran con un fundido nomás. */
+.js .tarjeta[data-revelar] { transform: none; }
+.trabajo { transition: none; }
 
 /* ---------- banner frío / calor / luz ----------
    Va entre Trabajos y la consulta, de borde a borde de la pantalla:
