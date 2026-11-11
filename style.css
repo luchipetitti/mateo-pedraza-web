@@ -2958,20 +2958,32 @@ html:not(.js) .carrito {
 .trabajo { transition: none; }
 
 /* ---------- banner frío / calor / luz ----------
-   Va entre Trabajos y la consulta, de borde a borde de la pantalla:
-   en PC y en celular ocupa todo el ancho y se achica en proporción. */
+   Va entre Trabajos y la consulta, centrado y del ancho del contenido
+   (no de borde a borde): en la PC queda de unos 120 px de alto y en el
+   celular se achica en proporción, con el mismo margen que el resto.
+   El video está hecho a 3x (2184x270) para que se vea nítido, en la
+   versión oscura (banner/_fuente/animado-oscuro.html) para que no choque
+   con el fondo azul de la web. */
 .franja {
   display: block;
-  width: 100%;
-  background: #eef3f8;
+  width: calc(100% - 32px);
+  max-width: 960px;
+  margin: 8px auto;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--marino);
+  box-shadow: 0 0 0 1px var(--borde-claro), 0 18px 36px -26px rgba(0, 0, 0, .6);
 }
 .franja__video {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1456 / 180;
+  aspect-ratio: 2184 / 270;
 }
-.franja:focus-visible { outline: 3px solid var(--hielo-claro); outline-offset: -3px; }
+.franja:focus-visible { outline: 3px solid var(--hielo-claro); outline-offset: 3px; }
+@media (max-width: 560px) {
+  .franja { border-radius: 8px; margin: 4px auto; }
+}
 
 /* ---------- menos movimiento ---------- */
 
