@@ -643,13 +643,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // orden por precio: arranca del más barato
     const ordenPrecio = document.getElementById('orden-precio');
-    // "Recomendado": primero los equipos (aire y frío) y después los
-    // insumos; dentro de cada grupo, de menor a mayor precio
-    const esEquipo = function (li) { return li.dataset.categoria === 'aire' || li.dataset.categoria === 'frio'; };
+    // "Recomendado": por rubro, en el mismo orden que los filtros de la
+    // barra lateral (aires, kits, caños…); dentro de cada rubro, de menor
+    // a mayor precio y al final los de "Consultar precio"
+    const RUBROS = Array.prototype.map.call(
+      document.querySelectorAll('.chip-filtro[data-categoria]:not([data-categoria="todos"])'),
+      function (b) { return b.dataset.categoria; });
+    const rubro = function (li) {
+      const i = RUBROS.indexOf(li.dataset.categoria);
+      return i === -1 ? RUBROS.length : i;
+    };
     const ordenar = function () {
       const modo = ordenPrecio ? ordenPrecio.value : 'recomendado';
       productos.slice().sort(function (x, y) {
-        if (modo === 'recomendado' && esEquipo(x) !== esEquipo(y)) return esEquipo(x) ? -1 : 1;
+        if (modo === 'recomendado' && rubro(x) !== rubro(y)) return rubro(x) - rubro(y);
         if (!precioDe(x) !== !precioDe(y)) return precioDe(x) ? -1 : 1;
         return modo === 'desc' ? precioDe(y) - precioDe(x) : precioDe(x) - precioDe(y);
       }).forEach(function (li) { grillaEquipos.appendChild(li); });

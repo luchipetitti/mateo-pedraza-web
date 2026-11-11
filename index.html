@@ -19,7 +19,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="canonical" href="https://mateopedrazainstalaciones.com.ar/">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -180,10 +180,10 @@
         <button type="button" class="chip-filtro" data-categoria="todos" aria-pressed="true">Todos los productos</button>
         <button type="button" class="chip-filtro" data-categoria="aire" aria-pressed="false">Aire acondicionado</button>
         <button type="button" class="chip-filtro" data-categoria="kit" aria-pressed="false">Kits de instalación de aire</button>
+        <button type="button" class="chip-filtro" data-categoria="cobre" aria-pressed="false">Caño de cobre, aislantes y cintas</button>
         <button type="button" class="chip-filtro" data-categoria="frio" aria-pressed="false">Refrigeración</button>
         <button type="button" class="chip-filtro" data-categoria="gas" aria-pressed="false">Gases refrigerantes</button>
         <button type="button" class="chip-filtro" data-categoria="quimicos" aria-pressed="false">Selladores Albans</button>
-        <button type="button" class="chip-filtro" data-categoria="cobre" aria-pressed="false">Caño de cobre, aislantes y cintas</button>
         <button type="button" class="chip-filtro" data-categoria="electrico" aria-pressed="false">Electricidad, cables y cerraduras</button>
         <button type="button" class="chip-filtro" data-categoria="led" aria-pressed="false">Iluminación LED</button>
         <button type="button" class="chip-filtro" data-categoria="seguridad" aria-pressed="false">Seguridad</button>
@@ -202,7 +202,7 @@
     <div class="lateral__grupo">
       <label class="lateral__titulo" for="orden-precio">Ordenar</label>
       <select id="orden-precio" class="lateral__select">
-        <option value="recomendado" selected>Recomendado: equipos primero</option>
+        <option value="recomendado" selected>Recomendado: por rubro</option>
         <option value="asc">Menor precio primero</option>
         <option value="desc">Mayor precio primero</option>
       </select>
@@ -239,7 +239,7 @@
       <li>Finalizá por WhatsApp y te confirmamos el total</li>
     </ol>
     <!-- >>> CAMBIÁ ESTO: la fecha de la última lista de precios cargada -->
-    <p class="catalogo__nota">* Precios al 02/11/2026. Cambian seguido: antes de cobrar te confirmamos el precio final y el stock por WhatsApp.</p>
+    <p class="catalogo__nota">* Precios al 11/11/2026. Cambian seguido: antes de cobrar te confirmamos el precio final y el stock por WhatsApp.</p>
 
     <button type="button" class="kit-banner" data-abre-kit>
       <strong>Armá tu kit <span aria-hidden="true">→</span></strong>
@@ -347,9 +347,35 @@
         </div>
       </li>
 
-      <!-- ---- Aires acondicionados BGH: precio de venta de contado (lista de Mateo 02/11/2026) ---- -->
+      <!-- ---- Aires acondicionados BGH: precio de venta de contado (catálogo de Mateo 11/11/2026; pisos techo y ducto en U$S × 1.500) ---- -->
 
-      <li class="producto" data-id="bgh-1006005930" data-nombre="Split BGH Inverter 3100 fg frío/calor (3650 W, BSI37WCNX)" data-precio="1006317" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-onoff-2300" data-nombre="Split BGH on-off 2300 fg frío/calor" data-precio="798000" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh on off 2300 frigorias frio calor dormitorio chico">
+        <figure data-marca="Split on-off">
+          <img src="img/prod-bgh-1006005357.jpg" alt="Split BGH on-off 2300 fg frío/calor" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH on-off 2300 fg frío/calor</h3>
+          <p class="producto__precio">$798.000</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-inverter-2300" data-nombre="Split BGH Inverter 2300 fg frío/calor" data-precio="920000" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh inverter 2300 frigorias frio calor dormitorio chico">
+        <figure data-marca="Split inverter">
+          <img src="img/prod-bgh-1006005930.jpg" alt="Split BGH Inverter 2300 fg frío/calor" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Inverter 2300 fg frío/calor</h3>
+          <p class="producto__precio">$920.000</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1006005930" data-nombre="Split BGH Inverter 3100 fg frío/calor (3650 W, BSI37WCNX)" data-precio="975000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh inverter frio calor 3100 frigorias 3650w bsi37wcnx dormitorio">
         <figure data-marca="Split inverter">
           <img src="img/prod-bgh-1006005930.jpg" alt="Split BGH Inverter 3100 fg frío/calor (3650 W, BSI37WCNX)" width="480" height="480" loading="lazy" decoding="async">
@@ -357,12 +383,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Split BGH Inverter 3100 fg frío/calor (3650 W, BSI37WCNX)</h3>
-          <p class="producto__precio">$1.006.317</p>
+          <p class="producto__precio">$975.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1006005357" data-nombre="Split BGH Silent Air 3000 fg on-off (3500 W)" data-precio="874278" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-1006005357" data-nombre="Split BGH Silent Air 3000 fg on-off (3500 W)" data-precio="840000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh on off 3000 frigorias 3500w cdw silent air dormitorio">
         <figure data-marca="Split on-off">
           <img src="img/prod-bgh-1006005357.jpg" alt="Split BGH Silent Air 3000 fg on-off (3500 W)" width="480" height="480" loading="lazy" decoding="async">
@@ -370,12 +396,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Split BGH Silent Air 3000 fg on-off (3500 W)</h3>
-          <p class="producto__precio">$874.278</p>
+          <p class="producto__precio">$840.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1006005948" data-nombre="Split BGH Silent Air 4600 fg on-off (5400 W)" data-precio="1197433" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-1006005948" data-nombre="Split BGH Silent Air 4600 fg on-off (5400 W)" data-precio="1180000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh on off 4600 frigorias 5400w cdw silent air living">
         <figure data-marca="Split on-off">
           <img src="img/prod-bgh-1006005948.jpg" alt="Split BGH Silent Air 4600 fg on-off (5400 W)" width="480" height="480" loading="lazy" decoding="async">
@@ -383,12 +409,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Split BGH Silent Air 4600 fg on-off (5400 W)</h3>
-          <p class="producto__precio">$1.197.433</p>
+          <p class="producto__precio">$1.180.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1006004974" data-nombre="Split BGH Inverter 4700 fg frío/calor (5500 W, BSI55WCNX)" data-precio="1505785" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-1006004974" data-nombre="Split BGH Inverter 4700 fg frío/calor (5500 W, BSI55WCNX)" data-precio="1520000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh inverter frio calor 4700 frigorias 5500w bsi55wcnx living">
         <figure data-marca="Split inverter">
           <img src="img/prod-bgh-1006004974.jpg" alt="Split BGH Inverter 4700 fg frío/calor (5500 W, BSI55WCNX)" width="480" height="480" loading="lazy" decoding="async">
@@ -396,12 +422,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Split BGH Inverter 4700 fg frío/calor (5500 W, BSI55WCNX)</h3>
-          <p class="producto__precio">$1.505.785</p>
+          <p class="producto__precio">$1.520.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-bsi67wcnx" data-nombre="Split BGH Inverter 5762 fg frío/calor (6700 W, BSI67WCNX)" data-precio="1820660" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-bsi67wcnx" data-nombre="Split BGH Inverter 5762 fg frío/calor (6700 W, BSI67WCNX)" data-precio="1850000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh inverter frio calor 5762 frigorias 6000 6700w bsi67wcnx living">
         <figure data-marca="Split inverter">
           <img src="img/prod-bgh-bsi67wcnx.jpg" alt="Split BGH Inverter 5762 fg frío/calor (6700 W, BSI67WCNX)" width="480" height="480" loading="lazy" decoding="async">
@@ -409,12 +435,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Split BGH Inverter 5762 fg frío/calor (6700 W, BSI67WCNX)</h3>
-          <p class="producto__precio">$1.820.660</p>
+          <p class="producto__precio">$1.850.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1006005937" data-nombre="Split BGH Silent Air 5500 fg on-off (6500 W)" data-precio="1534000" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-1006005937" data-nombre="Split BGH Silent Air 5500 fg on-off (6500 W)" data-precio="1498000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh on off 5500 frigorias 6500w cew silent air living">
         <figure data-marca="Split on-off">
           <img src="img/prod-bgh-1006005937.jpg" alt="Split BGH Silent Air 5500 fg on-off (6500 W)" width="480" height="480" loading="lazy" decoding="async">
@@ -422,12 +448,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Split BGH Silent Air 5500 fg on-off (6500 W)</h3>
-          <p class="producto__precio">$1.534.000</p>
+          <p class="producto__precio">$1.498.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1006005934" data-nombre="Split BGH Inverter WiFi 9100 fg (10600 W, BSI106WCAW)" data-precio="2652361" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-1006005934" data-nombre="Split BGH Inverter WiFi 9100 fg (10600 W, BSI106WCAW)" data-precio="" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh inverter wifi 9100 frigorias 10600w bsi106wcaw salon local">
         <figure data-marca="Split inverter">
           <img src="img/prod-bgh-1006005934.jpg" alt="Split BGH Inverter WiFi 9100 fg (10600 W, BSI106WCAW)" width="480" height="480" loading="lazy" decoding="async">
@@ -435,12 +461,26 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Split BGH Inverter WiFi 9100 fg (10600 W, BSI106WCAW)</h3>
-          <p class="producto__precio">$2.652.361</p>.652.361</p>
+          <p class="producto__precio">Consultar precio</p>.652.361</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1009000010" data-nombre="Piso techo BGH Inverter 5 TR frío/calor (BSPTHI60CPT)" data-precio="4115947" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-cooltime-8000" data-nombre="Split BGH Cool Time 8000 fg (on-off o inverter)" data-precio="" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh cool time 8000 frigorias on off inverter grande local">
+        <figure data-marca="Split">
+          <img src="img/prod-bgh-1006005934.jpg" alt="Split BGH Cool Time 8000 fg (on-off o inverter)" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Split BGH Cool Time 8000 fg (on-off o inverter)</h3>
+          <span class="producto__ilustrativa">Foto ilustrativa</span>
+          <p class="producto__precio">Consultar precio</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1009000010" data-nombre="Piso techo BGH Inverter 5 TR frío/calor (BSPTHI60CPT)" data-precio="3843000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh piso techo inverter frio calor 5 tr 15000 frigorias bspthi60cpt comercial local">
         <figure data-marca="Piso techo">
           <img src="img/prod-bgh-1009000010.jpg" alt="Piso techo BGH Inverter 5 TR frío/calor (BSPTHI60CPT)" width="480" height="480" loading="lazy" decoding="async">
@@ -448,12 +488,25 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Piso techo BGH Inverter 5 TR frío/calor (BSPTHI60CPT)</h3>
-          <p class="producto__precio">$4.115.947</p>
+          <p class="producto__precio">$3.843.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1009000005" data-nombre="Piso techo BGH 6 TR on-off (BSPTH72CTP)" data-precio="3675920" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-pt-3tr-trif" data-nombre="Piso techo BGH 3 TR on-off frío/calor trifásico" data-precio="3024000" data-estado="nuevo" data-categoria="aire"
+          data-palabras="aire acondicionado split bgh piso techo on off 3 tr 9000 frigorias trifasico frio calor comercial local">
+        <figure data-marca="Piso techo">
+          <img src="img/prod-bgh-1009000005.jpg" alt="Piso techo BGH 3 TR on-off frío/calor trifásico" width="480" height="480" loading="lazy" decoding="async">
+        </figure>
+        <div class="producto__info">
+          <span class="chapa">BGH</span>
+          <h3>Piso techo BGH 3 TR on-off frío/calor trifásico</h3>
+          <p class="producto__precio">$3.024.000</p>
+          <button type="button" class="btn producto__agregar">Agregar</button>
+        </div>
+      </li>
+
+      <li class="producto" data-id="bgh-1009000005" data-nombre="Piso techo BGH 6 TR on-off (BSPTH72CTP)" data-precio="3600000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh piso techo on off 6 tr 18000 frigorias bspth72ctp comercial local">
         <figure data-marca="Piso techo">
           <img src="img/prod-bgh-1009000005.jpg" alt="Piso techo BGH 6 TR on-off (BSPTH72CTP)" width="480" height="480" loading="lazy" decoding="async">
@@ -461,12 +514,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Piso techo BGH 6 TR on-off (BSPTH72CTP)</h3>
-          <p class="producto__precio">$3.675.920</p>
+          <p class="producto__precio">$3.600.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-1009000008" data-nombre="Piso techo BGH Inverter 6 TR frío/calor R32 (BSPTHI72CTQ)" data-precio="4342714" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-1009000008" data-nombre="Piso techo BGH Inverter 6 TR frío/calor R32 (BSPTHI72CTQ)" data-precio="4104000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh piso techo inverter frio calor r32 6 tr 18000 frigorias bspthi72ctq comercial local">
         <figure data-marca="Piso techo">
           <img src="img/prod-bgh-1009000008.jpg" alt="Piso techo BGH Inverter 6 TR frío/calor R32 (BSPTHI72CTQ)" width="480" height="480" loading="lazy" decoding="async">
@@ -474,12 +527,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Piso techo BGH Inverter 6 TR frío/calor R32 (BSPTHI72CTQ)</h3>
-          <p class="producto__precio">$4.342.714</p>
+          <p class="producto__precio">$4.104.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-220030100019" data-nombre="Cassette BGH 6 TR on-off (18000 fg)" data-precio="3789902" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-220030100019" data-nombre="Cassette BGH 6 TR on-off (18000 fg)" data-precio="" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh cassette casette techo on off 6 tr 18000 frigorias comercial local oficina">
         <figure data-marca="Cassette">
           <img src="img/prod-bgh-220030100019.jpg" alt="Cassette BGH 6 TR on-off (18000 fg)" width="480" height="480" loading="lazy" decoding="async">
@@ -487,12 +540,12 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Cassette BGH 6 TR on-off (18000 fg)</h3>
-          <p class="producto__precio">$3.789.902</p>
+          <p class="producto__precio">Consultar precio</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="bgh-220030100025" data-nombre="Baja silueta / ducto BGH 6 TR on-off" data-precio="3789902" data-estado="nuevo" data-categoria="aire"
+      <li class="producto" data-id="bgh-220030100025" data-nombre="Baja silueta / ducto BGH 6 TR on-off" data-precio="4176000" data-estado="nuevo" data-categoria="aire"
           data-palabras="aire acondicionado split bgh ducto baja silueta conductos on off 6 tr 18000 frigorias comercial">
         <figure data-marca="Baja silueta">
           <img src="img/prod-bgh-220030100025.jpg" alt="Baja silueta / ducto BGH 6 TR on-off" width="480" height="480" loading="lazy" decoding="async">
@@ -500,14 +553,14 @@
         <div class="producto__info">
           <span class="chapa">BGH</span>
           <h3>Baja silueta / ducto BGH 6 TR on-off</h3>
-          <p class="producto__precio">$3.789.902</p>
+          <p class="producto__precio">$4.176.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <!-- ---- Gases refrigerantes (lista FrioRep 07/10/2026) ---- -->
+      <!-- ---- Gases refrigerantes (lista FrioRep 07/10/2026 + 30 %) ---- -->
 
-      <li class="producto" data-id="gas-128001000001" data-nombre="Gas Lata R32 x 650 g Anton" data-precio="24506" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-128001000001" data-nombre="Gas Lata R32 x 650 g Anton" data-precio="31858" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r32 lata r32 x 650 g anton carga">
         <figure data-marca="Lata R32">
           <img src="img/prod-gas-128001000001.jpg" alt="Gas Lata R32 x 650 g Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -515,12 +568,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Lata R32 x 650 g Anton</h3>
-          <p class="producto__precio">$24.506</p>
+          <p class="producto__precio">$31.858</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-686114000541" data-nombre="Gas Garrafa R32 x 3 kg Anton" data-precio="89856" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-686114000541" data-nombre="Gas Garrafa R32 x 3 kg Anton" data-precio="116813" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r32 garrafa r32 x 3 kg anton carga">
         <figure data-marca="Garrafa R32">
           <img src="img/prod-gas-686114000541.jpg" alt="Gas Garrafa R32 x 3 kg Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -528,12 +581,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Garrafa R32 x 3 kg Anton</h3>
-          <p class="producto__precio">$89.856</p>
+          <p class="producto__precio">$116.813</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430030200006" data-nombre="Gas Lata R290 x 400 g Anton" data-precio="11611" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430030200006" data-nombre="Gas Lata R290 x 400 g Anton" data-precio="15095" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r290 propano lata r290 x 400 g anton carga">
         <figure data-marca="Lata R290">
           <img src="img/prod-gas-430030200006.jpg" alt="Gas Lata R290 x 400 g Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -541,12 +594,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Lata R290 x 400 g Anton</h3>
-          <p class="producto__precio">$11.611</p>
+          <p class="producto__precio">$15.095</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430030200007" data-nombre="Gas Lata R134a x 900 g Anton" data-precio="26857" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430030200007" data-nombre="Gas Lata R134a x 900 g Anton" data-precio="34914" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r134 r134a heladera lata r134a x 900 g anton carga">
         <figure data-marca="Lata R134a">
           <img src="img/prod-gas-430030200007.jpg" alt="Gas Lata R134a x 900 g Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -554,12 +607,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Lata R134a x 900 g Anton</h3>
-          <p class="producto__precio">$26.857</p>
+          <p class="producto__precio">$34.914</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430030200010" data-nombre="Gas Lata R290 x 225 g Anton" data-precio="10163" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430030200010" data-nombre="Gas Lata R290 x 225 g Anton" data-precio="13212" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r290 propano lata r290 x 225 g anton carga">
         <figure data-marca="Lata R290">
           <img src="img/prod-gas-430030200010.jpg" alt="Gas Lata R290 x 225 g Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -567,12 +620,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Lata R290 x 225 g Anton</h3>
-          <p class="producto__precio">$10.163</p>
+          <p class="producto__precio">$13.212</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-7791073877141" data-nombre="Gas Lata R600a x 420 g Necton" data-precio="7338" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-7791073877141" data-nombre="Gas Lata R600a x 420 g Necton" data-precio="9539" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r600 r600a isobutano heladera lata r600a x 420 g necton carga">
         <figure data-marca="Lata R600a">
           <img src="img/prod-gas-7791073877141.jpg" alt="Gas Lata R600a x 420 g Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -580,12 +633,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Lata R600a x 420 g Necton</h3>
-          <p class="producto__precio">$7.338</p>
+          <p class="producto__precio">$9.539</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430040001112" data-nombre="Gas Lata R290 x 400 g Necton" data-precio="8495" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430040001112" data-nombre="Gas Lata R290 x 400 g Necton" data-precio="11044" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r290 propano lata r290 x 400 g necton carga">
         <figure data-marca="Lata R290">
           <img src="img/prod-gas-430040001112.jpg" alt="Gas Lata R290 x 400 g Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -593,12 +646,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Lata R290 x 400 g Necton</h3>
-          <p class="producto__precio">$8.495</p>
+          <p class="producto__precio">$11.044</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430040001113" data-nombre="Gas Lata R600a x 225 g Anton" data-precio="9090" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430040001113" data-nombre="Gas Lata R600a x 225 g Anton" data-precio="11817" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r600 r600a isobutano heladera lata r600a x 225 g anton carga">
         <figure data-marca="Lata R600a">
           <img src="img/prod-gas-430040001113.jpg" alt="Gas Lata R600a x 225 g Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -606,12 +659,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Lata R600a x 225 g Anton</h3>
-          <p class="producto__precio">$9.090</p>
+          <p class="producto__precio">$11.817</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50008002553" data-nombre="Gas Garrafa R134a x 13,6 kg Necton" data-precio="372745" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50008002553" data-nombre="Gas Garrafa R134a x 13,6 kg Necton" data-precio="484568" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r134 r134a garrafa r134a x 13,6 kg necton carga">
         <figure data-marca="Garrafa R134a">
           <img src="img/prod-gas-50008002553.jpg" alt="Gas Garrafa R134a x 13,6 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -619,12 +672,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R134a x 13,6 kg Necton</h3>
-          <p class="producto__precio">$372.745</p>
+          <p class="producto__precio">$484.568</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50008003881" data-nombre="Gas Garrafa R134a x 6,8 kg Necton" data-precio="196666" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50008003881" data-nombre="Gas Garrafa R134a x 6,8 kg Necton" data-precio="255666" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r134 r134a garrafa r134a x 6,8 kg necton carga">
         <figure data-marca="Garrafa R134a">
           <img src="img/prod-gas-50008003881.jpg" alt="Gas Garrafa R134a x 6,8 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -632,12 +685,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R134a x 6,8 kg Necton</h3>
-          <p class="producto__precio">$196.666</p>
+          <p class="producto__precio">$255.666</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50008005070" data-nombre="Gas Lata R134a x 900 g Necton" data-precio="24957" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50008005070" data-nombre="Gas Lata R134a x 900 g Necton" data-precio="32445" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r134 r134a heladera lata r134a x 900 g necton carga">
         <figure data-marca="Lata R134a">
           <img src="img/prod-gas-50008005070.jpg" alt="Gas Lata R134a x 900 g Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -645,12 +698,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Lata R134a x 900 g Necton</h3>
-          <p class="producto__precio">$24.957</p>
+          <p class="producto__precio">$32.445</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-686114000251" data-nombre="Gas Garrafa R134a x 3,4 kg Necton" data-precio="105505" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-686114000251" data-nombre="Gas Garrafa R134a x 3,4 kg Necton" data-precio="137156" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r134 r134a garrafa r134a x 3,4 kg necton carga">
         <figure data-marca="Garrafa R134a">
           <img src="img/prod-gas-686114000251.jpg" alt="Gas Garrafa R134a x 3,4 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -658,12 +711,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R134a x 3,4 kg Necton</h3>
-          <p class="producto__precio">$105.505</p>
+          <p class="producto__precio">$137.156</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50002000554" data-nombre="Gas Garrafa R22 x 13,6 kg Necton" data-precio="387539" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50002000554" data-nombre="Gas Garrafa R22 x 13,6 kg Necton" data-precio="503800" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r22 aire acondicionado garrafa r22 x 13,6 kg necton carga">
         <figure data-marca="Garrafa R22">
           <img src="img/prod-gas-50002000554.jpg" alt="Gas Garrafa R22 x 13,6 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -671,12 +724,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R22 x 13,6 kg Necton</h3>
-          <p class="producto__precio">$387.539</p>
+          <p class="producto__precio">$503.800</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50002001920" data-nombre="Gas Garrafa R22 x 6,8 kg Necton" data-precio="222027" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50002001920" data-nombre="Gas Garrafa R22 x 6,8 kg Necton" data-precio="288636" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r22 aire acondicionado garrafa r22 x 6,8 kg necton carga">
         <figure data-marca="Garrafa R22">
           <img src="img/prod-gas-50002001920.jpg" alt="Gas Garrafa R22 x 6,8 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -684,12 +737,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R22 x 6,8 kg Necton</h3>
-          <p class="producto__precio">$222.027</p>
+          <p class="producto__precio">$288.636</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50002002325" data-nombre="Gas Lata R22 x 1 kg Necton" data-precio="33458" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50002002325" data-nombre="Gas Lata R22 x 1 kg Necton" data-precio="43496" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r22 aire acondicionado lata r22 x 1 kg necton carga">
         <figure data-marca="Lata R22">
           <img src="img/prod-gas-50002002325.jpg" alt="Gas Lata R22 x 1 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -697,12 +750,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Lata R22 x 1 kg Necton</h3>
-          <p class="producto__precio">$33.458</p>
+          <p class="producto__precio">$43.496</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-686114000701" data-nombre="Gas Garrafa R22 x 3,4 kg Necton" data-precio="111014" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-686114000701" data-nombre="Gas Garrafa R22 x 3,4 kg Necton" data-precio="144318" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r22 aire acondicionado garrafa r22 x 3,4 kg necton carga">
         <figure data-marca="Garrafa R22">
           <img src="img/prod-gas-686114000701.jpg" alt="Gas Garrafa R22 x 3,4 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -710,12 +763,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R22 x 3,4 kg Necton</h3>
-          <p class="producto__precio">$111.014</p>
+          <p class="producto__precio">$144.318</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430060104755" data-nombre="Gas Garrafa AN22 Plus x 11,3 kg Anton" data-precio="282105" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430060104755" data-nombre="Gas Garrafa AN22 Plus x 11,3 kg Anton" data-precio="366737" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante an22 r22 reemplazo garrafa an22 plus x 11,3 kg anton carga">
         <figure data-marca="Garrafa AN22 Plus">
           <img src="img/prod-gas-430060104755.jpg" alt="Gas Garrafa AN22 Plus x 11,3 kg Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -723,12 +776,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Garrafa AN22 Plus x 11,3 kg Anton</h3>
-          <p class="producto__precio">$282.105</p>
+          <p class="producto__precio">$366.737</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430060104757" data-nombre="Gas Garrafa AN22 x 2,7 kg Anton" data-precio="91494" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430060104757" data-nombre="Gas Garrafa AN22 x 2,7 kg Anton" data-precio="118943" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante an22 r22 reemplazo garrafa an22 x 2,7 kg anton carga">
         <figure data-marca="Garrafa AN22">
           <img src="img/prod-gas-430060104757.jpg" alt="Gas Garrafa AN22 x 2,7 kg Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -736,12 +789,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Garrafa AN22 x 2,7 kg Anton</h3>
-          <p class="producto__precio">$91.494</p>
+          <p class="producto__precio">$118.943</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-115001000002" data-nombre="Gas Lata R404A x 650 g Anton" data-precio="20476" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-115001000002" data-nombre="Gas Lata R404A x 650 g Anton" data-precio="26619" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r404 r404a freezer camara lata r404a x 650 g anton carga">
         <figure data-marca="Lata R404A">
           <img src="img/prod-gas-115001000002.jpg" alt="Gas Lata R404A x 650 g Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -749,12 +802,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Lata R404A x 650 g Anton</h3>
-          <p class="producto__precio">$20.476</p>
+          <p class="producto__precio">$26.619</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430080103236" data-nombre="Gas Lata AN22 Plus x 780 g Anton" data-precio="24136" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430080103236" data-nombre="Gas Lata AN22 Plus x 780 g Anton" data-precio="31376" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante an22 r22 reemplazo lata an22 plus x 780 g anton carga">
         <figure data-marca="Lata AN22 Plus">
           <img src="img/prod-gas-430080103236.jpg" alt="Gas Lata AN22 Plus x 780 g Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -762,12 +815,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Lata AN22 Plus x 780 g Anton</h3>
-          <p class="producto__precio">$24.136</p>
+          <p class="producto__precio">$31.376</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50005000559" data-nombre="Gas Garrafa R404A x 5,4 kg Necton" data-precio="107855" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50005000559" data-nombre="Gas Garrafa R404A x 5,4 kg Necton" data-precio="140212" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r404 r404a freezer camara garrafa r404a x 5,4 kg necton carga">
         <figure data-marca="Garrafa R404A">
           <img src="img/prod-gas-50005000559.jpg" alt="Gas Garrafa R404A x 5,4 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -775,12 +828,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R404A x 5,4 kg Necton</h3>
-          <p class="producto__precio">$107.855</p>
+          <p class="producto__precio">$140.212</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50005001978" data-nombre="Gas Garrafa R404A x 2,7 kg Necton" data-precio="60482" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50005001978" data-nombre="Gas Garrafa R404A x 2,7 kg Necton" data-precio="78626" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r404 r404a freezer camara garrafa r404a x 2,7 kg necton carga">
         <figure data-marca="Garrafa R404A">
           <img src="img/prod-gas-50005001978.jpg" alt="Gas Garrafa R404A x 2,7 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -788,12 +841,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R404A x 2,7 kg Necton</h3>
-          <p class="producto__precio">$60.482</p>
+          <p class="producto__precio">$78.626</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-50006002457" data-nombre="Gas Garrafa R404A x 10,9 kg Necton" data-precio="218869" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-50006002457" data-nombre="Gas Garrafa R404A x 10,9 kg Necton" data-precio="284530" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r404 r404a freezer camara garrafa r404a x 10,9 kg necton carga">
         <figure data-marca="Garrafa R404A">
           <img src="img/prod-gas-50006002457.jpg" alt="Gas Garrafa R404A x 10,9 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -801,12 +854,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R404A x 10,9 kg Necton</h3>
-          <p class="producto__precio">$218.869</p>
+          <p class="producto__precio">$284.530</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430090103288" data-nombre="Gas Lata R404A x 650 g Necton" data-precio="20469" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430090103288" data-nombre="Gas Lata R404A x 650 g Necton" data-precio="26610" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r404 r404a freezer camara lata r404a x 650 g necton carga">
         <figure data-marca="Lata R404A">
           <img src="img/prod-gas-430090103288.jpg" alt="Gas Lata R404A x 650 g Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -814,12 +867,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Lata R404A x 650 g Necton</h3>
-          <p class="producto__precio">$20.469</p>
+          <p class="producto__precio">$26.610</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-108001000001" data-nombre="Gas Garrafa R410A x 11,3 kg Necton" data-precio="349474" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-108001000001" data-nombre="Gas Garrafa R410A x 11,3 kg Necton" data-precio="454316" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 11,3 kg necton carga">
         <figure data-marca="Garrafa R410A">
           <img src="img/prod-gas-108001000001.jpg" alt="Gas Garrafa R410A x 11,3 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -827,12 +880,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R410A x 11,3 kg Necton</h3>
-          <p class="producto__precio">$349.474</p>
+          <p class="producto__precio">$454.316</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430110100003" data-nombre="Gas Lata R410A x 650 g Necton" data-precio="26539" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430110100003" data-nombre="Gas Lata R410A x 650 g Necton" data-precio="34500" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r410 r410a aire acondicionado split lata r410a x 650 g necton carga">
         <figure data-marca="Lata R410A">
           <img src="img/prod-gas-430110100003.jpg" alt="Gas Lata R410A x 650 g Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -840,12 +893,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Lata R410A x 650 g Necton</h3>
-          <p class="producto__precio">$26.539</p>
+          <p class="producto__precio">$34.500</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430110100004" data-nombre="Gas Garrafa R410A x 5,6 kg Necton" data-precio="218086" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430110100004" data-nombre="Gas Garrafa R410A x 5,6 kg Necton" data-precio="283511" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 5,6 kg necton carga">
         <figure data-marca="Garrafa R410A">
           <img src="img/prod-gas-430110100004.jpg" alt="Gas Garrafa R410A x 5,6 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -853,12 +906,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R410A x 5,6 kg Necton</h3>
-          <p class="producto__precio">$218.086</p>
+          <p class="producto__precio">$283.511</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430110100006" data-nombre="Gas Garrafa R410A x 2,8 kg Necton" data-precio="96362" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430110100006" data-nombre="Gas Garrafa R410A x 2,8 kg Necton" data-precio="125271" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 2,8 kg necton carga">
         <figure data-marca="Garrafa R410A">
           <img src="img/prod-gas-430110100006.jpg" alt="Gas Garrafa R410A x 2,8 kg Necton" width="480" height="480" loading="lazy" decoding="async">
@@ -866,12 +919,12 @@
         <div class="producto__info">
           <span class="chapa">Necton</span>
           <h3>Gas Garrafa R410A x 2,8 kg Necton</h3>
-          <p class="producto__precio">$96.362</p>
+          <p class="producto__precio">$125.271</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430110100007" data-nombre="Gas Garrafa R410A x 2,8 kg Anton" data-precio="89474" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430110100007" data-nombre="Gas Garrafa R410A x 2,8 kg Anton" data-precio="116316" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 2,8 kg anton carga">
         <figure data-marca="Garrafa R410A">
           <img src="img/prod-gas-430110100007.jpg" alt="Gas Garrafa R410A x 2,8 kg Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -879,12 +932,12 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Garrafa R410A x 2,8 kg Anton</h3>
-          <p class="producto__precio">$89.474</p>
+          <p class="producto__precio">$116.316</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="gas-430110100009" data-nombre="Gas Garrafa R410A x 11,3 kg Anton" data-precio="291319" data-estado="nuevo" data-categoria="gas"
+      <li class="producto" data-id="gas-430110100009" data-nombre="Gas Garrafa R410A x 11,3 kg Anton" data-precio="378715" data-estado="nuevo" data-categoria="gas"
           data-palabras="gas refrigerante r410 r410a aire acondicionado split garrafa r410a x 11,3 kg anton carga">
         <figure data-marca="Garrafa R410A">
           <img src="img/prod-gas-430110100009.jpg" alt="Gas Garrafa R410A x 11,3 kg Anton" width="480" height="480" loading="lazy" decoding="async">
@@ -892,14 +945,14 @@
         <div class="producto__info">
           <span class="chapa">Anton</span>
           <h3>Gas Garrafa R410A x 11,3 kg Anton</h3>
-          <p class="producto__precio">$291.319</p>
+          <p class="producto__precio">$378.715</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <!-- ---- Selladores y químicos Albans (lista FrioRep 07/10/2026) ---- -->
+      <!-- ---- Selladores y químicos Albans (lista FrioRep 07/10/2026 + 30 %) ---- -->
 
-      <li class="producto" data-id="albans-74001005865" data-nombre="Sella rosca rojo para refrigeración 50 ml (SK-005 St-Lock Red) Albans" data-precio="12048" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005865" data-nombre="Sella rosca rojo para refrigeración 50 ml (SK-005 St-Lock Red) Albans" data-precio="15662" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador traba roscas sella rosca rojo para refrigeración 50 ml (sk-005 st-lock red) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005865.jpg" alt="Sella rosca rojo para refrigeración 50 ml (SK-005 St-Lock Red) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -907,12 +960,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Sella rosca rojo para refrigeración 50 ml (SK-005 St-Lock Red) Albans</h3>
-          <p class="producto__precio">$12.048</p>
+          <p class="producto__precio">$15.662</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005866" data-nombre="Masilla reparadora para fisuras 20 g (SK010 Copper Repair) Albans" data-precio="18491" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005866" data-nombre="Masilla reparadora para fisuras 20 g (SK010 Copper Repair) Albans" data-precio="24038" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador cobre reparacion masilla reparadora para fisuras 20 g (sk010 copper repair) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005866.jpg" alt="Masilla reparadora para fisuras 20 g (SK010 Copper Repair) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -920,12 +973,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Masilla reparadora para fisuras 20 g (SK010 Copper Repair) Albans</h3>
-          <p class="producto__precio">$18.491</p>
+          <p class="producto__precio">$24.038</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005867" data-nombre="Sella rosca azul uso general 50 ml (SK-004 St-Lock Blue) Albans" data-precio="12048" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005867" data-nombre="Sella rosca azul uso general 50 ml (SK-004 St-Lock Blue) Albans" data-precio="15662" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador traba roscas sella rosca azul uso general 50 ml (sk-004 st-lock blue) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005867.jpg" alt="Sella rosca azul uso general 50 ml (SK-004 St-Lock Blue) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -933,12 +986,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Sella rosca azul uso general 50 ml (SK-004 St-Lock Blue) Albans</h3>
-          <p class="producto__precio">$12.048</p>
+          <p class="producto__precio">$15.662</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005868" data-nombre="Sellador en frío para todos los metales FixQuick (ST-SK009) Albans" data-precio="11968" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005868" data-nombre="Sellador en frío para todos los metales FixQuick (ST-SK009) Albans" data-precio="15559" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador soldadura en frio sellador en frío para todos los metales fixquick (st-sk009) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005868.jpg" alt="Sellador en frío para todos los metales FixQuick (ST-SK009) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -946,12 +999,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Sellador en frío para todos los metales FixQuick (ST-SK009) Albans</h3>
-          <p class="producto__precio">$11.968</p>
+          <p class="producto__precio">$15.559</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005869" data-nombre="Masilla reutilizable disipadora de calor Stop Heat (ST-SK006) Albans" data-precio="43138" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005869" data-nombre="Masilla reutilizable disipadora de calor Stop Heat (ST-SK006) Albans" data-precio="56080" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador soldadura proteccion calor masilla reutilizable disipadora de calor stop heat (st-sk006) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005869.jpg" alt="Masilla reutilizable disipadora de calor Stop Heat (ST-SK006) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -959,12 +1012,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Masilla reutilizable disipadora de calor Stop Heat (ST-SK006) Albans</h3>
-          <p class="producto__precio">$43.138</p>
+          <p class="producto__precio">$56.080</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005879" data-nombre="Pasta sella rajaduras caño de cobre 10 g (SK011) Albans" data-precio="20545" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005879" data-nombre="Pasta sella rajaduras caño de cobre 10 g (SK011) Albans" data-precio="26709" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador cobre fisura pasta sella rajaduras caño de cobre 10 g (sk011) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005879.jpg" alt="Pasta sella rajaduras caño de cobre 10 g (SK011) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -972,12 +1025,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Pasta sella rajaduras caño de cobre 10 g (SK011) Albans</h3>
-          <p class="producto__precio">$20.545</p>
+          <p class="producto__precio">$26.709</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005880" data-nombre="Tapa fuga sellador jeringa 10 ml (ST-524) Albans" data-precio="13849" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005880" data-nombre="Tapa fuga sellador jeringa 10 ml (ST-524) Albans" data-precio="18003" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador fugas tapa fuga sellador jeringa 10 ml (st-524) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005880.jpg" alt="Tapa fuga sellador jeringa 10 ml (ST-524) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -985,12 +1038,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Tapa fuga sellador jeringa 10 ml (ST-524) Albans</h3>
-          <p class="producto__precio">$13.849</p>
+          <p class="producto__precio">$18.003</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005881" data-nombre="Sella fuga rosa jeringa 15 ml (S508-04) Albans" data-precio="13849" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005881" data-nombre="Sella fuga rosa jeringa 15 ml (S508-04) Albans" data-precio="18003" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador fugas sella fuga rosa jeringa 15 ml (s508-04) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005881.jpg" alt="Sella fuga rosa jeringa 15 ml (S508-04) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -998,12 +1051,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Sella fuga rosa jeringa 15 ml (S508-04) Albans</h3>
-          <p class="producto__precio">$13.849</p>
+          <p class="producto__precio">$18.003</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005882" data-nombre="Detector UV y sella fuga jeringa azul 15 ml (S508UV-04) Albans" data-precio="18494" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005882" data-nombre="Detector UV y sella fuga jeringa azul 15 ml (S508UV-04) Albans" data-precio="24042" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador fugas ultravioleta detector uv y sella fuga jeringa azul 15 ml (s508uv-04) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005882.jpg" alt="Detector UV y sella fuga jeringa azul 15 ml (S508UV-04) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -1011,12 +1064,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Detector UV y sella fuga jeringa azul 15 ml (S508UV-04) Albans</h3>
-          <p class="producto__precio">$18.494</p>
+          <p class="producto__precio">$24.042</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005883" data-nombre="Repuesto sella fuga rosa 15 ml (S508-2) Albans" data-precio="12823" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005883" data-nombre="Repuesto sella fuga rosa 15 ml (S508-2) Albans" data-precio="16670" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador fugas repuesto sella fuga rosa 15 ml (s508-2) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005883.jpg" alt="Repuesto sella fuga rosa 15 ml (S508-2) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -1024,12 +1077,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Repuesto sella fuga rosa 15 ml (S508-2) Albans</h3>
-          <p class="producto__precio">$12.823</p>
+          <p class="producto__precio">$16.670</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005884" data-nombre="Sella fuga rosa 30 ml (ST-508) Albans" data-precio="24649" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005884" data-nombre="Sella fuga rosa 30 ml (ST-508) Albans" data-precio="32043" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador fugas sella fuga rosa 30 ml (st-508) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005884.jpg" alt="Sella fuga rosa 30 ml (ST-508) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -1037,12 +1090,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Sella fuga rosa 30 ml (ST-508) Albans</h3>
-          <p class="producto__precio">$24.649</p>
+          <p class="producto__precio">$32.043</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005885" data-nombre="Sella fuga Easy Fast inyección directa 6 ml (ST-201) Albans" data-precio="26489" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005885" data-nombre="Sella fuga Easy Fast inyección directa 6 ml (ST-201) Albans" data-precio="34436" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador fugas sella fuga easy fast inyección directa 6 ml (st-201) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005885.jpg" alt="Sella fuga Easy Fast inyección directa 6 ml (ST-201) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -1050,12 +1103,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Sella fuga Easy Fast inyección directa 6 ml (ST-201) Albans</h3>
-          <p class="producto__precio">$26.489</p>
+          <p class="producto__precio">$34.436</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005886" data-nombre="Kit sellador y detector de fugas con linterna y aplicador 30 ml (K508UV-04) Albans" data-precio="75718" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005886" data-nombre="Kit sellador y detector de fugas con linterna y aplicador 30 ml (K508UV-04) Albans" data-precio="98434" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador fugas ultravioleta uv kit sellador y detector de fugas con linterna y aplicador 30 ml (k508uv-04) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005886.jpg" alt="Kit sellador y detector de fugas con linterna y aplicador 30 ml (K508UV-04) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -1063,12 +1116,12 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Kit sellador y detector de fugas con linterna y aplicador 30 ml (K508UV-04) Albans</h3>
-          <p class="producto__precio">$75.718</p>
+          <p class="producto__precio">$98.434</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="albans-74001005887" data-nombre="Pistola aplicadora (P001) Albans" data-precio="7979" data-estado="nuevo" data-categoria="quimicos"
+      <li class="producto" data-id="albans-74001005887" data-nombre="Pistola aplicadora (P001) Albans" data-precio="10372" data-estado="nuevo" data-categoria="quimicos"
           data-palabras="albans quimico sellador aplicador jeringa pistola aplicadora (p001) refrigeracion">
         <figure data-marca="Albans">
           <img src="img/prod-albans-74001005887.jpg" alt="Pistola aplicadora (P001) Albans" width="480" height="480" loading="lazy" decoding="async">
@@ -1076,14 +1129,14 @@
         <div class="producto__info">
           <span class="chapa">Albans</span>
           <h3>Pistola aplicadora (P001) Albans</h3>
-          <p class="producto__precio">$7.979</p>
+          <p class="producto__precio">$10.372</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <!-- ---- Kits de instalación de aire (lista de Mateo 02/11/2026) ---- -->
+      <!-- ---- Kits de instalación de aire (catálogo de Mateo 11/11/2026) ---- -->
 
-      <li class="producto" data-id="kit-instalacion-1-4-3-8" data-nombre="Kit de instalación de aire 3 m 1/4&quot; + 3/8&quot; con ménsulas" data-precio="88500" data-estado="nuevo" data-categoria="kit"
+      <li class="producto" data-id="kit-instalacion-1-4-3-8" data-nombre="Kit de instalación de aire 3 m 1/4&quot; + 3/8&quot; con ménsulas" data-precio="82000" data-estado="nuevo" data-categoria="kit"
           data-palabras="kit instalacion aire acondicionado split caño cano cobre 1/4 3/8 3 metros aislante cinta mensulas soporte tornillos desague combo">
         <figure data-marca="Kit de instalación">
           <img src="img/prod-kit-instalacion.jpg" alt="Kit de instalación de split: caños de cobre con aislante, cinta, desagüe, cable, ménsulas, tacos y gomas antivibración" width="480" height="480" loading="lazy" decoding="async">
@@ -1092,12 +1145,12 @@
           <span class="chapa">Kit de instalación</span>
           <h3>Kit de instalación 3 m · 1/4&quot; + 3/8&quot; con ménsulas</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">$88.500</p>
+          <p class="producto__precio">$82.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="kit-instalacion-1-4-1-2" data-nombre="Kit de instalación de aire 3 m 1/4&quot; + 1/2&quot; con ménsulas" data-precio="107000" data-estado="nuevo" data-categoria="kit"
+      <li class="producto" data-id="kit-instalacion-1-4-1-2" data-nombre="Kit de instalación de aire 3 m 1/4&quot; + 1/2&quot; con ménsulas" data-precio="96000" data-estado="nuevo" data-categoria="kit"
           data-palabras="kit instalacion aire acondicionado split caño cano cobre 1/4 1/2 3 metros aislante cinta mensulas soporte tornillos desague combo">
         <figure data-marca="Kit de instalación">
           <img src="img/prod-kit-instalacion.jpg" alt="Kit de instalación de split: caños de cobre con aislante, cinta, desagüe, cable, ménsulas, tacos y gomas antivibración" width="480" height="480" loading="lazy" decoding="async">
@@ -1106,7 +1159,7 @@
           <span class="chapa">Kit de instalación</span>
           <h3>Kit de instalación 3 m · 1/4&quot; + 1/2&quot; con ménsulas</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">$107.000</p>
+          <p class="producto__precio">$96.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
@@ -1125,7 +1178,7 @@
         </div>
       </li>
 
-      <li class="producto" data-id="kit-rollo-1-2-1-4" data-nombre="Kit de rollo de caño 1/2&quot; + 1/4&quot; con aislación y accesorios (rinde para 5 equipos)" data-precio="360000" data-estado="nuevo" data-categoria="kit"
+      <li class="producto" data-id="kit-rollo-1-2-1-4" data-nombre="Kit de rollo de caño 1/2&quot; + 1/4&quot; con aislación y accesorios (rinde para 5 equipos)" data-precio="" data-estado="nuevo" data-categoria="kit"
           data-palabras="kit rollo caño cano cobre 1/2 1/4 aislacion aislante accesorios instalacion cable tpr 5x1,5 20 metros 5 equipos instalador">
         <figure data-marca="Kit de rollo">
           <img src="img/prod-kit-rollo-1-2-1-4.jpg" alt="Kit de rollo: rollos de caño de cobre, aislantes, cinta, desagüe, cable TPR, kit de tornillos y gomas antivibración" width="480" height="480" loading="lazy" decoding="async">
@@ -1134,14 +1187,14 @@
           <span class="chapa">Kit de rollo</span>
           <h3>Kit de rollo 1/2&quot; + 1/4&quot; con aislación, accesorios y 20 m de cable TPR 5x1,5 · rinde para 5 equipos</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">$360.000</p>
+          <p class="producto__precio">Consultar precio</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <!-- ---- Caño de cobre en rollos de 15 m (precio por rollo: lo pasa Mateo) ---- -->
+      <!-- ---- Caño de cobre en rollos de 15 m, cables y aislantes (catálogo de Mateo 11/11/2026) ---- -->
 
-      <li class="producto" data-id="cobre-rollo-1-4" data-nombre="Rollo de caño de cobre 1/4&quot; x 15 m Termomecánica" data-precio="" data-estado="nuevo" data-categoria="cobre"
+      <li class="producto" data-id="cobre-rollo-1-4" data-nombre="Rollo de caño de cobre 1/4&quot; x 15 m Termomecánica" data-precio="90500" data-estado="nuevo" data-categoria="cobre"
           data-palabras="caño cano cobre rollo 15 metros tubo instalacion split 1/4 termomecánica">
         <figure data-marca="Caño de cobre">
           <img src="img/prod-cobre-24002002733.jpg" alt="Rollo de caño de cobre 1/4&quot;" width="480" height="480" loading="lazy" decoding="async">
@@ -1149,12 +1202,12 @@
         <div class="producto__info">
           <span class="chapa">Termomecánica</span>
           <h3>Rollo de caño de cobre 1/4&quot; · 15 m</h3>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$90.500</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="cobre-rollo-3-8" data-nombre="Rollo de caño de cobre 3/8&quot; x 15 m Termomecánica" data-precio="" data-estado="nuevo" data-categoria="cobre"
+      <li class="producto" data-id="cobre-rollo-3-8" data-nombre="Rollo de caño de cobre 3/8&quot; x 15 m Termomecánica" data-precio="140000" data-estado="nuevo" data-categoria="cobre"
           data-palabras="caño cano cobre rollo 15 metros tubo instalacion split 3/8 termomecánica">
         <figure data-marca="Caño de cobre">
           <img src="img/prod-cobre-24002002734.jpg" alt="Rollo de caño de cobre 3/8&quot;" width="480" height="480" loading="lazy" decoding="async">
@@ -1162,12 +1215,12 @@
         <div class="producto__info">
           <span class="chapa">Termomecánica</span>
           <h3>Rollo de caño de cobre 3/8&quot; · 15 m</h3>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$140.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="cobre-rollo-1-2" data-nombre="Rollo de caño de cobre 1/2&quot; x 15 m Termomecánica" data-precio="" data-estado="nuevo" data-categoria="cobre"
+      <li class="producto" data-id="cobre-rollo-1-2" data-nombre="Rollo de caño de cobre 1/2&quot; x 15 m Termomecánica" data-precio="191000" data-estado="nuevo" data-categoria="cobre"
           data-palabras="caño cano cobre rollo 15 metros tubo instalacion split 1/2 termomecánica">
         <figure data-marca="Caño de cobre">
           <img src="img/prod-cobre-24002002735.jpg" alt="Rollo de caño de cobre 1/2&quot;" width="480" height="480" loading="lazy" decoding="async">
@@ -1175,12 +1228,12 @@
         <div class="producto__info">
           <span class="chapa">Termomecánica</span>
           <h3>Rollo de caño de cobre 1/2&quot; · 15 m</h3>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$191.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="cobre-rollo-5-8" data-nombre="Rollo de caño de cobre 5/8&quot; x 15 m Paranapanema" data-precio="" data-estado="nuevo" data-categoria="cobre"
+      <li class="producto" data-id="cobre-rollo-5-8" data-nombre="Rollo de caño de cobre 5/8&quot; x 15 m Paranapanema" data-precio="247000" data-estado="nuevo" data-categoria="cobre"
           data-palabras="caño cano cobre rollo 15 metros tubo instalacion split 5/8 paranapanema">
         <figure data-marca="Caño de cobre">
           <img src="img/prod-cobre-24002000275.jpg" alt="Rollo de caño de cobre 5/8&quot;" width="480" height="480" loading="lazy" decoding="async">
@@ -1188,7 +1241,7 @@
         <div class="producto__info">
           <span class="chapa">Paranapanema</span>
           <h3>Rollo de caño de cobre 5/8&quot; · 15 m</h3>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$247.000</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
@@ -1415,7 +1468,7 @@
         </div>
       </li>
 
-      <li class="producto" data-id="cable-tpr-5x1-5" data-unidad="m" data-nombre="Cable TPR tipo taller 5x1,5 mm (por metro)" data-precio="" data-estado="nuevo" data-categoria="electrico"
+      <li class="producto" data-id="cable-tpr-5x1-5" data-unidad="m" data-nombre="Cable TPR tipo taller 5x1,5 mm (por metro)" data-precio="3300" data-estado="nuevo" data-categoria="electrico"
           data-palabras="cable tpr tipo taller 5x1,5 5x1.5 pentapolar flexible por metro motor trifasico">
         <figure data-marca="Cable TPR">
           <img src="img/prod-cable-tpr-5.jpg" alt="Cable tipo taller TPR de cinco conductores" width="480" height="480" loading="lazy" decoding="async">
@@ -1424,12 +1477,12 @@
           <span class="chapa">Tipo taller</span>
           <h3>Cable TPR 5x1,5 mm · por metro</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$3.300</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="cable-tpr-5x2-5" data-unidad="m" data-nombre="Cable TPR tipo taller 5x2,5 mm (por metro)" data-precio="" data-estado="nuevo" data-categoria="electrico"
+      <li class="producto" data-id="cable-tpr-5x2-5" data-unidad="m" data-nombre="Cable TPR tipo taller 5x2,5 mm (por metro)" data-precio="4800" data-estado="nuevo" data-categoria="electrico"
           data-palabras="cable tpr tipo taller 5x2,5 5x2.5 pentapolar flexible por metro motor trifasico">
         <figure data-marca="Cable TPR">
           <img src="img/prod-cable-tpr-5.jpg" alt="Cable tipo taller TPR de cinco conductores" width="480" height="480" loading="lazy" decoding="async">
@@ -1438,63 +1491,63 @@
           <span class="chapa">Tipo taller</span>
           <h3>Cable TPR 5x2,5 mm · por metro</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$4.800</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="aislante-1-4" data-unidad="m" data-nombre="Aislante para caño de cobre 1/4&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
-          data-palabras="aislante tubo espuma coquilla caño cano cobre 1/4 aire acondicionado split instalacion">
+      <li class="producto" data-id="aislante-1-4" data-nombre="Aislante para caño de cobre 1/4&quot; (tramo de 2 m)" data-precio="2480" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tramo 2 metros tubo espuma coquilla caño cano cobre 1/4 aire acondicionado split instalacion">
         <figure data-marca="Aislante">
           <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
         </figure>
         <div class="producto__info">
           <span class="chapa">Aislante</span>
-          <h3>Aislante para caño de cobre 1/4&quot; · por metro</h3>
+          <h3>Aislante para caño de cobre 1/4&quot; · tramo de 2 m</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$2.480</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="aislante-3-8" data-unidad="m" data-nombre="Aislante para caño de cobre 3/8&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
-          data-palabras="aislante tubo espuma coquilla caño cano cobre 3/8 aire acondicionado split instalacion">
+      <li class="producto" data-id="aislante-3-8" data-nombre="Aislante para caño de cobre 3/8&quot; (tramo de 2 m)" data-precio="2600" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tramo 2 metros tubo espuma coquilla caño cano cobre 3/8 aire acondicionado split instalacion">
         <figure data-marca="Aislante">
           <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
         </figure>
         <div class="producto__info">
           <span class="chapa">Aislante</span>
-          <h3>Aislante para caño de cobre 3/8&quot; · por metro</h3>
+          <h3>Aislante para caño de cobre 3/8&quot; · tramo de 2 m</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$2.600</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="aislante-1-2" data-unidad="m" data-nombre="Aislante para caño de cobre 1/2&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
-          data-palabras="aislante tubo espuma coquilla caño cano cobre 1/2 aire acondicionado split instalacion">
+      <li class="producto" data-id="aislante-1-2" data-nombre="Aislante para caño de cobre 1/2&quot; (tramo de 2 m)" data-precio="2900" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tramo 2 metros tubo espuma coquilla caño cano cobre 1/2 aire acondicionado split instalacion">
         <figure data-marca="Aislante">
           <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
         </figure>
         <div class="producto__info">
           <span class="chapa">Aislante</span>
-          <h3>Aislante para caño de cobre 1/2&quot; · por metro</h3>
+          <h3>Aislante para caño de cobre 1/2&quot; · tramo de 2 m</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$2.900</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
 
-      <li class="producto" data-id="aislante-5-8" data-unidad="m" data-nombre="Aislante para caño de cobre 5/8&quot; (por metro)" data-precio="" data-estado="nuevo" data-categoria="cobre"
-          data-palabras="aislante tubo espuma coquilla caño cano cobre 5/8 aire acondicionado split instalacion">
+      <li class="producto" data-id="aislante-5-8" data-nombre="Aislante para caño de cobre 5/8&quot; (tramo de 2 m)" data-precio="3500" data-estado="nuevo" data-categoria="cobre"
+          data-palabras="aislante tramo 2 metros tubo espuma coquilla caño cano cobre 5/8 aire acondicionado split instalacion">
         <figure data-marca="Aislante">
           <img src="img/prod-aislante-cano.jpg" alt="Tubos aislantes de espuma para caño de cobre" width="480" height="480" loading="lazy" decoding="async">
         </figure>
         <div class="producto__info">
           <span class="chapa">Aislante</span>
-          <h3>Aislante para caño de cobre 5/8&quot; · por metro</h3>
+          <h3>Aislante para caño de cobre 5/8&quot; · tramo de 2 m</h3>
           <span class="producto__ilustrativa">Foto ilustrativa</span>
-          <p class="producto__precio">Consultar precio</p>
+          <p class="producto__precio">$3.500</p>
           <button type="button" class="btn producto__agregar">Agregar</button>
         </div>
       </li>
@@ -1785,7 +1838,7 @@
     </div>
 
     <ul class="catalogo__grilla destacados__grilla" id="destacados"
-        data-ids="bgh-1006005357,bgh-1006005930,bgh-1006005948,bgh-1006004974,bgh-1006005937,bgh-1006005934"></ul>
+        data-ids="bgh-onoff-2300,bgh-1006005930,bgh-1006005948,bgh-1006004974,bgh-1006005937,bgh-bsi67wcnx"></ul>
 
     <div class="destacados__mas">
       <button class="btn btn--linea" type="button" data-abre-carrito>
@@ -1818,70 +1871,70 @@
     <ul class="trabajos__grilla" id="grilla-trabajos">
       <li class="trabajo" data-categoria="led">
         <figure data-marca="La Rural">
-          <video src="img/trabajo-salon-led-rgb.mp4" poster="img/trabajo-salon-led-rgb.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-salon-led-rgb.mp4" poster="img/trabajo-salon-led-rgb.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: los rombos LED del techo del salón La Rural cambian de color"></video>
           <figcaption><h3>Salón La Rural: rombos LED que cambian de color</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="electrico">
         <figure data-marca="Cartel YPF">
-          <video src="img/trabajo-ypf-cartel.mp4" poster="img/trabajo-ypf-cartel.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-ypf-cartel.mp4" poster="img/trabajo-ypf-cartel.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video con drone: dos técnicos en la canasta del hidroelevador trabajando en el cartel de YPF"></video>
           <figcaption><h3>Cartel de YPF: trabajo en altura</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="aire">
         <figure data-marca="Soma Estudio">
-          <video src="img/trabajo-soma-split.mp4" poster="img/trabajo-soma-split.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-soma-split.mp4" poster="img/trabajo-soma-split.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: se prende con el control un aire split recién instalado en Soma Estudio"></video>
           <figcaption><h3>Aires instalados en Soma Estudio</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="Galpón LED">
-          <video src="img/trabajo-galpon-led.mp4" poster="img/trabajo-galpon-led.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-galpon-led.mp4" poster="img/trabajo-galpon-led.jpg" muted loop playsinline preload="none"
                  width="1280" height="720" aria-label="Video con drone: se prenden las líneas LED en el techo de un galpón"></video>
           <figcaption><h3>Galpón con líneas LED (video con drone)</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="electrico">
         <figure data-marca="Local YV">
-          <video src="img/trabajo-yv-camaras.mp4" poster="img/trabajo-yv-camaras.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-yv-camaras.mp4" poster="img/trabajo-yv-camaras.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: cámaras de seguridad con cañería a la vista en el techo del local de ropa YV"></video>
           <figcaption><h3>13 cámaras de seguridad en el local YV</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="aire">
         <figure data-marca="7 aires">
-          <video src="img/trabajo-siete-aires.mp4" poster="img/trabajo-siete-aires.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-siete-aires.mp4" poster="img/trabajo-siete-aires.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: ménsulas y cañerías listas en la pared de un galpón para siete equipos de aire"></video>
           <figcaption><h3>Instalación de 7 aires: ménsulas y cañerías</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="AF Automotores">
-          <video src="img/trabajo-af-hexagonos.mp4" poster="img/trabajo-af-hexagonos.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-af-hexagonos.mp4" poster="img/trabajo-af-hexagonos.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: luminaria LED de hexágonos en el techo de la agencia AF Automotores"></video>
           <figcaption><h3>Hexágonos LED en AF Automotores</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="electrico">
         <figure data-marca="Tablero">
-          <video src="img/trabajo-tablero-gabinete.mp4" poster="img/trabajo-tablero-gabinete.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-tablero-gabinete.mp4" poster="img/trabajo-tablero-gabinete.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: tablero eléctrico en gabinete con pilotos en la puerta, térmicas y cablecanal por dentro"></video>
           <figcaption><h3>Tablero eléctrico en gabinete</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="aire">
         <figure data-marca="YPF Autopista">
-          <video src="img/trabajo-ypf-service.mp4" poster="img/trabajo-ypf-service.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-ypf-service.mp4" poster="img/trabajo-ypf-service.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: Mateo en la escalera terminando el service de un aire split en YPF Autopista"></video>
           <figcaption><h3>Service de aires en YPF Autopista</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="Declon Gym">
-          <video src="img/trabajo-declon-led.mp4" poster="img/trabajo-declon-led.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-declon-led.mp4" poster="img/trabajo-declon-led.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: líneas de luz LED en el techo del gimnasio Declon"></video>
           <figcaption><h3>Iluminación del gimnasio Declon</h3></figcaption>
         </figure>
@@ -1895,14 +1948,14 @@
       </li>
       <li class="trabajo" data-categoria="aire">
         <figure data-marca="Split">
-          <video src="img/trabajo-split-conexion.mp4" poster="img/trabajo-split-conexion.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-split-conexion.mp4" poster="img/trabajo-split-conexion.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: conexión de los cables en la bornera de la unidad interior de un split"></video>
           <figcaption><h3>Conexionado de la unidad interior</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="Núcleo">
-          <video src="img/trabajo-nucleo-led.mp4" poster="img/trabajo-nucleo-led.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-nucleo-led.mp4" poster="img/trabajo-nucleo-led.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: estructura flotante con perfiles LED en el techo del gimnasio Núcleo"></video>
           <figcaption><h3>Estructura flotante LED en gimnasio Núcleo</h3></figcaption>
         </figure>
@@ -1916,14 +1969,14 @@
       </li>
       <li class="trabajo" data-categoria="aire">
         <figure data-marca="Unidad exterior">
-          <video src="img/trabajo-exterior-conexion.mp4" poster="img/trabajo-exterior-conexion.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-exterior-conexion.mp4" poster="img/trabajo-exterior-conexion.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: técnico conectando los cables de la unidad exterior de un aire Midea"></video>
           <figcaption><h3>Conexionado de la unidad exterior</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="Local YV">
-          <video src="img/trabajo-yv-iluminacion.mp4" poster="img/trabajo-yv-iluminacion.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-yv-iluminacion.mp4" poster="img/trabajo-yv-iluminacion.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: paneles LED en el techo, perfiles de luz en los probadores y el salón del local YV iluminado"></video>
           <figcaption><h3>Iluminación nueva del local YV</h3></figcaption>
         </figure>
@@ -1958,21 +2011,21 @@
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="Patio y pileta">
-          <video src="img/trabajo-pileta-led.mp4" poster="img/trabajo-pileta-led.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-pileta-led.mp4" poster="img/trabajo-pileta-led.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video de noche: tira LED al pie del muro y luces entre las plantas alrededor de la pileta"></video>
           <figcaption><h3>Iluminación de patio y pileta</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="En obra">
-          <video src="img/trabajo-rural-armado.mp4" poster="img/trabajo-rural-armado.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-rural-armado.mp4" poster="img/trabajo-rural-armado.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: dos electricistas en escaleras arman la estructura de rombos sobre bandejas portacables"></video>
           <figcaption><h3>Armando la estructura en La Rural</h3></figcaption>
         </figure>
       </li>
       <li class="trabajo" data-categoria="led">
         <figure data-marca="Cocina">
-          <video src="img/trabajo-cocina-led.mp4" poster="img/trabajo-cocina-led.jpg" muted loop playsinline preload="metadata"
+          <video src="img/trabajo-cocina-led.mp4" poster="img/trabajo-cocina-led.jpg" muted loop playsinline preload="none"
                  width="720" height="960" aria-label="Video: tira LED cálida debajo de las alacenas iluminando la mesada de una cocina"></video>
           <figcaption><h3>LED bajo alacena en una cocina</h3></figcaption>
         </figure>
@@ -2388,6 +2441,8 @@
       <div class="kit__panel" data-kit="aire" hidden>
         <fieldset class="kit__paso">
           <legend><span class="ficha__num">1</span> Equipo</legend>
+          <label class="kit__opcion"><input type="radio" name="equipo" value="bgh-onoff-2300" data-kit-instalacion="kit-instalacion-1-4-3-8"> BGH on-off 2300 fg</label>
+          <label class="kit__opcion"><input type="radio" name="equipo" value="bgh-inverter-2300" data-kit-instalacion="kit-instalacion-1-4-3-8"> BGH inverter 2300 fg</label>
           <label class="kit__opcion"><input type="radio" name="equipo" value="bgh-1006005357" data-kit-instalacion="kit-instalacion-1-4-3-8" checked> BGH on-off 3000 fg <small>3500 W</small></label>
           <label class="kit__opcion"><input type="radio" name="equipo" value="bgh-1006005930" data-kit-instalacion="kit-instalacion-1-4-3-8"> BGH inverter 3100 fg <small>3650 W</small></label>
           <label class="kit__opcion"><input type="radio" name="equipo" value="bgh-1006005948" data-kit-instalacion="kit-instalacion-1-4-1-2"> BGH on-off 4600 fg <small>5400 W</small></label>

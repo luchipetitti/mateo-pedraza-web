@@ -124,8 +124,9 @@ img { display: block; max-width: 100%; }
   animation: subir 900ms cubic-bezier(.16, .84, .28, 1) var(--d, 0ms) both;
 }
 @keyframes subir {
-  from { opacity: 0; transform: translateY(26px); filter: blur(6px); }
-  to   { opacity: 1; transform: none; filter: none; }
+  /* sin desenfoque: en el celular hacía pesada la entrada del hero */
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* ---------- rótulos y titulares ---------- */
@@ -1265,32 +1266,6 @@ html:not(.js) .carrito {
   }
 }
 
-.ico-efectivo, .ico-transferencia, .ico-tarjeta, .ico-mp {
-  width: 18px; height: 18px;
-  flex: 0 0 auto;
-  background: currentColor;
-}
-.ico-efectivo {
-  -webkit-mask: var(--efectivo-svg) center / contain no-repeat;
-  mask: var(--efectivo-svg) center / contain no-repeat;
-  --efectivo-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E");
-}
-.ico-transferencia {
-  -webkit-mask: var(--transferencia-svg) center / contain no-repeat;
-  mask: var(--transferencia-svg) center / contain no-repeat;
-  --transferencia-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.99 11 3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z'/%3E%3C/svg%3E");
-}
-.ico-tarjeta {
-  -webkit-mask: var(--tarjeta-svg) center / contain no-repeat;
-  mask: var(--tarjeta-svg) center / contain no-repeat;
-  --tarjeta-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z'/%3E%3C/svg%3E");
-}
-.ico-mp {
-  -webkit-mask: var(--mp-svg) center / contain no-repeat;
-  mask: var(--mp-svg) center / contain no-repeat;
-  --mp-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E");
-}
-
 /* ---------- caja de consulta ---------- */
 
 .consulta { max-width: 680px; }
@@ -1800,6 +1775,10 @@ html:not(.js) .carrito {
   overflow: hidden;
   background: var(--blanco);
   box-shadow: 0 0 0 1px var(--borde), 0 14px 26px -22px rgba(0, 0, 0, .4);
+  /* el catálogo tiene cientos de productos: el navegador solo dibuja
+     los que están a la vista (el resto queda reservado con su alto) */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 280px;
 }
 .producto.oculto { display: none; }
 
@@ -2087,8 +2066,7 @@ html:not(.js) .carrito {
   font-size: .88rem;
   font-weight: 500;
   color: var(--hielo-claro);
-  background: rgba(9, 27, 50, .92);
-  backdrop-filter: blur(10px);
+  background: rgba(9, 27, 50, .96);
   box-shadow:
     inset 0 0 0 1px rgba(143, 212, 230, .3),
     0 18px 34px -20px rgba(0, 0, 0, .9);
