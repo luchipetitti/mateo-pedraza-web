@@ -1315,7 +1315,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const unidad = li.dataset.unidad === 'm' ? ' por metro' : '';
       const ilustrativa = li.querySelector('.producto__ilustrativa') ? ' · Foto ilustrativa' : '';
       return {
-        src: im.currentSrc || im.src,
+        // la versión grande (1600x1200) se baja recién al abrir el visor
+        src: im.dataset.grande || im.currentSrc || im.src,
         alt: im.alt,
         titulo: li.dataset.nombre || '',
         detalle: (precio ? formatoPrecio(precio) + unidad : 'Consultar precio') + ilustrativa
