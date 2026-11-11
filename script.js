@@ -1380,6 +1380,40 @@ document.addEventListener('DOMContentLoaded', function () {
   const kitCerrarBtn = document.getElementById('kit-cerrar');
   const kitBuscar = document.getElementById('kit-buscar');
   const kitSugerencias = document.getElementById('kit-sugerencias');
+  const kitRubros = document.getElementById('kit-rubros');
+  // rubros del mini buscador: tocás uno y aparecen todos sus productos,
+  // sin tener que buscarlos. "Te puede servir" muestra lo que suele
+  // acompañar al kit elegido
+  const RUBROS_KIT = [
+    ['sugeridos', 'Te puede servir'], ['aire', 'Aires'], ['kit', 'Kits de instalación'],
+    ['cobre', 'Caños y aislantes'], ['gas', 'Gases'], ['quimicos', 'Selladores'],
+    ['frio', 'Refrigeración'], ['electrico', 'Electricidad'], ['led', 'Iluminación LED'],
+    ['seguridad', 'Seguridad']
+  ];
+  const ACOMPANAN = {
+    led: ['led', 'electrico'],
+    aire: ['kit', 'cobre', 'gas', 'quimicos'],
+    seguridad: ['seguridad', 'electrico'],
+    libre: []
+  };
+  // qué suele ir con cada rubro (para "Te puede servir" según lo que ya
+  // tiene el kit, también en "A medida")
+  const COMPLEMENTOS = {
+    aire: ['kit', 'cobre', 'gas'], kit: ['cobre', 'gas', 'quimicos'],
+    cobre: ['kit', 'gas', 'quimicos'], gas: ['quimicos', 'cobre'],
+    quimicos: ['gas', 'cobre'], frio: ['gas', 'quimicos'],
+    led: ['led', 'electrico'], electrico: ['led', 'seguridad'],
+    seguridad: ['seguridad', 'electrico']
+  };
+  const rubrosSugeridos = function () {
+    const lista = (ACOMPANAN[kitTipo] || []).slice();
+    kitItems.forEach(function (p) {
+      const cat = p.li && p.li.dataset.categoria;
+      (COMPLEMENTOS[cat] || []).forEach(function (r) { if (lista.indexOf(r) === -1) lista.push(r); });
+    });
+    return lista;
+  };
+  let kitRubro = '';
   let kitTipo = 'led';
   let kitOrigen = null;
   let kitItems = [];
@@ -1498,13 +1532,34 @@ document.addEventListener('DOMContentLoaded', function () {
   // mayúsculas (sinTildes es la del buscador de toda la web, más abajo)
   const pintarSugerencias = function () {
     if (!kitSugerencias || !kitBuscar) return;
+    // al sumar uno de abajo, la lista no vuelve al principio
+    const clave = kitRubro + '|' + kitBuscar.value;
+    const scrollPrevio = kitSugerencias.dataset.clave === clave ? kitSugerencias.scrollTop : 0;
+    kitSugerencias.dataset.clave = clave;
     kitSugerencias.innerHTML = '';
+    requestAnimationFrame(function () { kitSugerencias.scrollTop = scrollPrevio; });
     const palabras = sinTildes(kitBuscar.value).split(/\s+/).filter(Boolean);
-    if (!palabras.length) return;
-    const hallados = Array.prototype.slice.call(document.querySelectorAll('#grilla-equipos .producto')).filter(function (li) {
-      const texto = sinTildes(li.dataset.nombre + ' ' + (li.dataset.palabras || ''));
-      return palabras.every(function (p) { return texto.indexOf(p) !== -1; });
-    });
+    pintarRubros();
+    if (!palabras.length && !kitRubro) return;
+    const todos = Array.prototype.slice.call(document.querySelectorAll('#grilla-equipos .producto'));
+    let hallados;
+    if (palabras.length) {
+      hallados = todos.filter(function (li) {
+        const texto = sinTildes(li.dataset.nombre + ' ' + (li.dataset.palabras || ''));
+        return palabras.every(function (p) { return texto.indexOf(p) !== -1; });
+      });
+    } else {
+      // todo el rubro (o lo que acompaña al kit), sin lo que ya está en el kit
+      const rubros = kitRubro === 'sugeridos' ? rubrosSugeridos() : [kitRubro];
+      const enKit = {};
+      kitItems.forEach(function (p) { if (!kitExtras.some(function (e) { return e.id === p.id; })) enKit[p.id] = true; });
+      hallados = todos.filter(function (li) {
+        return rubros.indexOf(li.dataset.categoria) !== -1 && !enKit[li.dataset.id];
+      });
+    }
+    // los que muestran todo el rubro no se cortan: la lista tiene su propio scroll
+    const tope = palabras.length ? 6 : hallados.length;
+    kitSugerencias.classList.toggle('kit__sugerencias--rubro', !palabras.length);
     if (!hallados.length) {
       const nada = document.createElement('li');
       nada.className = 'kit__sin-resultados';
@@ -1512,7 +1567,7 @@ document.addEventListener('DOMContentLoaded', function () {
       kitSugerencias.appendChild(nada);
       return;
     }
-    hallados.slice(0, 6).forEach(function (li) {
+    hallados.slice(0, tope).forEach(function (li) {
       const fila = document.createElement('li');
       const texto = document.createElement('span');
       texto.className = 'kit__sugerencia-nombre';
@@ -1531,13 +1586,41 @@ document.addEventListener('DOMContentLoaded', function () {
       fila.appendChild(boton);
       kitSugerencias.appendChild(fila);
     });
-    if (hallados.length > 6) {
+    if (hallados.length > tope) {
       const mas = document.createElement('li');
       mas.className = 'kit__sin-resultados';
-      mas.textContent = 'Hay ' + (hallados.length - 6) + ' más: escribí algo más preciso.';
+      mas.textContent = 'Hay ' + (hallados.length - tope) + ' más: escribí algo más preciso.';
       kitSugerencias.appendChild(mas);
     }
   };
+  // la fila de rubros: "Te puede servir" solo si el kit tiene acompañantes
+  const pintarRubros = function () {
+    if (!kitRubros) return;
+    if (!kitRubros.children.length) {
+      RUBROS_KIT.forEach(function (r) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chip-filtro kit__rubro';
+        b.dataset.rubro = r[0];
+        b.textContent = r[1];
+        kitRubros.appendChild(b);
+      });
+      kitRubros.addEventListener('click', function (e) {
+        const b = e.target.closest('[data-rubro]');
+        if (!b) return;
+        // tocar el que ya está elegido lo suelta
+        kitRubro = kitRubro === b.dataset.rubro ? '' : b.dataset.rubro;
+        if (kitBuscar) kitBuscar.value = '';
+        pintarSugerencias();
+      });
+    }
+    const escribiendo = kitBuscar && kitBuscar.value.trim();
+    Array.prototype.forEach.call(kitRubros.children, function (b) {
+      if (b.dataset.rubro === 'sugeridos') b.hidden = !rubrosSugeridos().length;
+      b.setAttribute('aria-pressed', !escribiendo && b.dataset.rubro === kitRubro ? 'true' : 'false');
+    });
+  };
+
   if (kitBuscar) {
     kitBuscar.addEventListener('input', pintarSugerencias);
     // Enter suma el primero de la lista
@@ -1564,7 +1647,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!kitItems.length) {
         const li = document.createElement('li');
         li.className = 'kit__vacio';
-        li.textContent = kitTipo === 'libre' ? 'Buscá productos arriba y sumalos.' : 'Elegí al menos una parte.';
+        li.textContent = kitTipo === 'libre' ? 'Tocá un rubro arriba y sumá lo que necesites.' : 'Elegí al menos una parte.';
         kitLista.appendChild(li);
       }
       kitItems.forEach(function (p) {
@@ -1632,16 +1715,33 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
     pintarKit();
+    if (kitRubro === 'sugeridos' && !rubrosSugeridos().length) kitRubro = '';
+    else if (!kitRubro && rubrosSugeridos().length) kitRubro = 'sugeridos';
+    // la lista se arma solo con el kit abierto (al cargar la página todavía
+    // no está lista la función del buscador que usa)
+    if (kit && kit.classList.contains('abierto')) pintarSugerencias();
   };
 
+  const KIT_DE_RUBRO = { led: 'led', seguridad: 'seguridad', aire: 'aire', kit: 'aire', cobre: 'aire' };
   const abrirKit = function () {
     if (!kit) return;
+    const filtro = document.querySelector('.chip-filtro[data-categoria][aria-pressed="true"]');
+    const rubro = filtro && filtro.dataset.categoria !== 'todos' ? filtro.dataset.categoria : '';
+    if (kitBuscar) kitBuscar.value = '';
+    if (rubro) {
+      kitRubro = rubro;
+      elegirKit(KIT_DE_RUBRO[rubro] || 'libre');
+    } else {
+      pintarKit();
+      kitRubro = rubrosSugeridos().length ? 'sugeridos' : '';
+    }
     kitOrigen = document.activeElement;
     kit.classList.add('abierto');
     kit.inert = false;
     kit.querySelector('.ficha__caja').scrollTop = 0;
     actualizarBloqueoScroll();
     pintarKit();
+    pintarSugerencias();
     if (kitCerrarBtn) kitCerrarBtn.focus({ preventScroll: true });
   };
 

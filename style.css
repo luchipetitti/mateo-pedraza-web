@@ -2912,7 +2912,21 @@ html:not(.js) .carrito {
   color: var(--marino);
   background: var(--blanco);
 }
+.kit__rubros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+.kit__rubro { padding: 6px 12px; font-size: .78rem; }
 .kit__sugerencias { margin: 6px 0 0; padding: 0; list-style: none; }
+/* un rubro entero: la lista tiene su propio scroll para no estirar la ficha */
+.kit__sugerencias--rubro {
+  max-height: 290px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
 .kit__sugerencias li {
   display: flex;
   align-items: center;

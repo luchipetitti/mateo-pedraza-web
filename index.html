@@ -2485,14 +2485,15 @@
         </fieldset>
       </div>
       <div class="kit__panel" data-kit="libre" hidden>
-        <p class="kit__ayuda kit__ayuda--libre">Armalo con lo que quieras de la web: buscá cada producto abajo y sumalo.</p>
+        <p class="kit__ayuda kit__ayuda--libre">Armalo con lo que quieras de la web: tocá un rubro abajo y sumá lo que necesites.</p>
       </div>
     </form>
 
     <!-- mini buscador: cualquier producto del catálogo se suma a cualquier kit -->
     <div class="kit__extra">
       <label class="kit__extra-titulo" for="kit-buscar"><span class="ficha__num">+</span> Sumar otros productos</label>
-      <input class="kit__buscar" id="kit-buscar" type="search" placeholder="Buscar: gas, cinta, caño, tira LED…" autocomplete="off">
+      <div class="kit__rubros" id="kit-rubros" role="group" aria-label="Ver productos por rubro"></div>
+      <input class="kit__buscar" id="kit-buscar" type="search" placeholder="O buscá: gas, cinta, caño, tira LED…" autocomplete="off">
       <ul class="kit__sugerencias" id="kit-sugerencias" aria-live="polite"></ul>
     </div>
 
