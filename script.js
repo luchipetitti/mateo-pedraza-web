@@ -2633,8 +2633,8 @@ document.addEventListener('DOMContentLoaded', function () {
       a.rel = 'noopener';
       const hayAlgo = encontrados.length || respuesta;
       armarResultado(a,
-        hayAlgo ? '¿No es esto?' : (lectura.pregunta ? 'Esa no la tengo en la web' : 'No encontré nada en la web'),
-        'Preguntale a Mateo por WhatsApp: "' + consulta + '"');
+        hayAlgo ? '¿No es esto?' : (lectura.pregunta ? 'Eso no lo tenemos en la web' : 'No encontramos nada en la web'),
+        'Preguntanos por WhatsApp: "' + consulta + '"');
       a.classList.add('resultado--wp');
       li.appendChild(a);
       buscadorResultados.appendChild(li);
