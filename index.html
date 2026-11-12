@@ -91,7 +91,7 @@
   <div class="cuenta" id="cuenta-google" hidden>
     <div class="cuenta__fuera" id="cuenta-fuera">
       <div id="google-boton"></div>
-      <p class="cuenta__nota">Recibí promos por mail. Te das de baja cuando quieras.</p>
+      <p class="cuenta__nota">Entrá y tenés 10% off en tu primera compra, más promos por mail. Te das de baja cuando quieras.</p>
     </div>
 
     <div class="cuenta__dentro" id="cuenta-dentro" hidden>
@@ -107,6 +107,9 @@
   <div class="menu__pie">
     <a class="menu__ig" href="https://www.instagram.com/instalacionesmateo" target="_blank" rel="noopener">
       <span class="ico-instagram" aria-hidden="true"></span> @instalacionesmateo
+    </a>
+    <a class="menu__ig" href="mailto:instalacionesmateo.mp@gmail.com">
+      <span class="ico-mail" aria-hidden="true"></span> instalacionesmateo.mp@gmail.com
     </a>
     <p>Villa María, Villa Nueva y alrededores</p>
   </div>
@@ -1966,6 +1969,13 @@
       </dl>
     </div>
 
+    <button type="button" class="carrito__promo" id="carrito-promo" hidden>
+      Entrá con tu cuenta de Google y tenés <strong>10% off</strong> en tu primera compra →
+    </button>
+    <div class="carrito__descuento" id="carrito-descuento" hidden>
+      <span>10% de bienvenida (primera compra)</span>
+      <strong id="carrito-descuento-monto"></strong>
+    </div>
     <div class="carrito__total" id="carrito-total-caja" hidden>
       <span>Total estimado*</span>
       <strong id="carrito-total">$0</strong>
@@ -2491,6 +2501,9 @@
   <a class="pie__dato pie__ig" href="https://www.instagram.com/instalacionesmateo" target="_blank" rel="noopener">
     <span class="ico-instagram" aria-hidden="true"></span> @instalacionesmateo
   </a>
+  <a class="pie__dato pie__ig pie__mail" href="mailto:instalacionesmateo.mp@gmail.com">
+    <span class="ico-mail" aria-hidden="true"></span> instalacionesmateo.mp@gmail.com
+  </a>
   <p class="pie__legal">© <span id="anio">2026</span> Instalaciones Mateo · Hecho por Hélice Drone Marketing</p>
 </footer>
 
@@ -2822,6 +2835,7 @@
   "name": "Instalaciones Mateo",
   "url": "https://mateopedrazainstalaciones.com.ar/",
   "telephone": "+5493534290559",
+  "email": "instalacionesmateo.mp@gmail.com",
   "description": "Instalaciones eléctricas, cerraduras inteligentes, cámaras y alarmas, iluminación, aire acondicionado y refrigeración en Villa María, Córdoba.",
   "areaServed": ["Villa María", "Villa Nueva", "Córdoba"],
   "address": { "@type": "PostalAddress", "addressLocality": "Villa María", "addressRegion": "Córdoba", "addressCountry": "AR" },

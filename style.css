@@ -834,6 +834,32 @@ html:not(.js) .carrito {
   font-size: .92rem;
   color: rgba(220, 241, 247, .78);
 }
+.carrito__descuento {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 12px;
+  margin-top: auto;
+  font-size: .86rem;
+  color: var(--hielo);
+}
+.carrito__descuento strong { font-variant-numeric: tabular-nums; }
+.carrito__descuento:not([hidden]) + .carrito__total { margin-top: 6px; }
+.carrito__promo {
+  width: 100%;
+  margin: 0 0 4px;
+  padding: 10px 14px;
+  border: 1px dashed rgba(143, 212, 230, .5);
+  border-radius: 12px;
+  font: inherit;
+  font-size: .84rem;
+  text-align: left;
+  color: var(--hielo-claro);
+  background: rgba(143, 212, 230, .08);
+  cursor: pointer;
+}
+.carrito__promo strong { color: var(--blanco); }
+.carrito__promo:hover { background: rgba(143, 212, 230, .14); }
 .carrito__total strong {
   font-family: var(--display);
   font-size: 1.35rem;
@@ -2005,6 +2031,17 @@ html:not(.js) .carrito {
   transition: color var(--t), border-color var(--t);
 }
 .pie__ig:hover { color: var(--hielo-claro); border-color: var(--hielo-claro); }
+/* sobre: mismo trazo que el ícono de Instagram */
+.ico-mail {
+  display: inline-block;
+  width: 16px; height: 16px;
+  flex: 0 0 auto;
+  background: currentColor;
+  -webkit-mask: var(--mail-svg) center / contain no-repeat;
+  mask: var(--mail-svg) center / contain no-repeat;
+  --mail-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E");
+}
+.pie__mail { font-weight: 500; font-size: .85rem; word-break: break-all; }
 
 .pie__legal { font-size: .78rem; color: rgba(220, 241, 247, .34); }
 

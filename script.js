@@ -191,8 +191,37 @@ document.addEventListener('DOMContentLoaded', function () {
     guardarCarrito();
   };
 
-  const totalCarrito = function () {
+  const subtotalCarrito = function () {
     return pedido.reduce(function (acc, p) { return acc + p.precio * p.cantidad; }, 0);
+  };
+
+  /* 10 % de bienvenida: quien entró con Google tiene 10 % de descuento en
+     su primera compra. Al finalizar ese pedido el mail queda anotado en
+     este navegador; la planilla además avisa si ese mail ya había comprado */
+  const DESCUENTO_BIENVENIDA = 0.10;
+  const YA_COMPRARON = 'mateo-compraron';
+  const sesionActual = function () {
+    try { return JSON.parse(localStorage.getItem(SESION) || 'null'); } catch (e) { return null; }
+  };
+  const yaCompro = function (email) {
+    try { return (JSON.parse(localStorage.getItem(YA_COMPRARON) || '[]')).indexOf(email) !== -1; } catch (e) { return false; }
+  };
+  const anotarCompra = function (email) {
+    try {
+      const lista = JSON.parse(localStorage.getItem(YA_COMPRARON) || '[]');
+      if (lista.indexOf(email) === -1) lista.push(email);
+      localStorage.setItem(YA_COMPRARON, JSON.stringify(lista));
+    } catch (e) { /* nada */ }
+  };
+  const tieneBienvenida = function () {
+    const s = sesionActual();
+    return !!(s && s.email && !yaCompro(s.email));
+  };
+  const descuentoCarrito = function () {
+    return tieneBienvenida() ? Math.round(subtotalCarrito() * DESCUENTO_BIENVENIDA) : 0;
+  };
+  const totalCarrito = function () {
+    return subtotalCarrito() - descuentoCarrito();
   };
 
   const cantidadCarrito = function () {
@@ -288,6 +317,15 @@ document.addEventListener('DOMContentLoaded', function () {
         : 'Ver carrito de compra, vacío');
     }
     if (carritoTotalTexto) carritoTotalTexto.textContent = formatoPrecio(totalCarrito());
+    const descuento = descuentoCarrito();
+    const cajaDescuento = document.getElementById('carrito-descuento');
+    if (cajaDescuento) {
+      cajaDescuento.hidden = !hayCosas || !descuento;
+      document.getElementById('carrito-descuento-monto').textContent = '−' + formatoPrecio(descuento);
+    }
+    // a quien no entró con Google se le cuenta que tiene el 10 %
+    const promo = document.getElementById('carrito-promo');
+    if (promo) promo.hidden = !hayCosas || !!sesionActual();
     if (carritoVaciar) carritoVaciar.hidden = !hayCosas;
     if (resumenNum) resumenNum.textContent = cantidad;
     if (resumenTotal) resumenTotal.textContent = formatoPrecio(totalCarrito());
@@ -508,6 +546,12 @@ document.addEventListener('DOMContentLoaded', function () {
         mensaje += '- ' + item.nombre + ' x' + item.cantidad +
           ' (' + formatoPrecio(item.precio * item.cantidad) + ')\n';
       });
+      const descuento = descuentoCarrito();
+      const sesion = sesionActual();
+      if (descuento) {
+        mensaje += '\nSubtotal: ' + formatoPrecio(subtotalCarrito());
+        mensaje += '\n10% de bienvenida por mi primera compra (entré con Google: ' + sesion.email + '): −' + formatoPrecio(descuento);
+      }
       mensaje += '\nTotal según la web: ' + formatoPrecio(totalCarrito()) + ' (¿me confirmás precio y stock?)';
       mensaje += '\nPago: ' + carritoPago.value;
       if (pagoMp && !pagoMp.hidden || pagoTransferencia && !pagoTransferencia.hidden) {
@@ -522,14 +566,25 @@ document.addEventListener('DOMContentLoaded', function () {
         direccion: direccion,
         pago: carritoPago.value,
         total: totalCarrito(),
+        descuento: descuento,
         items: pedido.map(function (item) {
           return { nombre: item.nombre, cantidad: item.cantidad, precio: item.precio };
         })
       });
 
       window.open(armarLink(mensaje), '_blank', 'noopener');
+      // el 10 % es para una sola compra
+      if (descuento && sesion && sesion.email) {
+        anotarCompra(sesion.email);
+        pintarCarrito();
+      }
     });
   }
+
+  // al entrar o salir de la cuenta se recalcula el total
+  document.addEventListener('mateo-sesion', function () { pintarCarrito(); });
+  const promoBoton = document.getElementById('carrito-promo');
+  if (promoBoton) promoBoton.addEventListener('click', function () { abrirMenu(); });
 
   /* --- base de clientes: cada pedido se anota en la planilla de Google
      (hojas "Pedidos" y "Clientes", ver apps-script/Codigo.gs). Si la
@@ -2761,6 +2816,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (s) localStorage.setItem(SESION, JSON.stringify(s));
       else localStorage.removeItem(SESION);
     } catch (e) { /* nada */ }
+    document.dispatchEvent(new CustomEvent('mateo-sesion'));
   };
 
   // el token de Google es un JWT: la parte del medio trae nombre, mail y foto
@@ -2855,3 +2911,98 @@ document.addEventListener('DOMContentLoaded', function () {
   if (anio) anio.textContent = new Date().getFullYear();
 
 });
+
+/* ---------------------------------------------------------
+   Registro de visitas (hoja "Visitas" de la planilla CONTACTOS
+   MATEO). Es anónimo: de quien solo mira no se sabe el nombre ni
+   el mail; se guarda un número de visitante al azar (para saber si
+   vuelve), celular o PC, de dónde llegó y qué miró. Si la persona
+   entró con Google, va también su nombre y mail.
+   En la PC de prueba (localhost) no se registra, salvo con
+   ?probar-visita en la dirección.
+   --------------------------------------------------------- */
+(function () {
+  if (!APPS_SCRIPT_URL) return;
+  const local = /^(localhost|127\.|192\.168\.|10\.)/.test(location.hostname) || location.protocol === 'file:';
+  if (local && location.search.indexOf('probar-visita') === -1) return;
+
+  const leer = function (k, guardado) { try { return guardado.getItem(k); } catch (e) { return null; } };
+  const escribir = function (k, v, guardado) { try { guardado.setItem(k, v); } catch (e) { /* sin almacenamiento */ } };
+
+  // número de visitante (al azar, queda en este navegador) y cuántas veces vino
+  let visitante = leer('mateo-visitante', localStorage);
+  if (!visitante) {
+    visitante = 'V-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+    escribir('mateo-visitante', visitante, localStorage);
+  }
+  // una visita por pestaña: recargar la página no cuenta como otra
+  const yaContada = leer('mateo-visita-numero', sessionStorage);
+  const numero = yaContada ? Number(yaContada) : (Number(leer('mateo-visitas', localStorage)) || 0) + 1;
+  if (!yaContada) {
+    escribir('mateo-visitas', String(numero), localStorage);
+    escribir('mateo-visita-numero', String(numero), sessionStorage);
+  }
+
+  const ancho = Math.min(screen.width, screen.height);
+  const dispositivo = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Celular'
+    : (/iPad|Tablet/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && ancho < 900) ? 'Tablet' : 'PC');
+
+  // de dónde llegó: ?utm_source=..., o la página anterior, o directo
+  const desde = (function () {
+    const p = new URLSearchParams(location.search);
+    const utm = p.get('utm_source') || (p.get('fbclid') ? 'Facebook/Instagram' : '') || (p.get('gclid') ? 'Google (anuncio)' : '');
+    if (utm) return utm;
+    let ref = '';
+    try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) { ref = ''; }
+    if (!ref || ref === location.hostname) return 'Directo';
+    if (/google\./.test(ref)) return 'Google';
+    if (/instagram\./.test(ref)) return 'Instagram';
+    if (/facebook\.|fb\./.test(ref)) return 'Facebook';
+    if (/whatsapp\.|wa\.me/.test(ref)) return 'WhatsApp';
+    return ref.replace(/^www\./, '');
+  })();
+
+  // qué miró: secciones a la vista y lo que abrió o tocó
+  const vio = [];
+  const anotar = function (cosa) { if (cosa && vio.indexOf(cosa) === -1) vio.push(cosa); };
+  const NOMBRES = { hero: 'Inicio', equipo: 'Equipo', servicios: 'Servicios', equipos: 'Equipos y precios', trabajos: 'Trabajos', consulta: 'Consulta', preguntas: 'Preguntas' };
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) { if (en.isIntersecting) anotar(NOMBRES[en.target.id]); });
+    }, { threshold: 0.35 });
+    Object.keys(NOMBRES).forEach(function (id) { const s = document.getElementById(id); if (s) obs.observe(s); });
+  }
+  document.addEventListener('click', function (e) {
+    const t = e.target;
+    if (t.closest('#abrir-carrito, [href="#carrito"]')) anotar('Catálogo');
+    if (t.closest('[data-abre-kit]')) anotar('Armá tu kit');
+    if (t.closest('.producto__agregar')) anotar('Agregó al carrito');
+    if (t.closest('[data-wp], .flotante, a[href*="wa.me"]')) anotar('Escribió por WhatsApp');
+    if (t.closest('a[href^="mailto:"]')) anotar('Tocó el mail');
+    const ficha = t.closest('[data-abre-ficha], [data-ficha]');
+    if (ficha && (ficha.dataset.abreFicha || ficha.dataset.ficha)) anotar('Ficha: ' + (ficha.dataset.abreFicha || ficha.dataset.ficha));
+  }, true);
+
+  const inicio = Date.now();
+  let enviada = false;
+  const enviar = function () {
+    if (enviada) return;
+    enviada = true;
+    let sesion = null;
+    try { sesion = JSON.parse(localStorage.getItem(SESION) || 'null'); } catch (e) { sesion = null; }
+    const datos = JSON.stringify({
+      tipo: 'visita', visitante: visitante, numero: numero, dispositivo: dispositivo, desde: desde,
+      vio: vio.join(', '), segundos: Math.round((Date.now() - inicio) / 1000),
+      nombre: sesion && sesion.nombre || '', email: sesion && sesion.email || ''
+    });
+    // sendBeacon sale aunque se esté cerrando la pestaña
+    if (!(navigator.sendBeacon && navigator.sendBeacon(APPS_SCRIPT_URL, new Blob([datos], { type: 'text/plain' })))) {
+      fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: datos }).catch(function () {});
+    }
+  };
+  // se manda al irse (o al pasar a otra app en el celular); si se
+  // queda mucho rato, igual se manda a los 3 minutos
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') enviar(); });
+  window.addEventListener('pagehide', enviar);
+  setTimeout(enviar, 180000);
+})();
