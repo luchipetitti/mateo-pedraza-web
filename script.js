@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', function () {
     actualizarBloqueoScroll();
     if (abrirMenuBtn) abrirMenuBtn.setAttribute('aria-expanded', 'true');
     if (cerrarMenuBtn) cerrarMenuBtn.focus();
+    // el botón "Entrar con Google" vive en el menú: su script baja recién ahora
+    document.dispatchEvent(new Event('menu-abierto'));
   };
 
   // devolverFoco = false cuando se cierra para ir a otro lado de la
@@ -708,10 +710,22 @@ document.addEventListener('DOMContentLoaded', function () {
       const i = RUBROS.indexOf(li.dataset.categoria);
       return i === -1 ? RUBROS.length : i;
     };
+    // dentro de los aires: primero los equipos para la casa (splits y
+    // ventana), después los comerciales, el multi split por partes y al
+    // final controles y VRF (si no, por precio arrancaba con un control)
+    const TIPO_AIRE = [/^(split|ventana|portátil)/i, /^(piso techo|cassette|baja silueta|multiposición|comercial)/i, /^multi split/i];
+    const tipoAire = function (li) {
+      if (li.dataset.categoria !== 'aire') return 0;
+      const fig = li.querySelector('figure');
+      const tipo = (fig && fig.dataset.marca) || '';
+      for (let i = 0; i < TIPO_AIRE.length; i++) if (TIPO_AIRE[i].test(tipo)) return i;
+      return TIPO_AIRE.length;
+    };
     const ordenar = function () {
       const modo = ordenPrecio ? ordenPrecio.value : 'recomendado';
       productos.slice().sort(function (x, y) {
         if (modo === 'recomendado' && rubro(x) !== rubro(y)) return rubro(x) - rubro(y);
+        if (modo === 'recomendado' && tipoAire(x) !== tipoAire(y)) return tipoAire(x) - tipoAire(y);
         if (!precioDe(x) !== !precioDe(y)) return precioDe(x) ? -1 : 1;
         return modo === 'desc' ? precioDe(y) - precioDe(x) : precioDe(x) - precioDe(y);
       }).forEach(function (li) { grillaEquipos.appendChild(li); });
@@ -980,21 +994,55 @@ document.addEventListener('DOMContentLoaded', function () {
      fundido. Se muestra siempre, aunque Windows tenga apagadas las
      animaciones: es una toma lenta y es la cara de la web. Si no
      está el archivo, se ve el degradé de siempre y ya. */
+  /* cuandoCerca(elemento, fn): fn corre una sola vez, cuando la sección
+     del elemento está a menos de ~1 pantalla de verse. Así las portadas
+     de los videos de más abajo no bajan al abrir la página. */
+  const esperandoCerca = new Map();
+  const vigiaCerca = 'IntersectionObserver' in window ? new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (entrada) {
+      if (!entrada.isIntersecting) return;
+      const fns = esperandoCerca.get(entrada.target) || [];
+      esperandoCerca.delete(entrada.target);
+      vigiaCerca.unobserve(entrada.target);
+      fns.forEach(function (fn) { fn(); });
+    });
+  }, { rootMargin: '900px 0px' }) : null;
+  const cuandoCerca = function (elemento, fn) {
+    if (!vigiaCerca) { fn(); return; }
+    const zona = elemento.closest('section') || elemento;
+    if (!esperandoCerca.has(zona)) { esperandoCerca.set(zona, []); vigiaCerca.observe(zona); }
+    esperandoCerca.get(zona).push(fn);
+  };
+
+  /* Para que la web abra liviana, el video empieza a bajar recién cuando
+     terminó de cargar la página; mientras tanto se ve la foto del primer
+     cuadro (fondo del .hero). Con "ahorro de datos" o conexión muy lenta
+     queda solo la foto. */
   const heroVideo = document.getElementById('hero-video');
-  if (heroVideo) {
+  const conexion = navigator.connection || {};
+  const ahorrarDatos = conexion.saveData === true || /(^|-)2g$/.test(conexion.effectiveType || '');
+  if (heroVideo && !ahorrarDatos) {
+    let heroArrancado = false;
+    let heroALaVista = true;
     const mostrarHeroVideo = function () { heroVideo.classList.add('cargada'); };
-    if (heroVideo.readyState >= 2) {
-      mostrarHeroVideo();
-    } else {
-      heroVideo.addEventListener('loadeddata', mostrarHeroVideo);
-    }
-    heroVideo.play().catch(function () { /* el navegador lo frenó, no pasa nada */ });
+    heroVideo.addEventListener('loadeddata', mostrarHeroVideo);
+    const arrancarHero = function () {
+      if (heroArrancado) return;
+      heroArrancado = true;
+      heroVideo.preload = 'auto';
+      if (heroALaVista) heroVideo.play().catch(function () { /* el navegador lo frenó, no pasa nada */ });
+      else heroVideo.load();
+    };
+    if (document.readyState === 'complete') setTimeout(arrancarHero, 0);
+    else window.addEventListener('load', function () { setTimeout(arrancarHero, 0); });
 
     // cuando el hero sale de pantalla el video se pausa: así el resto
     // de la página scrollea sin la placa de video trabajando de fondo
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entradas) {
-        if (entradas[0].isIntersecting) {
+        heroALaVista = entradas[0].isIntersecting;
+        if (!heroArrancado) return;
+        if (heroALaVista) {
           heroVideo.play().catch(function () { /* nada */ });
         } else {
           heroVideo.pause();
@@ -1006,6 +1054,11 @@ document.addEventListener('DOMContentLoaded', function () {
   /* El banner frío / calor / luz: anda solo mientras se ve. Como el
      hero, se reproduce aunque Windows tenga apagadas las animaciones. */
   const franjaVideo = document.getElementById('franja-video');
+  // la portada y el video bajan recién cuando el banner está cerca
+  if (franjaVideo) cuandoCerca(franjaVideo, function () {
+    if (franjaVideo.dataset.poster) franjaVideo.poster = franjaVideo.dataset.poster;
+    franjaVideo.preload = 'metadata';
+  });
   if (franjaVideo && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (entradas) {
       if (entradas[0].isIntersecting) {
@@ -1218,29 +1271,14 @@ document.addEventListener('DOMContentLoaded', function () {
       }, { threshold: 0, rootMargin: '150px' }).observe(medio);
     }
 
-    if (esVideo) {
-      // con preload="metadata" el video baja recién cuando se ve; mientras
-      // tanto alcanza con la portada (poster) para mostrar la tarjeta
-      let yaLista = false;
-      const listaUnaVez = function () { if (!yaLista) { yaLista = true; lista(); } };
-      if (medio.readyState >= 1) listaUnaVez(); else {
-        // si el video no baja pero la portada sí, la tarjeta queda con la
-        // portada: solo se esconde si fallan los dos
-        let portadaOk = !medio.poster ? false : null;
-        let videoFallo = false;
-        medio.addEventListener('loadedmetadata', listaUnaVez);
-        medio.addEventListener('loadeddata', listaUnaVez);
-        medio.addEventListener('error', function () {
-          videoFallo = true;
-          if (portadaOk === false) fallo();
-        });
-        if (medio.poster) {
-          const portada = new Image();
-          portada.onload = function () { portadaOk = true; listaUnaVez(); };
-          portada.onerror = function () { portadaOk = false; if (videoFallo) fallo(); };
-          portada.src = medio.poster;
-        }
-      }
+    // la portada (data-poster) se pone recién cuando la sección está cerca
+    if (esVideo && medio.dataset.poster && !medio.poster) {
+      cuandoCerca(figura, function () {
+        medio.poster = medio.dataset.poster;
+        prepararVideo(medio, lista, fallo);
+      });
+    } else if (esVideo) {
+      prepararVideo(medio, lista, fallo);
     } else if (medio.complete) {
       if (medio.naturalWidth > 0) lista(); else fallo();
     } else {
@@ -1248,6 +1286,30 @@ document.addEventListener('DOMContentLoaded', function () {
       medio.addEventListener('error', fallo);
     }
   };
+
+  // con preload="none" el video baja recién cuando se ve; mientras
+  // tanto alcanza con la portada (poster) para mostrar la tarjeta
+  function prepararVideo(medio, lista, fallo) {
+    let yaLista = false;
+    const listaUnaVez = function () { if (!yaLista) { yaLista = true; lista(); } };
+    if (medio.readyState >= 1) { listaUnaVez(); return; }
+    // si el video no baja pero la portada sí, la tarjeta queda con la
+    // portada: solo se esconde si fallan los dos
+    let portadaOk = !medio.poster ? false : null;
+    let videoFallo = false;
+    medio.addEventListener('loadedmetadata', listaUnaVez);
+    medio.addEventListener('loadeddata', listaUnaVez);
+    medio.addEventListener('error', function () {
+      videoFallo = true;
+      if (portadaOk === false) fallo();
+    });
+    if (medio.poster) {
+      const portada = new Image();
+      portada.onload = function () { portadaOk = true; listaUnaVez(); };
+      portada.onerror = function () { portadaOk = false; if (videoFallo) fallo(); };
+      portada.src = medio.poster;
+    }
+  }
 
   /* tarjetas de Servicios y productos del catálogo que llevan foto */
   document.querySelectorAll('.tarjeta--medio figure, .producto figure').forEach(prepararMedio);
@@ -2858,40 +2920,93 @@ document.addEventListener('DOMContentLoaded', function () {
     mostrarSesion(sesion);
     mostrarAviso('¡Hola, ' + (datos.given_name || sesion.nombre) + '!', 'verde');
 
-    // el texto plano evita la consulta previa (CORS) que Apps Script no responde
-    fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify({ credential: respuesta.credential }) })
-      .then(function (r) { return r.json(); })
-      .then(function (r) {
-        if (r && r.ok && r.nuevo) mostrarAviso('Te mandamos un mail de bienvenida con las promos', 'verde');
-      })
-      .catch(function () { /* si falla el aviso, la persona igual queda adentro */ });
+    const pendiente = { credential: respuesta.credential, email: datos.email, nombre: datos.name || '', exp: Number(datos.exp) || 0 };
+    guardarPendiente(pendiente);
+    enviarIngreso(pendiente, true);
   };
+
+  /* el ingreso tiene que llegar SIEMPRE a la hoja "Contactos": si se
+     corta la conexión o Google no contesta, se reintenta 4 veces; si
+     igual no llega, queda guardado en este navegador y se manda en la
+     próxima visita. El permiso de Google dura una hora: si venció, se
+     manda el mail y el nombre igual (la hoja lo marca "sin verificar") */
+  const PENDIENTE = 'mateo-ingreso-pendiente';
+  const guardarPendiente = function (p) {
+    try { if (p) localStorage.setItem(PENDIENTE, JSON.stringify(p)); else localStorage.removeItem(PENDIENTE); } catch (e) { /* sin almacenamiento */ }
+  };
+  const leerPendiente = function () {
+    try { return JSON.parse(localStorage.getItem(PENDIENTE) || 'null'); } catch (e) { return null; }
+  };
+  const postear = function (cuerpo) {
+    // el texto plano evita la consulta previa (CORS) que Apps Script no responde
+    return fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(cuerpo) }).then(function (r) { return r.json(); });
+  };
+  const vigente = function (p) { return p.exp && p.exp * 1000 > Date.now() + 60000; };
+  const enviarIngreso = function (p, avisar, intento) {
+    intento = intento || 0;
+    const reintentar = function () {
+      if (intento < 3) setTimeout(function () { enviarIngreso(p, avisar, intento + 1); }, [2000, 6000, 15000][intento]);
+    };
+    if (!vigente(p)) {
+      postear({ tipo: 'contacto', email: p.email, nombre: p.nombre })
+        .then(function (r) { if (r && r.ok) guardarPendiente(null); else reintentar(); })
+        .catch(reintentar);
+      return;
+    }
+    postear({ credential: p.credential })
+      .then(function (r) {
+        if (r && r.ok) {
+          guardarPendiente(null);
+          if (avisar && r.nuevo) mostrarAviso('Te mandamos un mail de bienvenida con las promos', 'verde');
+        } else if (r && r.error === 'token-invalido') {
+          guardarPendiente(null);
+        } else {
+          reintentar();
+        }
+      })
+      .catch(reintentar);
+  };
+  // lo que quedó sin llegar en una visita anterior
+  const quedo = leerPendiente();
+  if (quedo && quedo.email && APPS_SCRIPT_URL) enviarIngreso(quedo, false);
 
   if (cuentaCaja && GOOGLE_CLIENT_ID && APPS_SCRIPT_URL) {
     cuentaCaja.hidden = false;
     const sesionGuardada = leerSesion();
     mostrarSesion(sesionGuardada);
 
-    const gsi = document.createElement('script');
-    gsi.src = 'https://accounts.google.com/gsi/client';
-    gsi.async = true;
-    gsi.onload = function () {
-      google.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
-        callback: alEntrar,
-        auto_select: false,
-        cancel_on_tap_outside: true,
-        use_fedcm_for_prompt: true
-      });
-      if (googleBoton) {
-        google.accounts.id.renderButton(googleBoton, {
-          theme: 'outline', size: 'large', shape: 'pill', text: 'signin_with', locale: 'es', width: 260
+    // el script de Google pesa ~270 KB: baja recién cuando se abre el
+    // menú (ahí está el botón), no al abrir la página
+    let googleCargado = false;
+    const cargarGoogle = function () {
+      if (googleCargado) return;
+      googleCargado = true;
+      const gsi = document.createElement('script');
+      gsi.src = 'https://accounts.google.com/gsi/client';
+      gsi.async = true;
+      gsi.onerror = function () {
+        // sin conexión con Google: se vuelve a intentar al reabrir el menú
+        gsi.remove();
+        googleCargado = false;
+      };
+      gsi.onload = function () {
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: alEntrar,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+          use_fedcm_for_prompt: true
         });
-      }
-      // el cartelito de Google aparece un rato después de entrar a la
-      // página, no encima del título apenas carga
+        if (googleBoton) {
+          google.accounts.id.renderButton(googleBoton, {
+            theme: 'outline', size: 'large', shape: 'pill', text: 'signin_with', locale: 'es', width: 260
+          });
+        }
+      };
+      document.head.appendChild(gsi);
     };
-    document.head.appendChild(gsi);
+    document.addEventListener('menu-abierto', cargarGoogle);
+    if (document.querySelector('.menu.abierto')) cargarGoogle();
 
     if (cuentaSalir) {
       cuentaSalir.addEventListener('click', function () {
